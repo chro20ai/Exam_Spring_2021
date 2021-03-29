@@ -28,3 +28,14 @@ class Match{
     }
 }
 
+class Address{
+    constructor(ID, street, number, city, postalCode, country){
+        this._ID = ID
+        this._street = street
+        this._number = number
+        this._city = city
+        this._postalCode = postalCode
+        this._country = country
+    }
+}
+
