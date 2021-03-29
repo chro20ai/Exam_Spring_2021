@@ -1,0 +1,14 @@
+{  
+    "server": "datingcbsserver.database.windows.net", 
+    "authentication": {
+        "type": "default",
+        "options": {
+            "userName": "Peter", 
+            "password": "Kodener1234" 
+        }
+    },
+    "options": {
+        "encrypt": true,
+        "database": "DatingDatabase"
+    }
+}
