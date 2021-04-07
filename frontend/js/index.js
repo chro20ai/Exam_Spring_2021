@@ -9,7 +9,7 @@ form.addEventListener("submit", function(e) {
     var birthdate = document.getElementById("birthdate").value
     var fabrikId = document.getElementById("fabrik_id").value
 
-    fetch("http://localhost:7071/api/user", {
+    fetch("http://localhost:7071/api/PostAndGetUser", {
         method: 'POST',
         body: JSON.stringify({
             name: name,
