@@ -1,3 +1,9 @@
+var AddressClass = require('../classes/classes')['Address']
+var UserClass = require('../classes/classes')['User']
+var LikeClass = require('../classes/classes')['Like']
+var MatchClass = require('../classes/classes')['Match']
+
+
 var form = document.getElementById("form")
 
 form.addEventListener("submit", function(e) {
