@@ -41,4 +41,9 @@ class Address{
 
 var hallo
 
-// test
+module.exports = {
+    'Address' : Address,
+    'Match' : Match,
+    'Like' : Like,
+    'User' : User
+}
