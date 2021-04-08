@@ -33,7 +33,7 @@ form.addEventListener("submit", function(e) {
     })
 })
 
-var getButton = document.getElementById("checkOut")
+var getButton = document.getElementById("getUser")
 
 getButton.addEventListener('click', function(){
     var name1 = document.getElementById("name").value
@@ -46,7 +46,17 @@ getButton.addEventListener('click', function(){
             }
 
             response.json().then(function(data) {
-                console.log(data)
+                var dataname = data[1].value
+                var dataemail = data[2].value
+                var datagender = data[3].value
+                var databirthdate = data[4].value
+                var datafabrikId = data[5].value
+
+                document.getElementById("dataname").innerHTML = dataname;
+                document.getElementById("dataemail").innerHTML = dataemail;
+                document.getElementById("datagender").innerHTML = datagender;
+                document.getElementById("databirthdate").innerHTML = databirthdate;
+                document.getElementById("datafabrikId").innerHTML = datafabrikId;
             });
         }
     )
