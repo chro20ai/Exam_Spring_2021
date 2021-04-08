@@ -44,7 +44,7 @@ function insert(payload){
         });
 
     connection.execSql(request)
-
+//yallah
 
     });
 }
