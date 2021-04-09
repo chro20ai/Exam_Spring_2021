@@ -3,8 +3,8 @@ var UserClass = require('../classes/classes')['User']
 var LikeClass = require('../classes/classes')['Like']
 var MatchClass = require('../classes/classes')['Match']*/
 
-
 var form = document.getElementById("form")
+
 
 form.addEventListener("submit", function(e) {
     e.preventDefault()
@@ -32,6 +32,7 @@ form.addEventListener("submit", function(e) {
     }) 
     .then((response) => {
         return response.json()
+
     })
     .then((data) => {
         console.log(data)
@@ -53,18 +54,23 @@ getButton.addEventListener('click', function(){
                 return 
             }
 
-            response.json().then(function(data) {
-                var dataname = data[1].value
-                var dataemail = data[2].value
-                var datagender = data[3].value
-                var databirthdate = data[4].value
-                var datafabrikId = data[5].value
 
-                document.getElementById("dataname").innerHTML = dataname;
-                document.getElementById("dataemail").innerHTML = dataemail;
-                document.getElementById("datagender").innerHTML = datagender;
+            response.json().then(function(data) {
+            
+                var datausername = data[1].value
+                var datapassword = data[2].value
+                var datafirstname = data[3].value
+                var datalastname = data[4].value
+                var databirthdate = data[5].value
+                var datagender = data[6].value
+
+                document.getElementById("datausername").innerHTML = datausername;
+                document.getElementById("datapassword").innerHTML = datapassword;
+                document.getElementById("datafirstname").innerHTML = datafirstname;
+                document.getElementById("datalastname").innerHTML = datalastname;
                 document.getElementById("databirthdate").innerHTML = databirthdate;
-                document.getElementById("datafabrikId").innerHTML = datafabrikId;
+                document.getElementById("datagender").innerHTML = datagender;
+                
             });
         }
     )
