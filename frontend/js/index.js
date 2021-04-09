@@ -1,7 +1,7 @@
-var AddressClass = require('../classes/classes')['Address']
+/*var AddressClass = require('../classes/classes')['Address']
 var UserClass = require('../classes/classes')['User']
 var LikeClass = require('../classes/classes')['Like']
-var MatchClass = require('../classes/classes')['Match']
+var MatchClass = require('../classes/classes')['Match']*/
 
 
 var form = document.getElementById("form")
@@ -9,20 +9,22 @@ var form = document.getElementById("form")
 form.addEventListener("submit", function(e) {
     e.preventDefault()
 
-    var name = document.getElementById("name").value
-    var email = document.getElementById("email").value
-    var gender = document.getElementById("gender").value
+    var username = document.getElementById("username").value
+    var password = document.getElementById("password").value
+    var firstname = document.getElementById("firstname").value
+    var lastname = document.getElementById("lastname").value
     var birthdate = document.getElementById("birthdate").value
-    var fabrikId = document.getElementById("fabrik_id").value
+    var gender = document.getElementById("gender").value
 
     fetch("http://localhost:7071/api/PostAndGetUser", {
         method: 'POST',
         body: JSON.stringify({
-            name: name,
-            email: email,
-            gender: gender,
+            username: username,
+            password: password,
+            firstname: firstname,
+            lastname: lastname,
             birthdate: birthdate,
-            fabrikId: fabrikId
+            gender: gender
         }),
         headers: {
             "Content-Type": "application/json; charset-UTF-8"

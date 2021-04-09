@@ -25,18 +25,19 @@ module.exports.startDb = startDb;
 
 function insert(payload){
     return new Promise((resolve, reject) => {
-    const sql = `INSERT INTO [GKO7].[User] (name, email, gender, birthdate, fabrik_id) VALUES (@name, @email, @gender, @birthdate, @fabrik_id)`
+    const sql = `INSERT INTO [eksamen].[user] (username, password, firstname, lastname, birthdate, gender) VALUES (@username, @password, @firstname, @lastname, @birthdate, @gender)`
         const request = new Request(sql, (err) => {
             if(err){
                 reject(err)
                 console.log(err)
             }
         });
-        request.addParameter('name', TYPES.VarChar, payload.name)
-        request.addParameter('email', TYPES.VarChar, payload.email)
-        request.addParameter('gender', TYPES.VarChar, payload.gender)
+        request.addParameter('username', TYPES.VarChar, payload.username)
+        request.addParameter('password', TYPES.VarChar, payload.password)
+        request.addParameter('firstname', TYPES.VarChar, payload.firstname)
+        request.addParameter('lastname', TYPES.VarChar, payload.lastname)
         request.addParameter('birthdate', TYPES.Date, payload.birthdate)
-        request.addParameter('fabrik_id', TYPES.Int, payload.fabrikId )
+        request.addParameter('gender', TYPES.VarChar, payload.gender)
 
         request.on('requestCompleted', (row) => {
             console.log('User inserted', row)
