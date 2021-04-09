@@ -51,9 +51,9 @@ function insert(payload){
 }
 module.exports.insert = insert;
 
-function select(name){
+function select(username){
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM [GKO7].[User] where name = @name'
+        const sql = 'SELECT * FROM [eksamen].[user] where username = @username'
         const request = new Request(sql, (err, rowcount) => {
             if (err){
                 reject(err)
@@ -63,7 +63,7 @@ function select(name){
                 reject({message: 'User does not exist'})
             }
         });
-        request.addParameter('name', TYPES.VarChar, name)
+        request.addParameter('username', TYPES.VarChar, username)
 
         request.on('row', (columns) => {
             resolve(columns)

@@ -45,8 +45,9 @@ form.addEventListener("submit", function(e) {
 var getButton = document.getElementById("getUser")
 
 getButton.addEventListener('click', function(){
-    var name1 = document.getElementById("name").value
-    fetch(`http://localhost:7071/api/PostAndGetUser?name=${name1}`)
+    
+    var username1 = document.getElementById("username").value
+    fetch(`http://localhost:7071/api/PostAndGetUser?username=${username1}`)
     .then(
         function(response){
             if (response.status !== 200){
@@ -56,13 +57,13 @@ getButton.addEventListener('click', function(){
 
 
             response.json().then(function(data) {
-            
+            console.log(data)
                 var datausername = data[1].value
                 var datapassword = data[2].value
                 var datafirstname = data[3].value
                 var datalastname = data[4].value
                 var databirthdate = data[5].value
-                var datagender = data[6].value
+                var datagender = data[7].value
 
                 document.getElementById("datausername").innerHTML = datausername;
                 document.getElementById("datapassword").innerHTML = datapassword;
