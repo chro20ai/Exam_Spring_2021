@@ -1,14 +1,14 @@
-class User{
-    constructor(ID ,userName, password, firstName, lastName, birthDate, gender, sexualOrientation, address){
-    this._ID = ID
-    this._userName = userName
+
+export class User{
+    constructor(username, password, firstname, lastname, birthdate, address, gender){
+    this._username = username
     this._password = password
-    this._firstName = firstName 
-    this._lastName = lastName
-    this._birthDate = birthDate
-    this._gender = gender
-    this._sexualOrientation = sexualOrientation
+    this._firstname = firstname 
+    this._lastname = lastname
+    this._birthdate = birthdate
     this._address = address
+    this._gender = gender
+    
     } 
 }
 
@@ -39,11 +39,3 @@ class Address{
     }
 }
 
-var hallo
-
-module.exports = {
-    'Address' : Address,
-    'Match' : Match,
-    'Like' : Like,
-    'User' : User
-}
