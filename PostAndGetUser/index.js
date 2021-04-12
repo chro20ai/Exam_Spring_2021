@@ -26,8 +26,8 @@ module.exports = async function (context, req) {
 
 async function get(context, req){
     try{
-        let name = req.query.name;
-        let user = await db.select(name)
+        let username = req.query.username;
+        let user = await db.select(username)
         context.res = {
             body: user
         };

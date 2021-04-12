@@ -1,7 +1,12 @@
-/*var AddressClass = require('../classes/classes')['Address']
-var UserClass = require('../classes/classes')['User']
-var LikeClass = require('../classes/classes')['Like']
-var MatchClass = require('../classes/classes')['Match']*/
+//var AddressClass = require('../classes/classes')['Address']
+/*var user = require('../classes/classes.js')
+const User = user.User*/
+
+import {User} from '../classes/classes.js'
+
+
+//const Userclass = require('../classes/classes') 
+
 
 var form = document.getElementById("form")
 
@@ -16,7 +21,11 @@ form.addEventListener("submit", function(e) {
     var birthdate = document.getElementById("birthdate").value
     var gender = document.getElementById("gender").value
 
+
+
+
     fetch("http://localhost:7071/api/PostAndGetUser", {
+        
         method: 'POST',
         body: JSON.stringify({
             username: username,
@@ -26,12 +35,14 @@ form.addEventListener("submit", function(e) {
             birthdate: birthdate,
             gender: gender
         }),
+        
         headers: {
             "Content-Type": "application/json; charset-UTF-8"
         }
     }) 
     .then((response) => {
-        return response.json()
+        return response.json(data)
+
 
     })
     .then((data) => {
@@ -46,8 +57,9 @@ form.addEventListener("submit", function(e) {
 var getButton = document.getElementById("getUser")
 
 getButton.addEventListener('click', function(){
-    var name1 = document.getElementById("name").value
-    fetch(`http://localhost:7071/api/PostAndGetUser?name=${name1}`)
+    
+    var username1 = document.getElementById("username").value
+    fetch(`http://localhost:7071/api/PostAndGetUser?username=${username1}`)
     .then(
         function(response){
             if (response.status !== 200){
@@ -55,23 +67,17 @@ getButton.addEventListener('click', function(){
                 return 
             }
 
-
             response.json().then(function(data) {
-            
-                var datausername = data[1].value
-                var datapassword = data[2].value
-                var datafirstname = data[3].value
-                var datalastname = data[4].value
-                var databirthdate = data[5].value
-                var datagender = data[6].value
+            console.log(data)
 
-                document.getElementById("datausername").innerHTML = datausername;
-                document.getElementById("datapassword").innerHTML = datapassword;
-                document.getElementById("datafirstname").innerHTML = datafirstname;
-                document.getElementById("datalastname").innerHTML = datalastname;
-                document.getElementById("databirthdate").innerHTML = databirthdate;
-                document.getElementById("datagender").innerHTML = datagender;
-                
+                var userdata = new User (data[1].value, data[2].value, data[3].value, data[4].value, data[5].value,data[7].value)
+
+                document.getElementById("datausername").innerHTML = userdata._username
+                document.getElementById("datafirstname").innerHTML = userdata._firstname
+                document.getElementById("datalastname").innerHTML = userdata._lastname
+                document.getElementById("databirthdate").innerHTML = userdata._birthdate
+                document.getElementById("datagender").innerHTML = userdata._gender
+
             });
         }
     )
