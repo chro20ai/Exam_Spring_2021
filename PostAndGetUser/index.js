@@ -15,7 +15,7 @@ module.exports = async function (context, req) {
             break;
         case 'POST':
             await post(context, req);
-            break;
+            break; 
         default:
             context.res = {
                 body: "Please get or post"
@@ -44,7 +44,7 @@ async function get(context, req){
 async function post(context, req){
     try{
         let payload = req.body;
-        await db.insert(payload)
+        await db.insertlogin(payload)
         context.res = {
             body: {status: 'Success'}
         }
