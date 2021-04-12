@@ -9,6 +9,7 @@ loginform.addEventListener("submit", function(e) {
     var usernamelogin = document.getElementById("usernameid").value
     var passwordlogin = document.getElementById("passwordid").value
     
+    
 
     fetch("http://localhost:7071/api/Login", {
         method: 'POST',
@@ -21,6 +22,7 @@ loginform.addEventListener("submit", function(e) {
         }
     }) 
     .then((response) => {
+        console.log("testinggggg")
         return response.json()
 
     })
