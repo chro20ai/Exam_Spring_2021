@@ -3,7 +3,7 @@ const config = require('./config.json')
 
 var connection = new Connection(config);
 
-
+//Start DB
 function startDb(){
     return new Promise((resolve, reject) => {
         connection.on('connect', (err) => {
@@ -23,6 +23,7 @@ function startDb(){
 module.exports.sqlConnection = connection
 module.exports.startDb = startDb;
 
+//Når man opretter en bruger 
 function insert(payload){
     return new Promise((resolve, reject) => {
     const sql = `INSERT INTO [eksamen].[user] (username, password, firstname, lastname, birthdate, gender) VALUES (@username, @password, @firstname, @lastname, @birthdate, @gender)`
@@ -51,6 +52,7 @@ function insert(payload){
 }
 module.exports.insert = insert;
 
+//Bruges til get. 
 function select(username){
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM [eksamen].[user] where username = @username'
@@ -74,6 +76,7 @@ function select(username){
 }
 module.exports.select = select;
 
+//Logge ind
 function insertlogin(payload){
     
     return new Promise((resolve, reject) => {
