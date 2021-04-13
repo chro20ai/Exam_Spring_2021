@@ -8,7 +8,7 @@
 var form = document.getElementById("form")
 
 
-form.addEventListener("click", function(e) {
+form.addEventListener("submit", function(e) {
     e.preventDefault()
 
     var updateusername = document.getElementById("updateusername").value
