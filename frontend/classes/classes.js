@@ -1,6 +1,7 @@
 
 export class User{
-    constructor(username, password, firstname, lastname, birthdate, address, gender){
+    constructor(id, username, password, firstname, lastname, birthdate, address, gender){
+    this._id = id
     this._username = username
     this._password = password
     this._firstname = firstname 
