@@ -22,22 +22,6 @@ module.exports = async function (context, req) {
     }
 }
 
-async function update(context, req){
-    try{
-        let update = req.query;
-        let response = await db.update(update)
-        console.log(response);
-        context.res = {
-            body: {status: 'Success'}
-        }
-    }
-    catch(error){
-        context.res = {
-            status: 400,
-            body: error.message
-        }
-    }
-}
 
 function update(payload){
     

@@ -125,3 +125,22 @@ function deleteStatement(id1){
 }
 module.exports.deleteStatement = deleteStatement;
 
+
+async function update(context, req){
+    try{
+        let update = req.query;
+        let response = await db.update(update)
+        console.log(response);
+        context.res = {
+            body: {status: 'Success'}
+        }
+    }
+    catch(error){
+        context.res = {
+            status: 400,
+            body: error.message
+        }
+    }
+}
+
+module.exports.update = update;
