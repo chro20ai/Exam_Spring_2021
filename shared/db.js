@@ -40,7 +40,7 @@ function insert(payload){
         request.addParameter('gender', TYPES.VarChar, payload.gender)
 
         request.on('requestCompleted', (row) => {
-            console.log('User inserted', row)
+            console.log('Login succeeded', row)
             resolve('User inserted', row)
         });
 
