@@ -1,4 +1,3 @@
-
 const db = require('../shared/db');
 
 
@@ -11,8 +10,8 @@ module.exports = async function (context, req) {
             console.log("Error connecting to the database", error.message) 
         }
     switch (req.method) {
-        case 'UPDATE':
-            await update(context, req);
+        case 'PUT':
+            await updateUser(context, req);
             break; 
         default:
             context.res = {
@@ -22,10 +21,10 @@ module.exports = async function (context, req) {
     }
 }
 
-async function update(context, req){
+async function updateUser(context, req){
     try{
-        let update = req.query;
-        let response = await db.update(update)
+        let payload = req.body;
+        let response = await db.updateStatement(payload)
         console.log(response);
         context.res = {
             body: {status: 'Success'}

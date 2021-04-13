@@ -108,7 +108,7 @@ module.exports.insertlogin = insertlogin;
 
 
 
-
+//Delete user
 function deleteStatement(id1){
     return new Promise((resolve, reject) => {
     const sql = "DELETE FROM [eksamen].[user] WHERE id = @id"; 
@@ -128,28 +128,32 @@ function deleteStatement(id1){
 }
 module.exports.deleteStatement = deleteStatement;
 
-
-function update(payload){
-    
+//Update user
+function updateStatement(payload){
     return new Promise((resolve, reject) => {
-    const sql = "UPDATE * FROM [eksamen].[user], (username, password, firstname, lastname, birthdate, gender) VALUES (@username, @password, @firstname, @lastname, @birthdate, @gender)"; 
+        
+    const sql = "UPDATE eksamen.[user] SET username = @updateusername, password = @updatepassword, firstname = @updatefirstname, lastname = @updatelastname, birthdate = @updatebirthdate, gender = @updategender WHERE id = @id"
         const request = new Request(sql, (err) => {
             if(err){
                 reject({message: "error connection"})    
-            }});
-
-        request.addParameter('username', TYPES.VarChar, payload.username)
-        
-        request.on('row', (row) => {
-            console.log('User inserted', row)
-            resolve('User inserted', row) 
-        });
-
+            }}); 
+            request.addParameter('updateusername', TYPES.VarChar, payload.username)
+            request.addParameter('updatepassword', TYPES.VarChar, payload.password)
+            request.addParameter('updatefirstname', TYPES.VarChar, payload.firstname)
+            request.addParameter('updatelastname', TYPES.VarChar, payload.lastname)
+            request.addParameter('updatebirthdate', TYPES.Date, payload.birthdate)
+            request.addParameter('updategender', TYPES.VarChar, payload.gender)
+            request.addParameter('id', TYPES.Int, payload.id)     
+            
+            request.on('requestCompleted', (row) => {
+                console.log('Login succeeded', row)
+                resolve('User inserted', row)
+            });
     connection.execSql(request)
+
 
     });
 }
-module.exports.update = update;
-
+module.exports.updateStatement = updateStatement;
 
 

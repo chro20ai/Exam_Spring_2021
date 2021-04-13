@@ -1,6 +1,9 @@
 var deleteButton = document.getElementById("delete")
-console.log(deleteButton)
-console.log("hej1")
+var updateUser = document.getElementById("update")
+updateUser.addEventListener("click", function(e) {
+    e.preventDefault()
+    window.location = "update.html";
+})
 
 deleteButton.addEventListener("click", function(e) {
     e.preventDefault()

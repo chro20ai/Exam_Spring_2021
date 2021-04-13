@@ -1,5 +1,5 @@
 
-import {User} from '../classes/classes.js'
+//import {User} from '../classes/classes.js'
 
 
 //const User = require('../classes/classes') 
@@ -8,27 +8,29 @@ import {User} from '../classes/classes.js'
 var form = document.getElementById("form")
 
 
-form.addEventListener("submit", function(e) {
+form.addEventListener("click", function(e) {
     e.preventDefault()
 
-    var username = document.getElementById("updateusername").value
-    var password = document.getElementById("updatepassword").value
-    var firstname = document.getElementById("updatefirstname").value
-    var lastname = document.getElementById("updatelastname").value
-    var birthdate = document.getElementById("updatebirthdate").value
-    var gender = document.getElementById("updategender").value
+    var updateusername = document.getElementById("updateusername").value
+    var updatepassword = document.getElementById("updatepassword").value
+    var updatefirstname = document.getElementById("updatefirstname").value
+    var updatelastname = document.getElementById("updatelastname").value
+    var updatebirthdate = document.getElementById("updatebirthdate").value
+    var updategender = document.getElementById("updategender").value
 
-
-    fetch("http://localhost:7071/api/PostAndGetUser", {
+    var id = localStorage.getItem("loggedIn")
+    fetch("http://localhost:7071/api/UPDATE", {
         
-        method: 'UPDATE',
+        method: 'PUT',
         body: JSON.stringify({
-            username: username,
-            password: password,
-            firstname: firstname,
-            lastname: lastname,
-            birthdate: birthdate,
-            gender: gender
+            id: id,
+            username: updateusername,
+            password: updatepassword,
+            firstname: updatefirstname,
+            lastname: updatelastname,
+            birthdate: updatebirthdate,
+            gender: updategender
+            
         }),
         
         headers: {
