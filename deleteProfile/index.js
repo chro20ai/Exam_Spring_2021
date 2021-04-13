@@ -21,9 +21,10 @@ module.exports = async function (context, req) {
     }
 }
 
-async function deleteUser(context){
+async function deleteUser(context, req){
     try{
-        let response = await db.deleteStatement()
+        let id1 = req.body.id
+        let response = await db.deleteStatement(id1)
         console.log(response);
         context.res = {
             body: {status: 'Success'}
