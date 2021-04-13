@@ -7,8 +7,7 @@ deleteButton.addEventListener("click", function(e) {
 
     var id = localStorage.getItem("loggedIn")
     console.log(id)
-    fetch(`http://localhost:7071/api/deleteProfile?id=${id}`, {
-        //fetch("http://localhost:7071/api/deleteProfile?id=", + localStorage.getItem("loggedIn") {
+        fetch("http://localhost:7071/api/deleteProfile", {
         method: 'DELETE',
         body: JSON.stringify({
             id: id

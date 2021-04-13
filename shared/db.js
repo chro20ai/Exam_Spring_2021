@@ -106,14 +106,15 @@ module.exports.insertlogin = insertlogin;
 
 
 
-function deleteStatement(id){
+function deleteStatement(id1){
     return new Promise((resolve, reject) => {
     const sql = "DELETE FROM [eksamen].[user] WHERE id = @id"; 
         const request = new Request(sql, (err) => {
             if(err){
                 reject({message: "error connection"})    
             }}); 
-                request.addParameter('id', TYPES.Int, id)     
+                console.log(id1)
+                request.addParameter('id', TYPES.Int, id1)     
                 request.on('row', (columns) => {
                 resolve(columns)
             });
