@@ -116,7 +116,6 @@ function deleteStatement(id1){
             if(err){
                 reject({message: "error connection"})    
             }}); 
-                console.log(id1)
                 request.addParameter('id', TYPES.Int, id1)     
                 request.on('row', (columns) => {
                 resolve(columns)
@@ -146,8 +145,8 @@ function updateStatement(payload){
             request.addParameter('id', TYPES.Int, payload.id)     
             
             request.on('requestCompleted', (row) => {
-                console.log('Login succeeded', row)
-                resolve('User inserted', row)
+                console.log('Update succeeded', row)
+                resolve('User updated', row)
             });
     connection.execSql(request)
 

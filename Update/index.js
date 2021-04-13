@@ -25,7 +25,6 @@ async function updateUser(context, req){
     try{
         let payload = req.body;
         let response = await db.updateStatement(payload)
-        console.log(payload)
         console.log(response);
         context.res = {
             body: {status: 'Success'}
