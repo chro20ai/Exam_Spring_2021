@@ -3,7 +3,7 @@ const config = require('./config.json')
 
 var connection = new Connection(config);
 
-
+//Start DB
 function startDb(){
     return new Promise((resolve, reject) => {
         connection.on('connect', (err) => {
@@ -23,6 +23,7 @@ function startDb(){
 module.exports.sqlConnection = connection
 module.exports.startDb = startDb;
 
+//Når man opretter en bruger 
 function insert(payload){
     return new Promise((resolve, reject) => {
     const sql = `INSERT INTO [eksamen].[user] (username, password, firstname, lastname, birthdate, gender) VALUES (@username, @password, @firstname, @lastname, @birthdate, @gender)`
@@ -51,6 +52,7 @@ function insert(payload){
 }
 module.exports.insert = insert;
 
+//Bruges til get. 
 function select(username){
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM [eksamen].[user] where username = @username'
@@ -74,6 +76,7 @@ function select(username){
 }
 module.exports.select = select;
 
+//Logge ind
 function insertlogin(payload){
     
     return new Promise((resolve, reject) => {
@@ -105,7 +108,7 @@ module.exports.insertlogin = insertlogin;
 
 
 
-
+//Delete user
 function deleteStatement(id1){
     return new Promise((resolve, reject) => {
     const sql = "DELETE FROM [eksamen].[user] WHERE id = @id"; 
@@ -124,4 +127,33 @@ function deleteStatement(id1){
     });
 }
 module.exports.deleteStatement = deleteStatement;
+
+//Update user
+function updateStatement(payload){
+    return new Promise((resolve, reject) => {
+        
+    const sql = "UPDATE eksamen.[user] SET username = @updateusername, password = @updatepassword, firstname = @updatefirstname, lastname = @updatelastname, birthdate = @updatebirthdate, gender = @updategender WHERE id = @id"
+        const request = new Request(sql, (err) => {
+            if(err){
+                reject({message: "error connection"})    
+            }}); 
+            request.addParameter('updateusername', TYPES.VarChar, payload.username)
+            request.addParameter('updatepassword', TYPES.VarChar, payload.password)
+            request.addParameter('updatefirstname', TYPES.VarChar, payload.firstname)
+            request.addParameter('updatelastname', TYPES.VarChar, payload.lastname)
+            request.addParameter('updatebirthdate', TYPES.Date, payload.birthdate)
+            request.addParameter('updategender', TYPES.VarChar, payload.gender)
+            request.addParameter('id', TYPES.Int, payload.id)     
+            
+            request.on('requestCompleted', (row) => {
+                console.log('Login succeeded', row)
+                resolve('User inserted', row)
+            });
+    connection.execSql(request)
+
+
+    });
+}
+module.exports.updateStatement = updateStatement;
+
 
