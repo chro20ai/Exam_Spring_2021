@@ -5,7 +5,7 @@ const User = user.User*/
 import {User} from '../classes/classes.js'
 
 
-//const Userclass = require('../classes/classes') 
+//const User = require('../classes/classes') 
 
 
 var form = document.getElementById("form")

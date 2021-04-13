@@ -22,15 +22,17 @@ loginform.addEventListener("submit", function(e) {
         }
     }) 
     .then((response) => {
-        console.log("testinggggg")
         return response.json()
 
     })
     .then((data) => {
+        localStorage.setItem('loggedIn', data[0].value);
+        //localStorage.setItem('username', user.username);
         console.log(data)
         window.location = "homepage.html";
     })
     .catch(err => {
+        alert("Username and password is wrong")
         console.log(err)
     })
 })

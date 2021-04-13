@@ -77,18 +77,23 @@ module.exports.select = select;
 function insertlogin(payload){
     
     return new Promise((resolve, reject) => {
-    const sql = "SELECT username FROM [eksamen].[user] WHERE username = @username and password = @password"; 
-        const request = new Request(sql, (err) => {
-            if(err){
-                reject({message: "error connection"})    
-            }});
-
+    const sql = "SELECT * FROM [eksamen].[user] WHERE username = @username and password = @password"; 
+            const request = new Request(sql, (err, rowcount) => {
+                if (err){
+                    reject(err)
+                    console.log(err)
+                }
+                if (rowcount == 0){
+                    reject(err)
+                    console.log(err)
+                }
+            });
         request.addParameter('username', TYPES.VarChar, payload.username)
         request.addParameter('password', TYPES.VarChar, payload.password)
         
-        request.on('row', (row) => {
-            console.log('User inserted', row)
-            resolve('User inserted', row)
+        
+        request.on('row', (columns) => {
+            resolve(columns)
         });
 
     connection.execSql(request)
