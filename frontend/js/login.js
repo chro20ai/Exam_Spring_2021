@@ -29,7 +29,7 @@ loginform.addEventListener("submit", function(e) {
         localStorage.setItem('loggedIn', data[0].value);
         //localStorage.setItem('username', user.username);
         console.log(data)
-        //window.location = "homepage.html";
+        window.location = "homepage.html";
     })
     .catch(err => {
         alert("Username and password is wrong")
