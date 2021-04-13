@@ -19,7 +19,7 @@ form.addEventListener("click", function(e) {
     var updategender = document.getElementById("updategender").value
 
     var id = localStorage.getItem("loggedIn")
-    fetch("http://localhost:7071/api/UPDATE", {
+    fetch("http://localhost:7071/api/Update", {
         
         method: 'PUT',
         body: JSON.stringify({
