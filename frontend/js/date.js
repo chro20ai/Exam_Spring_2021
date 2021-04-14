@@ -6,7 +6,7 @@ swipe.addEventListener("click", function(e) {
     fetch(`http://localhost:7071/api/swipe?id=${id}`)
     .then(
         function(response){
-            if (response.staus !== 200){
+            if (response.status !== 200){
                 console.log("Something went wrong " + response.status);
                 return
             }
