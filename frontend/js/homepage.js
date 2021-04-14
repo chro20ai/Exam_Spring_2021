@@ -5,6 +5,13 @@ updateUser.addEventListener("click", function(e) {
     window.location = "update.html";
 })
 
+var logOutButton = document.getElementById("logout")
+logOutButton.addEventListener("click", function(e) {
+    e.preventDefault()
+    localStorage.removeItem("loggedIn")
+    window.location = "login.html"
+})
+
 deleteButton.addEventListener("click", function(e) {
     e.preventDefault()
 
