@@ -1,8 +1,8 @@
 var swipe = document.getElementById("swipe")
-
+var id = 1;
 swipe.addEventListener("click", function(e) {
     e.preventDefault()
-    var id = 1;
+    
     fetch(`http://localhost:7071/api/swipe?id=${id}`)
     .then(
         function(response){
@@ -13,6 +13,11 @@ swipe.addEventListener("click", function(e) {
             
             response.json().then(function(data) {
                 console.log(data)
+                id ++
+                if(isNaN(id)){
+                    id ++
+                    
+                }
 
                 var username = data[1].value
                 var firstname = data[3].value
