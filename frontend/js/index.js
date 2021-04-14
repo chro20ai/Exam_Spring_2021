@@ -54,7 +54,7 @@ form.addEventListener("submit", function(e) {
         console.log(err)
     })
 })
-
+/*
 var getButton = document.getElementById("getUser")
 
 getButton.addEventListener('click', function(){
@@ -86,3 +86,4 @@ getButton.addEventListener('click', function(){
         console.log(err)
     })
 })
+*/
