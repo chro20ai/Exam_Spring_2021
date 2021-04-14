@@ -21,7 +21,7 @@ form.addEventListener("submit", function(e) {
     var birthdate = document.getElementById("birthdate").value
     var gender = document.querySelector('input[name="gender"]:checked').value
     var ratiointerest = document.querySelector('input[name="interest"]:checked').value
-
+    var rangeAge = document.querySelector('input[name="ageRange"]:checked').value
 
     fetch("http://localhost:7071/api/PostAndGetUser", {
         
@@ -33,7 +33,8 @@ form.addEventListener("submit", function(e) {
             lastname: lastname,
             birthdate: birthdate,
             gender: gender,
-            interest: ratiointerest
+            interest: ratiointerest,
+            agerange: rangeAge
         }),
         
         headers: {

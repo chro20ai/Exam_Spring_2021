@@ -26,7 +26,7 @@ module.exports.startDb = startDb;
 //Når man opretter en bruger 
 function insert(payload){
     return new Promise((resolve, reject) => {
-    const sql = `INSERT INTO [eksamen].[user] (username, password, firstname, lastname, birthdate, gender, interest) VALUES (@username, @password, @firstname, @lastname, @birthdate, @gender, @interest)`
+    const sql = `INSERT INTO [eksamen].[user] (username, password, firstname, lastname, birthdate, gender, interest, agerange) VALUES (@username, @password, @firstname, @lastname, @birthdate, @gender, @interest, @agerange)`
         const request = new Request(sql, (err) => {
             if(err){
                 reject(err)
@@ -40,6 +40,7 @@ function insert(payload){
         request.addParameter('birthdate', TYPES.Date, payload.birthdate)
         request.addParameter('gender', TYPES.VarChar, payload.gender)
         request.addParameter('interest', TYPES.VarChar, payload.interest)
+        request.addParameter('agerange', TYPES.VarChar, payload.agerange)
 
         request.on('requestCompleted', (row) => {
             console.log('Login succeeded', row)
