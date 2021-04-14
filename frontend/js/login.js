@@ -27,7 +27,6 @@ loginform.addEventListener("submit", function(e) {
     })
     .then((data) => {
         localStorage.setItem('loggedIn', data[0].value);
-        //localStorage.setItem('username', user.username);
         console.log(data)
         window.location = "homepage.html";
     })

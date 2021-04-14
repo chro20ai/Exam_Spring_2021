@@ -9,7 +9,6 @@ deleteButton.addEventListener("click", function(e) {
     e.preventDefault()
 
     var id = localStorage.getItem("loggedIn")
-    console.log(id)
         fetch("http://localhost:7071/api/deleteProfile", {
         method: 'DELETE',
         body: JSON.stringify({
@@ -20,12 +19,14 @@ deleteButton.addEventListener("click", function(e) {
         }
     }) 
     .then((response) => {
-        console.log("testinggggg")
         return response.json()
 
     })
-    .then((data) => {
-        console.log(data)})
+    .then((data) => {        
+        //localStorage.removeItem("loggedIn")
+        console.log(data)
+        //window.location = "login.html";
+    })     
     .catch(err => {
         console.log(err)
     })
