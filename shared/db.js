@@ -161,7 +161,8 @@ module.exports.updateStatement = updateStatement;
 
 
 //Bruges til get swipe. 
-function swipe(payload){
+function swipe(id){
+    console.log(id)
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM [eksamen].[user] where id = @id'
         const request = new Request(sql, (err, rowcount) => {
@@ -173,7 +174,7 @@ function swipe(payload){
                 reject({message: 'User does not exist'})
             }
         });
-        request.addParameter('id', TYPES.Int, payload.id)
+        request.addParameter('id', TYPES.Int, id[0])
 
         request.on('row', (columns) => {
             resolve(columns)
