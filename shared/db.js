@@ -157,3 +157,26 @@ function updateStatement(payload){
 module.exports.updateStatement = updateStatement;
 
 
+//Bruges til get swipe. 
+function swipe(payload){
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM [eksamen].[user] where id = @id'
+        const request = new Request(sql, (err, rowcount) => {
+            if (err){
+                reject(err)
+                console.log(err)
+            }
+            else if (rowcount == 0){
+                reject({message: 'User does not exist'})
+            }
+        });
+        request.addParameter('id', TYPES.Int, payload.id)
+
+        request.on('row', (columns) => {
+            resolve(columns)
+        });
+        connection.execSql(request)    
+        })
+    
+}
+module.exports.swipe = swipe;
