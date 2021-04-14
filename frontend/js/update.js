@@ -16,7 +16,8 @@ form.addEventListener("submit", function(e) {
     var updatefirstname = document.getElementById("updatefirstname").value
     var updatelastname = document.getElementById("updatelastname").value
     var updatebirthdate = document.getElementById("updatebirthdate").value
-    var updategender = document.getElementById("updategender").value
+    var updategender = document.querySelector('input[name="gender"]:checked').value
+    var ratiointerest = document.querySelector('input[name="interest"]:checked').value
 
     var id = localStorage.getItem("loggedIn")
     fetch("http://localhost:7071/api/Update", {
@@ -29,7 +30,8 @@ form.addEventListener("submit", function(e) {
             firstname: updatefirstname,
             lastname: updatelastname,
             birthdate: updatebirthdate,
-            gender: updategender
+            gender: updategender,
+            ratiointerest: ratiointerest
             
         }),
         
