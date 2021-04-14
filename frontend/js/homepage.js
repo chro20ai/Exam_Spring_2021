@@ -49,9 +49,9 @@ deleteButton.addEventListener("click", function(e) {
 
     })
     .then((data) => {        
-        //localStorage.removeItem("loggedIn")
-        console.log(data)
-        //window.location = "login.html";
+        localStorage.removeItem("loggedIn")
+        localStorage.removeItem("username")
+        window.location = "login.html";
     })     
     .catch(err => {
         console.log(err)
