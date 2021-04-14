@@ -31,7 +31,7 @@ loginform.addEventListener("submit", function(e) {
         window.location = "homepage.html";
     })
     .catch(err => {
-        alert("Username and password is wrong")
+        alert("There was an error. Check your username and password")
         console.log(err)
     })
 })
