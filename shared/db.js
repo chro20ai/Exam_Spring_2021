@@ -133,7 +133,7 @@ module.exports.deleteStatement = deleteStatement;
 function updateStatement(payload){
     return new Promise((resolve, reject) => {
         
-    const sql = "UPDATE eksamen.[user] SET username = @updateusername, password = @updatepassword, firstname = @updatefirstname, lastname = @updatelastname, birthdate = @updatebirthdate, gender = @updategender WHERE id = @id"
+    const sql = "UPDATE eksamen.[user] SET username = @updateusername, password = @updatepassword, firstname = @updatefirstname, lastname = @updatelastname, birthdate = @updatebirthdate, gender = @updategender, interest = @interest, agerange = @agerange WHERE id = @id"
         const request = new Request(sql, (err) => {
             if(err){
                 reject({message: "error connection"})    
@@ -144,6 +144,8 @@ function updateStatement(payload){
             request.addParameter('updatelastname', TYPES.VarChar, payload.lastname)
             request.addParameter('updatebirthdate', TYPES.Date, payload.birthdate)
             request.addParameter('updategender', TYPES.VarChar, payload.gender)
+            request.addParameter('interest', TYPES.VarChar, payload.interest)
+            request.addParameter('agerange', TYPES.VarChar, payload.agerange)
             request.addParameter('id', TYPES.Int, payload.id)     
             
             request.on('requestCompleted', (row) => {
