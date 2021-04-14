@@ -19,9 +19,8 @@ form.addEventListener("submit", function(e) {
     var firstname = document.getElementById("firstname").value
     var lastname = document.getElementById("lastname").value
     var birthdate = document.getElementById("birthdate").value
-    var gender = document.getElementById("gender").value
-
-
+    var gender = document.querySelector('input[name="gender"]:checked').value
+    var ratiointerest = document.querySelector('input[name="interest"]:checked').value
 
 
     fetch("http://localhost:7071/api/PostAndGetUser", {
@@ -33,7 +32,8 @@ form.addEventListener("submit", function(e) {
             firstname: firstname,
             lastname: lastname,
             birthdate: birthdate,
-            gender: gender
+            gender: gender,
+            interest: ratiointerest
         }),
         
         headers: {

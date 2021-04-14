@@ -13,7 +13,16 @@
             <input type="text" id="firstname" placeholder="First Name"/>
             <input type="text" id="lastname" placeholder="Last Name"/>
             <input type="date" id="birthdate" placeholder="Birthdate">
-            <input type="text" id="gender" placeholder="Gender">
+            <p>Please select your gender:</p>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label><br>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label><br>
+            <p>Please select your interest:</p>
+            <input type="radio" id="males" name="interest" value="males">
+            <label for="males">Males</label><br>
+            <input type="radio" id="females" name="interest" value="females">
+            <label for="females">Females</label><br>
             <button type="submit" name="Submit">Post User</button>
         </form>
     </div>
