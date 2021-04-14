@@ -17,6 +17,12 @@ updateUser.addEventListener("click", function(e) {
     window.location = "update.html";
 })
 
+var date = document.getElementById("date")
+date.addEventListener("click", function(e) {
+    e.preventDefault()
+    window.location = "date.html"
+})
+
 var logOutButton = document.getElementById("logout")
 logOutButton.addEventListener("click", function(e) {
     e.preventDefault()

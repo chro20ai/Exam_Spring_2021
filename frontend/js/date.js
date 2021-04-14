@@ -35,3 +35,9 @@ swipe.addEventListener("click", function(e) {
         console.log(err)
     })
 })
+
+var homepageButton = document.getElementById("homepage")
+homepageButton.addEventListener("click", function(e) {
+    e.preventDefault()
+    window.location = "homepage.html"
+})
