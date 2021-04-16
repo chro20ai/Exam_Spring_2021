@@ -1,6 +1,8 @@
 
 
-import {User} from '../classes/classes.js'
+const classes = require('../classes/classes')
+var User = classes.User
+
 
 var form = document.getElementById("form")
 
