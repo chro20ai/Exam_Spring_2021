@@ -1,8 +1,6 @@
 
 
-const classes = require('../classes/classes')
-var User = classes.User
-
+import {User} from '../classes/classes.js'
 
 var form = document.getElementById("form")
 
@@ -24,7 +22,7 @@ form.addEventListener("submit", function(e) {
     console.log(birthdate)
     user.create()
  
-})
+}) 
 
 
 

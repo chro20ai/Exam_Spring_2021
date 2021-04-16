@@ -1,5 +1,5 @@
 
-class User{
+export class User{
     constructor(id, username, password, firstname, lastname, birthdate, address, gender, interest, rangeAge){
     this._id = id
     this._username = username
@@ -82,9 +82,3 @@ class Address{
     }
 }
 
-module.exports = {
-    User: User,
-    Like: Like,
-    Match: Match,
-    Address: Address
-}
