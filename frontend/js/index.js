@@ -13,13 +13,13 @@ form.addEventListener("submit", function(e) {
     var firstname = document.getElementById("firstname").value
     var lastname = document.getElementById("lastname").value
     var birthdate = document.getElementById("birthdate").value
+    var region = document.querySelector('input[name="region"]:checked').value
     var gender = document.querySelector('input[name="gender"]:checked').value
     var ratiointerest = document.querySelector('input[name="interest"]:checked').value
     var rangeAge = document.querySelector('input[name="ageRange"]:checked').value
 
-    var user = new User(1, username, password, firstname, lastname, birthdate, gender, ratiointerest, rangeAge)
+    var user = new User(1, username, password, firstname, lastname, birthdate, region, gender, ratiointerest, rangeAge)
 
-    console.log(birthdate)
     user.create()
  
 }) 
