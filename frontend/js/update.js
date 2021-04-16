@@ -20,7 +20,7 @@ form.addEventListener("submit", function(e) {
     var ratiointerest = document.querySelector('input[name="interest"]:checked').value
 
     var id = localStorage.getItem("loggedIn")
-    fetch("http://localhost:7071/api/Update", {
+    fetch("http://localhost:7071/api/Update",  {
         
         method: 'PUT',
         body: JSON.stringify({

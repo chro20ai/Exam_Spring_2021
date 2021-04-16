@@ -1,12 +1,6 @@
-//var AddressClass = require('../classes/classes')['Address']
-/*var user = require('../classes/classes.js')
-const User = user.User*/
+
 
 import {User} from '../classes/classes.js'
-
-
-//const User = require('../classes/classes') 
-
 
 var form = document.getElementById("form")
 
@@ -23,37 +17,20 @@ form.addEventListener("submit", function(e) {
     var ratiointerest = document.querySelector('input[name="interest"]:checked').value
     var rangeAge = document.querySelector('input[name="ageRange"]:checked').value
 
-    fetch("http://localhost:7071/api/PostAndGetUser", {
-        
-        method: 'POST',
-        body: JSON.stringify({
-            username: username,
-            password: password,
-            firstname: firstname,
-            lastname: lastname,
-            birthdate: birthdate,
-            gender: gender,
-            interest: ratiointerest,
-            agerange: rangeAge
-        }),
-        
-        headers: {
-            "Content-Type": "application/json; charset-UTF-8"
-        }
-    }) 
-    .then((response) => {
-        return response.json()
+    var user = new User(1, username, password, firstname, lastname, birthdate, gender, ratiointerest, rangeAge)
 
-
-    })
-    .then((data) => {
-        console.log(data)
-        window.location = "login.html";
-    })
-    .catch(err => {
-        console.log(err)
-    })
+    console.log(birthdate)
+    user.create()
+ 
 })
+
+
+
+
+
+
+
+
 /*
 var getButton = document.getElementById("getUser")
 

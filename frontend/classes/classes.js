@@ -1,6 +1,6 @@
 
 export class User{
-    constructor(id, username, password, firstname, lastname, birthdate, address, gender){
+    constructor(id, username, password, firstname, lastname, birthdate, address, gender, interest, rangeAge){
     this._id = id
     this._username = username
     this._password = password
@@ -9,8 +9,48 @@ export class User{
     this._birthdate = birthdate
     this._address = address
     this._gender = gender
+    this._ratiointerest = interest
+    this._rangeAge = rangeAge 
     
     } 
+    create(){
+        fetch("http://localhost:7071/api/PostAndGetUser", {
+        
+            method: 'POST',
+            body: JSON.stringify({
+                username: this._username,
+                password: this._password,
+                firstname: this._firstname,
+                lastname: this._lastname,
+                birthdate: this._birthdate,
+                gender: this._gender,
+                interest: this._ratiointerest,
+                agerange: this._rangeAge
+            }),
+            
+            headers: {
+                "Content-Type": "application/json; charset-UTF-8"
+            }
+        }) 
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            console.log(data)
+            window.location = "login.html";
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+    
+
+    update(){
+    }
+
+    delete(){
+    }
+
 }
 
 class Like{
@@ -19,6 +59,8 @@ class Like{
         this._userID = userID
         this._likedID = likedID
 }
+
+
 }
 
 class Match{
@@ -39,4 +81,5 @@ class Address{
         this._country = country
     }
 }
+
 

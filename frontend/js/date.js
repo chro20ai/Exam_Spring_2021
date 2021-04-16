@@ -15,8 +15,7 @@ swipe.addEventListener("click", function(e) {
                 console.log(data)
                 id ++
                 if(isNaN(id)){
-                    id ++
-                    
+                    id ++ 
                 }
 
                 var username = data[1].value
@@ -24,7 +23,6 @@ swipe.addEventListener("click", function(e) {
                 var lastname = data[3].value
                 var age = data[4].value
                 var gender = data[6].value
-
 
 
                 document.getElementById("swipeusername").innerHTML = username
