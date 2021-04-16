@@ -46,6 +46,36 @@ export class User{
     
 
     update(){
+        fetch("http://localhost:7071/api/Update",  {
+        
+            method: 'PUT',
+            body: JSON.stringify({
+                id: this._id,
+                username: this._username,
+                password: this._password,
+                firstname: this._firstname,
+                lastname: this._lastname,
+                birthdate: this._birthdate,
+                gender: this._gender,
+                interest: this._ratiointerest
+                
+            }),
+            
+            headers: {
+                "Content-Type": "application/json; charset-UTF-8"
+            }
+        }) 
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            console.log(data)
+            window.location = "homepage.html";
+    
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     delete(){

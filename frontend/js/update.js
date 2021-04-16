@@ -1,5 +1,5 @@
 
-//import {User} from '../classes/classes.js'
+import {User} from '../classes/classes.js'
 
 
 //const User = require('../classes/classes') 
@@ -20,34 +20,8 @@ form.addEventListener("submit", function(e) {
     var ratiointerest = document.querySelector('input[name="interest"]:checked').value
 
     var id = localStorage.getItem("loggedIn")
-    fetch("http://localhost:7071/api/Update",  {
-        
-        method: 'PUT',
-        body: JSON.stringify({
-            id: id,
-            username: updateusername,
-            password: updatepassword,
-            firstname: updatefirstname,
-            lastname: updatelastname,
-            birthdate: updatebirthdate,
-            gender: updategender,
-            ratiointerest: ratiointerest
-            
-        }),
-        
-        headers: {
-            "Content-Type": "application/json; charset-UTF-8"
-        }
-    }) 
-    .then((response) => {
-        return response.json()
-    })
-    .then((data) => {
-        console.log(data)
-        window.location = "homepage.html";
 
-    })
-    .catch(err => {
-        console.log(err)
-    })
+    var user = new User(id, updateusername, updatepassword, updatefirstname, updatelastname, updatebirthdate, updategender, ratiointerest)
+
+    user.update()
 })
