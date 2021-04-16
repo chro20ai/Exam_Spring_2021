@@ -58,6 +58,7 @@ export class User{
                 firstname: this._firstname,
                 lastname: this._lastname,
                 birthdate: this._birthdate,
+                region: this._region,
                 gender: this._gender,
                 interest: this._ratiointerest
                 
