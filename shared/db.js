@@ -26,7 +26,7 @@ module.exports.startDb = startDb;
 //Når man opretter en bruger 
 function insert(payload){
     return new Promise((resolve, reject) => {
-    const sql = `INSERT INTO [eksamen].[user] (username, password, firstname, lastname, birthdate, region, gender, interest, agerange) VALUES (@username, @password, @firstname, @lastname, @birthdate, @region, @gender, @interest, @agerange)`
+    const sql = `INSERT INTO [eksamen].[user] (username, password, firstname, lastname, birthdate, gender, interest, agerange, region) VALUES (@username, @password, @firstname, @lastname, @birthdate, @gender, @interest, @agerange, @region)`
         const request = new Request(sql, (err) => {
             if(err){
                 reject(err)
@@ -38,10 +38,10 @@ function insert(payload){
         request.addParameter('firstname', TYPES.VarChar, payload.firstname)
         request.addParameter('lastname', TYPES.VarChar, payload.lastname)
         request.addParameter('birthdate', TYPES.Date, payload.birthdate)
-        request.addParameter('region', TYPES.VarChar, payload.region)
         request.addParameter('gender', TYPES.VarChar, payload.gender)
         request.addParameter('interest', TYPES.VarChar, payload.interest)
         request.addParameter('agerange', TYPES.VarChar, payload.agerange)
+        request.addParameter('region', TYPES.VarChar, payload.region)
 
         request.on('requestCompleted', (row) => {
             console.log('Login succeeded', row)
@@ -133,8 +133,9 @@ module.exports.deleteStatement = deleteStatement;
 //Update user
 function updateStatement(payload){
     return new Promise((resolve, reject) => {
+        console.log(payload)
         
-    const sql = "UPDATE eksamen.[user] SET username = @updateusername, password = @updatepassword, firstname = @updatefirstname, lastname = @updatelastname, birthdate = @updatebirthdate, region = @updateregion, gender = @updategender, interest = @interest, agerange = @agerange WHERE id = @id"
+    const sql = "UPDATE eksamen.[user] SET username = @updateusername, password = @updatepassword, firstname = @updatefirstname, lastname = @updatelastname, birthdate = @updatebirthdate, gender = @updategender, interest = @interest, agerange = @agerange, region = @region WHERE id = @id"
         const request = new Request(sql, (err) => {
             if(err){
                 reject({message: "error connection"})    
@@ -144,14 +145,14 @@ function updateStatement(payload){
             request.addParameter('updatefirstname', TYPES.VarChar, payload.firstname)
             request.addParameter('updatelastname', TYPES.VarChar, payload.lastname)
             request.addParameter('updatebirthdate', TYPES.Date, payload.birthdate)
-            request.addParameter('updateregion', TYPES.VarChar, payload.region)
             request.addParameter('updategender', TYPES.VarChar, payload.gender)
             request.addParameter('interest', TYPES.VarChar, payload.interest)
             request.addParameter('agerange', TYPES.VarChar, payload.agerange)
+            request.addParameter('region', TYPES.VarChar, payload.region)
             request.addParameter('id', TYPES.Int, payload.id)     
             
             request.on('requestCompleted', (row) => {
-                console.log('Update succeeded', row)
+                //console.log('Update succeeded', row)
                 resolve('User updated', row)
             });
     connection.execSql(request)
@@ -164,7 +165,7 @@ module.exports.updateStatement = updateStatement;
 
 //Bruges til get swipe. 
 function swipe(id){
-    console.log(id)
+    //console.log(id)
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM [eksamen].[user] where id = @id'
         const request = new Request(sql, (err, rowcount) => {
@@ -176,13 +177,31 @@ function swipe(id){
                 reject({message: 'User does not exist'})
             }
         });
-        request.addParameter('id', TYPES.Int, id[0])
+        request.addParameter('id', TYPES.Int, id)
 
         request.on('row', (columns) => {
             resolve(columns)
+            console.log("id: " + columns[0].value)
+            console.log("username: " + columns[1].value)
+            console.log("password: " + columns[2].value)
+            console.log("firstname: " + columns[3].value)
+            console.log("lastname: " + columns[4].value)
+            console.log("birthdate: " + columns[5].value)
+            console.log("gender: " + columns[6].value)
+            console.log("interest: " + columns[7].value)
+            console.log("agerange: " + columns[8].value)
+            console.log("region: " + columns[9].value)
+
+
+            
+            
         });
         connection.execSql(request)    
         })
     
 }
 module.exports.swipe = swipe;
+
+function sortingalgorithm(){
+        
+}

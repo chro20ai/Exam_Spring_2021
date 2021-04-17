@@ -18,9 +18,11 @@ form.addEventListener("submit", function(e) {
     var ratiointerest = document.querySelector('input[name="interest"]:checked').value
     var rangeAge = document.querySelector('input[name="ageRange"]:checked').value
 
-    var user = new User(1, username, password, firstname, lastname, birthdate, region, gender, ratiointerest, rangeAge)
+    var user = new User(1, username, password, firstname, lastname, birthdate, gender, ratiointerest, rangeAge, region,)
 
     user.create()
+
+    localStorage.setItem("region", region)
  
 }) 
 

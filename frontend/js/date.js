@@ -1,9 +1,10 @@
 var swipe = document.getElementById("swipe")
-var id = 1;
+var id = 28;
 swipe.addEventListener("click", function(e) {
     e.preventDefault()
     
     fetch(`http://localhost:7071/api/swipe?id=${id}`)
+    //fetch("http://localhost:7071/api/swipe")
     .then(
         function(response){
             if (response.status !== 200){
@@ -12,11 +13,12 @@ swipe.addEventListener("click", function(e) {
             }
             
             response.json().then(function(data) {
+                console.log("under dette er date.js data")
                 console.log(data)
-                id ++
-                if(isNaN(id)){
+                //id ++
+                /*if(isNaN(id)){
                     id ++ 
-                }
+                }*/
 
                 var username = data[1].value
                 var firstname = data[3].value

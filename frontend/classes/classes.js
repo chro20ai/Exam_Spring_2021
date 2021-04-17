@@ -1,18 +1,18 @@
 
 export class User{
-    constructor(id, username, password, firstname, lastname, birthdate, region, gender, interest, rangeAge){
+    constructor(id, username, password, firstname, lastname, birthdate,  gender, interest, rangeAge, region){
     this._id = id
     this._username = username
     this._password = password
     this._firstname = firstname 
     this._lastname = lastname
     this._birthdate = birthdate
-    this._region = region
-    //this._address = address - Der har stået address her! Det skal vidst fjernes i databasen. 
+    //this._address = address
+    //Der har stået address her! Det skal vidst fjernes i databasen.
     this._gender = gender
     this._ratiointerest = interest
     this._rangeAge = rangeAge 
-    
+    this._region = region
     } 
     create(){
         fetch("http://localhost:7071/api/PostAndGetUser", {
@@ -24,10 +24,10 @@ export class User{
                 firstname: this._firstname,
                 lastname: this._lastname,
                 birthdate: this._birthdate,
-                region: this._region,
                 gender: this._gender,
                 interest: this._ratiointerest,
-                agerange: this._rangeAge
+                agerange: this._rangeAge,
+                region: this._region
             }),
             
             headers: {
@@ -38,7 +38,7 @@ export class User{
             return response.json()
         })
         .then((data) => {
-            console.log(data)
+            //console.log(data)
             window.location = "login.html";
         })
         .catch(err => {
@@ -58,10 +58,10 @@ export class User{
                 firstname: this._firstname,
                 lastname: this._lastname,
                 birthdate: this._birthdate,
-                region: this._region,
                 gender: this._gender,
-                interest: this._ratiointerest
-                
+                interest: this._ratiointerest,
+                agerange: this._rangeAge,
+                region: this._region
             }),
             
             headers: {
@@ -72,7 +72,7 @@ export class User{
             return response.json()
         })
         .then((data) => {
-            console.log(data)
+            //console.log(data)
             window.location = "homepage.html";
     
         })
