@@ -23,8 +23,8 @@ module.exports = async function (context, req) {
 
 async function get(context, req){
     try{
-        let id = req.query.id;
-        let user = await db.swipe(id)
+        let region = req.query.region;
+        let user = await db.swipe(region)
         context.res = {
             body: user
         };

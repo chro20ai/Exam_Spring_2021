@@ -162,12 +162,12 @@ function updateStatement(payload){
 }
 module.exports.updateStatement = updateStatement;
 
-
+var array = []
 //Bruges til get swipe. 
-function swipe(id){
+function swipe(region){
     //console.log(id)
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM [eksamen].[user] where id = @id'
+        const sql = 'SELECT * FROM [eksamen].[user] where region = @region'
         const request = new Request(sql, (err, rowcount) => {
             if (err){
                 reject(err)
@@ -177,11 +177,23 @@ function swipe(id){
                 reject({message: 'User does not exist'})
             }
         });
-        request.addParameter('id', TYPES.Int, id)
+        request.addParameter('region', TYPES.VarChar, region)
 
-        request.on('row', (columns) => {
+
+        request.on('row', function(columns) {
+            /*columns.forEach(function(column) {
+             array.push(column.value)
+              
+              
+            });*/
+            array.push(columns)
+             //array.push(columns[0].value, columns[9].value)
+             
+             //console.log(array)
+            
+       /* request.on('row', (columns) => {
             resolve(columns)
-            console.log("id: " + columns[0].value)
+            console.log("id'er: " + columns[0].value)
             console.log("username: " + columns[1].value)
             console.log("password: " + columns[2].value)
             console.log("firstname: " + columns[3].value)
@@ -190,18 +202,27 @@ function swipe(id){
             console.log("gender: " + columns[6].value)
             console.log("interest: " + columns[7].value)
             console.log("agerange: " + columns[8].value)
-            console.log("region: " + columns[9].value)
+            console.log("region: " + columns[9].value)*/
 
 
             
             
-        });
+        }); 
+        request.on('done', (rowCount) => {
+            console.log('Done is called!');
+          });
+        
+          request.on('doneInProc', (rowCount, more) => {
+            console.log(rowCount + ' rows returned');
+            console.log(array)
+            resolve(array)
+          });
         connection.execSql(request)    
         })
     
 }
 module.exports.swipe = swipe;
 
-function sortingalgorithm(){
-        
+function sortingalgorithm(array){
+        array
 }

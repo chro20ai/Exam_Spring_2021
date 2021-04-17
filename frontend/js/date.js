@@ -1,9 +1,11 @@
 var swipe = document.getElementById("swipe")
-var id = 28;
+var index = 0;
+var region = localStorage.getItem("region")
+var id = localStorage.getItem("loggedIn")
 swipe.addEventListener("click", function(e) {
     e.preventDefault()
     
-    fetch(`http://localhost:7071/api/swipe?id=${id}`)
+    fetch(`http://localhost:7071/api/swipe?region=${region}`)
     //fetch("http://localhost:7071/api/swipe")
     .then(
         function(response){
@@ -19,12 +21,18 @@ swipe.addEventListener("click", function(e) {
                 /*if(isNaN(id)){
                     id ++ 
                 }*/
+                if(id == data[index][0].value){
+                    index ++
+                }
+                    
+                
 
-                var username = data[1].value
-                var firstname = data[3].value
-                var lastname = data[3].value
-                var age = data[4].value
-                var gender = data[6].value
+
+                var username = data[index][1].value
+                var firstname = data[index][2].value
+                var lastname = data[index][3].value
+                var age = data[index][5].value
+                var gender = data[index][6].value
 
 
                 document.getElementById("swipeusername").innerHTML = username
@@ -33,11 +41,15 @@ swipe.addEventListener("click", function(e) {
                 document.getElementById("swipeage").innerHTML = age
                 document.getElementById("swipegender").innerHTML = gender
 
+                index ++
+
 
             })
         }
-    ).catch(function(err){
-        console.log(err)
+    )
+
+    .catch(function(err){
+    console.log(err)
     })
 })
 
