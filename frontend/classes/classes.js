@@ -10,7 +10,7 @@ export class User{
     //this._address = address
     //Der har stået address her! Det skal vidst fjernes i databasen.
     this._gender = gender
-    this._ratiointerest = lookingfor
+    this._lookingfor = lookingfor
     this._rangeAge = rangeAge 
     this._region = region
     } 
@@ -25,7 +25,7 @@ export class User{
                 lastname: this._lastname,
                 birthdate: this._birthdate,
                 gender: this._gender,
-                interest: this._ratiointerest,
+                lookingfor: this._lookingfor,
                 agerange: this._rangeAge,
                 region: this._region
             }),
@@ -59,7 +59,7 @@ export class User{
                 lastname: this._lastname,
                 birthdate: this._birthdate,
                 gender: this._gender,
-                lookingfor: this._ratiointerest,
+                lookingfor: this._lookingfor,
                 agerange: this._rangeAge,
                 region: this._region
             }),

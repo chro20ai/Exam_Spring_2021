@@ -18,16 +18,16 @@ form.addEventListener("submit", function(e) {
     var updatebirthdate = document.getElementById("updatebirthdate").value
     var updateregion = document.querySelector('input[name="region"]:checked').value
     var updategender = document.querySelector('input[name="gender"]:checked').value
-    var ratiointerest = document.querySelector('input[name="interest"]:checked').value
+    var updatelookingfor = document.querySelector('input[name="lookingfor"]:checked').value
     var rangeAge = document.querySelector('input[name="ageRange"]:checked').value
 
     var id = localStorage.getItem("loggedIn")
     
     
     localStorage.setItem("region", updateregion)
-    localStorage.setItem("lookingfor", ratiointerest)
+    localStorage.setItem("lookingfor", updatelookingfor)
 
-    var user = new User(id, updateusername, updatepassword, updatefirstname, updatelastname, updatebirthdate, updategender, ratiointerest, rangeAge, updateregion)
+    var user = new User(id, updateusername, updatepassword, updatefirstname, updatelastname, updatebirthdate, updategender, updatelookingfor, rangeAge, updateregion)
 
     user.update()
 })

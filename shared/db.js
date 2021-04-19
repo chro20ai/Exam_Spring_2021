@@ -26,7 +26,7 @@ module.exports.startDb = startDb;
 //Når man opretter en bruger 
 function insert(payload){
     return new Promise((resolve, reject) => {
-    const sql = `INSERT INTO [eksamen].[user] (username, password, firstname, lastname, birthdate, gender, interest, agerange, region) VALUES (@username, @password, @firstname, @lastname, @birthdate, @gender, @interest, @agerange, @region)`
+    const sql = `INSERT INTO [eksamen].[user] (username, password, firstname, lastname, birthdate, gender, lookingfor, agerange, region) VALUES (@username, @password, @firstname, @lastname, @birthdate, @gender, @lookingfor, @agerange, @region)`
         const request = new Request(sql, (err) => {
             if(err){
                 reject(err)
@@ -38,8 +38,8 @@ function insert(payload){
         request.addParameter('firstname', TYPES.VarChar, payload.firstname)
         request.addParameter('lastname', TYPES.VarChar, payload.lastname)
         request.addParameter('birthdate', TYPES.Date, payload.birthdate)
+        request.addParameter('lookingfor', TYPES.VarChar, payload.lookingfor)
         request.addParameter('gender', TYPES.VarChar, payload.gender)
-        request.addParameter('interest', TYPES.VarChar, payload.interest)
         request.addParameter('agerange', TYPES.VarChar, payload.agerange)
         request.addParameter('region', TYPES.VarChar, payload.region)
 
@@ -186,7 +186,7 @@ function swipe(lookingfor){
               
               
             });*/
-            console.log(columns)
+           // console.log(columns)
             array.push(columns)
              //array.push(columns[0].value, columns[9].value)
              
@@ -215,7 +215,7 @@ function swipe(lookingfor){
         
           request.on('doneInProc', (rowCount, more) => {
             console.log(rowCount + ' rows returned');
-            console.log(array)
+            //console.log(array)
             resolve(array)
           });
         connection.execSql(request)    

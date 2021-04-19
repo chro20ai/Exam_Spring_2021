@@ -1,5 +1,6 @@
 var swipe = document.getElementById("swipe")
 var index = 0;
+var swipeindex = 0; 
 var region = localStorage.getItem("region")
 var id = localStorage.getItem("loggedIn")
 var lookingfor = localStorage.getItem("lookingfor")
@@ -24,82 +25,120 @@ function getAge(dateString)
     }
     return age;}
 
+function startDating(){
+        fetch(`http://localhost:7071/api/swipe?lookingfor=${lookingfor}`)
+        //fetch("http://localhost:7071/api/swipe")
+        .then(
+            function(response){
+                if (response.status !== 200){
+                    console.log("Something went wrong " + response.status);
+                    return
+                }
+                
+                response.json().then(function(data) {
+                
+    
+                    for( i = 0; i < data.length; i ++){
+                        var age = getAge(data[i][5].value)
+                        //console.log(age)
+                        if(age >= 18 && age <= 25){
+                        array1825.push(data[i])
+                        }
+                        else if(age >= 26 && age <= 30){
+                        array2630.push(data[i])
+                        }
+                        else if(age >= 31 && age <= 40){
+                        array3140.push(data[i])
+                        }    
+                        else if(age >= 41){
+                        array41.push(data[i])
+                        }
+                    }
+                    
+                    console.log(array1825)
+                    console.log(array2630)
+                    console.log(array3140)
+                    console.log(array41)
+                    //console.log(data)
+                    
+    
+    
+                })
+            }
+        )
+    
+        .catch(function(err){
+        console.log(err)
+        })
+    }
+    
+
 swipe.addEventListener("click", function(e) {
     e.preventDefault()
     
-    fetch(`http://localhost:7071/api/swipe?lookingfor=${lookingfor}`)
-    //fetch("http://localhost:7071/api/swipe")
-    .then(
-        function(response){
-            if (response.status !== 200){
-                console.log("Something went wrong " + response.status);
-                return
-            }
-            
-            response.json().then(function(data) {
-                //console.log("under dette er date.js data")
-                //console.log(data)
-                //id ++
-                /*if(isNaN(id)){
-                    id ++ 
-                }*/
-                if(id == data[index][0].value){
-                    index ++
-                }
-                
-                
+  
 
+/*
+    if(id == [index][0].value){
+        index ++
+    }
+*/
+var username;
+var firstname;
+var lastname;
+var age;
+var gender;
 
-                var username = data[index][1].value
-                var firstname = data[index][2].value
-                var lastname = data[index][3].value
-                var birthdate = data[index][5].value
-                var gender = data[index][6].value
-
-                var age = getAge(birthdate)
-
-                for( i = 0; i < data.length; i ++){
-                    var age = getAge(data[i][5].value)
-                    console.log(age)
-                    if(age >= 18 && age <= 25){
-                    array1825.push(data[i][1].value)
-                    }
-                    else if(age >= 26 && age <= 30){
-                    array2630.push(data[i])
-                    }
-                    else if(age >= 31 && age <= 40){
-                    array3140.push(data[i])
-                    }    
-                    else if(age >= 41){
-                    array41.push(data[i])
-                    }
-                }
-                
-                console.log(array1825)
-                console.log(array2630)
-                console.log(array3140)
-                console.log(array41)
-                //console.log(data)
-                
-
+try {
+    if(agerange == "18-25"){
+        username = array1825[swipeindex][1].value
+        firstname = array1825[swipeindex][3].value
+        lastname = array1825[swipeindex][4].value
+        age = getAge(array1825[swipeindex][5].value)
+        gender = array1825[swipeindex][6].value
+        
+    }
+    else if(agerange == "26-30"){
+        username = array2630[swipeindex][1].value
+        firstname = array2630[swipeindex][3].value
+        lastname = array2630[swipeindex][4].value
+        age = getAge(array2630[swipeindex][5].value)
+        gender = array2630[swipeindex][6].value
+    }
+    else if(agerange == "31-40"){
+        username = array3140[swipeindex][1].value
+        firstname = array3140[swipeindex][3].value
+        lastname = array3140[swipeindex][4].value
+        age = getAge(array3140[swipeindex][5].value)
+        gender = array3140[swipeindex][6].value
+    }
+    else if(agerange == "41+"){
+        username = array41[swipeindex][1].value
+        firstname = array41[swipeindex][3].value
+        lastname = array41[swipeindex][4].value
+        age = getAge(array41[swipeindex][5].value)
+        gender = array41[swipeindex][6].value
+    }
+  }
+  catch(err) {
+    alert("No more users for you, checkout out pornhub")
+    username = "";
+    firstname = "";
+    lastname = "";
+    age = "";
+    gender = "";
+  }
+    swipeindex++;               
 
                 document.getElementById("swipeusername").innerHTML = username
                 document.getElementById("swipefirstname").innerHTML = firstname
                 document.getElementById("swipelastname").innerHTML = lastname
                 document.getElementById("swipeage").innerHTML = age
                 document.getElementById("swipegender").innerHTML = gender
-
-                index ++
-
-
-            })
-        }
-    )
-
-    .catch(function(err){
-    console.log(err)
-    })
 })
+            
+    
+    
 
 var homepageButton = document.getElementById("homepage")
 homepageButton.addEventListener("click", function(e) {
