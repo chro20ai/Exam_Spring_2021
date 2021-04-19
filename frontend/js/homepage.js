@@ -28,6 +28,8 @@ logOutButton.addEventListener("click", function(e) {
     e.preventDefault()
     localStorage.removeItem("loggedIn")
     localStorage.removeItem("username")
+    localStorage.removeItem("region")
+    localStorage.removeItem("lookingfor")
     window.location = "login.html"
 })
 

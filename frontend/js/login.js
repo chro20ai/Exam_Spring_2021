@@ -28,6 +28,7 @@ loginform.addEventListener("submit", function(e) {
         localStorage.setItem('loggedIn', data[0].value);
         localStorage.setItem('username', data[1].value);
         localStorage.setItem('region', data[9].value);
+        localStorage.setItem('lookingfor', data[7].value);
         //console.log(data)
         window.location = "homepage.html";
     })

@@ -2,10 +2,24 @@ var swipe = document.getElementById("swipe")
 var index = 0;
 var region = localStorage.getItem("region")
 var id = localStorage.getItem("loggedIn")
+var lookingfor = localStorage.getItem("lookingfor")
+
+function getAge(dateString) 
+{
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+    {
+        age--;
+    }
+    return age;}
+
 swipe.addEventListener("click", function(e) {
     e.preventDefault()
     
-    fetch(`http://localhost:7071/api/swipe?region=${region}`)
+    fetch(`http://localhost:7071/api/swipe?lookingfor=${lookingfor}`)
     //fetch("http://localhost:7071/api/swipe")
     .then(
         function(response){
@@ -31,8 +45,10 @@ swipe.addEventListener("click", function(e) {
                 var username = data[index][1].value
                 var firstname = data[index][2].value
                 var lastname = data[index][3].value
-                var age = data[index][5].value
+                var birthdate = data[index][5].value
                 var gender = data[index][6].value
+
+                var age = getAge(birthdate)
 
 
                 document.getElementById("swipeusername").innerHTML = username

@@ -1,6 +1,6 @@
 
 export class User{
-    constructor(id, username, password, firstname, lastname, birthdate,  gender, interest, rangeAge, region){
+    constructor(id, username, password, firstname, lastname, birthdate,  gender, lookingfor, rangeAge, region){
     this._id = id
     this._username = username
     this._password = password
@@ -10,7 +10,7 @@ export class User{
     //this._address = address
     //Der har stået address her! Det skal vidst fjernes i databasen.
     this._gender = gender
-    this._ratiointerest = interest
+    this._ratiointerest = lookingfor
     this._rangeAge = rangeAge 
     this._region = region
     } 
@@ -59,7 +59,7 @@ export class User{
                 lastname: this._lastname,
                 birthdate: this._birthdate,
                 gender: this._gender,
-                interest: this._ratiointerest,
+                lookingfor: this._ratiointerest,
                 agerange: this._rangeAge,
                 region: this._region
             }),

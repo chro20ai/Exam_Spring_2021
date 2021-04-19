@@ -135,7 +135,7 @@ function updateStatement(payload){
     return new Promise((resolve, reject) => {
         console.log(payload)
         
-    const sql = "UPDATE eksamen.[user] SET username = @updateusername, password = @updatepassword, firstname = @updatefirstname, lastname = @updatelastname, birthdate = @updatebirthdate, gender = @updategender, interest = @interest, agerange = @agerange, region = @region WHERE id = @id"
+    const sql = "UPDATE eksamen.[user] SET username = @updateusername, password = @updatepassword, firstname = @updatefirstname, lastname = @updatelastname, birthdate = @updatebirthdate, gender = @updategender, lookingfor = @lookingfor, agerange = @agerange, region = @region WHERE id = @id"
         const request = new Request(sql, (err) => {
             if(err){
                 reject({message: "error connection"})    
@@ -146,7 +146,7 @@ function updateStatement(payload){
             request.addParameter('updatelastname', TYPES.VarChar, payload.lastname)
             request.addParameter('updatebirthdate', TYPES.Date, payload.birthdate)
             request.addParameter('updategender', TYPES.VarChar, payload.gender)
-            request.addParameter('interest', TYPES.VarChar, payload.interest)
+            request.addParameter('lookingfor', TYPES.VarChar, payload.lookingfor)
             request.addParameter('agerange', TYPES.VarChar, payload.agerange)
             request.addParameter('region', TYPES.VarChar, payload.region)
             request.addParameter('id', TYPES.Int, payload.id)     
@@ -164,10 +164,10 @@ module.exports.updateStatement = updateStatement;
 
 var array = []
 //Bruges til get swipe. 
-function swipe(region){
+function swipe(lookingfor){
     //console.log(id)
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM [eksamen].[user] where region = @region'
+        const sql = 'SELECT * FROM [eksamen].[user] where lookingfor = @lookingfor'
         const request = new Request(sql, (err, rowcount) => {
             if (err){
                 reject(err)
@@ -177,7 +177,7 @@ function swipe(region){
                 reject({message: 'User does not exist'})
             }
         });
-        request.addParameter('region', TYPES.VarChar, region)
+        request.addParameter('lookingfor', TYPES.VarChar, lookingfor)
 
 
         request.on('row', function(columns) {
@@ -186,6 +186,7 @@ function swipe(region){
               
               
             });*/
+            console.log(columns)
             array.push(columns)
              //array.push(columns[0].value, columns[9].value)
              
