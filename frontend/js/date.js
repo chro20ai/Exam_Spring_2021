@@ -3,6 +3,14 @@ var index = 0;
 var region = localStorage.getItem("region")
 var id = localStorage.getItem("loggedIn")
 var lookingfor = localStorage.getItem("lookingfor")
+var agerange = localStorage.getItem("agerange")
+
+//lav om til 3140 osv.
+//lav agerange i localstorage
+var array1825 = []
+var array2630 = []
+var array3140 = []
+var array41 = []
 
 function getAge(dateString) 
 {
@@ -29,8 +37,8 @@ swipe.addEventListener("click", function(e) {
             }
             
             response.json().then(function(data) {
-                console.log("under dette er date.js data")
-                console.log(data)
+                //console.log("under dette er date.js data")
+                //console.log(data)
                 //id ++
                 /*if(isNaN(id)){
                     id ++ 
@@ -38,7 +46,7 @@ swipe.addEventListener("click", function(e) {
                 if(id == data[index][0].value){
                     index ++
                 }
-                    
+                
                 
 
 
@@ -49,6 +57,30 @@ swipe.addEventListener("click", function(e) {
                 var gender = data[index][6].value
 
                 var age = getAge(birthdate)
+
+                for( i = 0; i < data.length; i ++){
+                    var age = getAge(data[i][5].value)
+                    console.log(age)
+                    if(age >= 18 && age <= 25){
+                    array1825.push(data[i][1].value)
+                    }
+                    else if(age >= 26 && age <= 30){
+                    array2630.push(data[i])
+                    }
+                    else if(age >= 31 && age <= 40){
+                    array3140.push(data[i])
+                    }    
+                    else if(age >= 41){
+                    array41.push(data[i])
+                    }
+                }
+                
+                console.log(array1825)
+                console.log(array2630)
+                console.log(array3140)
+                console.log(array41)
+                //console.log(data)
+                
 
 
                 document.getElementById("swipeusername").innerHTML = username
