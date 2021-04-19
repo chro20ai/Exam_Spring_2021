@@ -34,9 +34,7 @@ function startDating(){
                     console.log("Something went wrong " + response.status);
                     return
                 }
-                
                 response.json().then(function(data) {
-                
     
                     for( i = 0; i < data.length; i ++){
                         var age = getAge(data[i][5].value)
@@ -54,19 +52,14 @@ function startDating(){
                         array41.push(data[i])
                         }
                     }
-                    
                     console.log(array1825)
                     console.log(array2630)
                     console.log(array3140)
                     console.log(array41)
                     //console.log(data)
-                    
-    
-    
                 })
             }
         )
-    
         .catch(function(err){
         console.log(err)
         })
@@ -75,30 +68,29 @@ function startDating(){
 
 swipe.addEventListener("click", function(e) {
     e.preventDefault()
-    
-  
 
-/*
-    if(id == [index][0].value){
-        index ++
-    }
-*/
 var username;
 var firstname;
 var lastname;
 var age;
 var gender;
 
+
 try {
     if(agerange == "18-25"){
-        username = array1825[swipeindex][1].value
-        firstname = array1825[swipeindex][3].value
-        lastname = array1825[swipeindex][4].value
-        age = getAge(array1825[swipeindex][5].value)
-        gender = array1825[swipeindex][6].value
-        
+        if(array1825[swipeindex][0].value == id){
+            swipeindex++;
+            }
+            username = array1825[swipeindex][1].value
+            firstname = array1825[swipeindex][3].value
+            lastname = array1825[swipeindex][4].value
+            age = getAge(array1825[swipeindex][5].value)
+            gender = array1825[swipeindex][6].value    
     }
     else if(agerange == "26-30"){
+        if(array2630[swipeindex][0].value == id){
+        swipeindex++;
+        }
         username = array2630[swipeindex][1].value
         firstname = array2630[swipeindex][3].value
         lastname = array2630[swipeindex][4].value
@@ -106,6 +98,9 @@ try {
         gender = array2630[swipeindex][6].value
     }
     else if(agerange == "31-40"){
+        if(array3140[swipeindex][0].value == id){
+            swipeindex++;
+            }
         username = array3140[swipeindex][1].value
         firstname = array3140[swipeindex][3].value
         lastname = array3140[swipeindex][4].value
@@ -113,6 +108,9 @@ try {
         gender = array3140[swipeindex][6].value
     }
     else if(agerange == "41+"){
+        if(array41[swipeindex][0].value == id){
+            swipeindex++;
+            }
         username = array41[swipeindex][1].value
         firstname = array41[swipeindex][3].value
         lastname = array41[swipeindex][4].value
@@ -136,9 +134,6 @@ try {
                 document.getElementById("swipeage").innerHTML = age
                 document.getElementById("swipegender").innerHTML = gender
 })
-            
-    
-    
 
 var homepageButton = document.getElementById("homepage")
 homepageButton.addEventListener("click", function(e) {

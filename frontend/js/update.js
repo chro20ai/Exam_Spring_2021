@@ -26,6 +26,8 @@ form.addEventListener("submit", function(e) {
     
     localStorage.setItem("region", updateregion)
     localStorage.setItem("lookingfor", updatelookingfor)
+    localStorage.setItem("agerange", rangeAge)
+    localStorage.setItem("username", updateusername)
 
     var user = new User(id, updateusername, updatepassword, updatefirstname, updatelastname, updatebirthdate, updategender, updatelookingfor, rangeAge, updateregion)
 
