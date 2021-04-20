@@ -224,6 +224,39 @@ function swipe(lookingfor){
 }
 module.exports.swipe = swipe;
 
+
+
+
+
+
+//Når man opretter en bruger 
+function insertInterest(payload){
+    return new Promise((resolve, reject) => {
+    const sql = `INSERT INTO [eksamen].[user_interest] (user_id, interest_id) VALUES (@user_id, @interest_id)`
+        const request = new Request(sql, (err) => {
+            if(err){
+                reject(err)
+                console.log(err)
+            }
+        });
+        request.addParameter('user_id', TYPES.Int, payload.user_id)
+        request.addParameter('interest_id', TYPES.Int, payload.interest_id)
+    
+        request.on('requestCompleted', (row) => {
+            console.log('Interests succeded', row)
+            resolve('Interests inserted', row)
+        });
+
+    connection.execSql(request)
+    });
+}
+module.exports.insertInterest = insertInterest
+;
+
+
+
+
+
 function sortingalgorithm(array){
         array
 }

@@ -15,6 +15,35 @@ export class User{
     this._region = region
     } 
     create(){
+    var errormessage = ""; 
+    //Errors hvis kravene for udfyldelse af oplysninger ikke er korrekte. 
+    if (username.value == "") {
+        errormessage += "Mangler at udfylde et brugernavn \n";}
+    if (password.value == "" || password.value.length < 6){
+        errormessage += "Din adgangskode skal bestå af mindst 6 tegn\n"}
+    if (firstname.value == "") {
+        errormessage += "Mangler at udfylde et fornavn\n"}
+    if (lastname.value == "") {
+        errormessage += "Mangler at udfylde et efternavn\n"}
+    if(birthdate.value == "") {
+        errormessage += "Angiv din fødselsdagsdato\n"}
+
+    /*
+    if(gender.value == "") {
+        errormessage += "Angiv dit køn\n"}
+    if(lookingfor.value == "") {
+         errormessage += "Angiv hvilket køn du vil bumle\n"}
+    if(rangeAge.value == "") {
+        errormessage += "Angiv hvilken alder du vil bumle\n"}
+    if(region.value == "") {
+        errormessage += "Angiv hvor du kommer fra\n"}
+    */
+
+    if(errormessage != ""){
+        alert(errormessage)
+    }
+
+    else{
         fetch("http://localhost:7071/api/PostAndGetUser", {
         
             method: 'POST',
@@ -39,12 +68,13 @@ export class User{
         })
         .then((data) => {
             //console.log(data)
-            window.location = "login.html";
+            window.location = "interest.html";
         })
         .catch(err => {
             console.log(err)
         })
     }
+}
     
 
     update(){

@@ -22,14 +22,22 @@ form.addEventListener("submit", function(e) {
 
     user.create()
 
-    localStorage.setItem("region", region)
- 
+    localStorage.setItem("region", region) 
 }) 
 
 
+   
 
+    //var interest1 = document.querySelector('input[name="interest"]:checked').value
 
-
+    /*
+    ('input[type=checkbox]').on('change', function (e) {
+        if (('input[type=checkbox]:checked').length !== 2 ) {
+            (this).prop('checked', false);
+            alert("allowed only 3");
+        }
+    });
+    */
 
 
 
