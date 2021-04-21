@@ -70,7 +70,7 @@ export class Graph{
             }
         }
 
-        return "No path exists"
+        return ["No path exists"]
     }
 
     backtrack(parents, startingNode, endNode){
@@ -133,9 +133,9 @@ graph.addEdge("sjaelland", "hovedstaden")
 graph.addEdge("hovedstaden", "sjaelland")
 
 
-console.log(graph.breadthFirstSearch("Nicolai"))
+/*console.log(graph.breadthFirstSearch("Nicolai"))
 console.log(graph.breadthFirstSearch("nordjylland"))
-console.log(graph.ShortestPathBFS("nordjylland", "hovedstaden"))
+console.log(graph.ShortestPathBFS("nordjylland", "hovedstaden"))*/
 
 /*module.exports = {
     Node: Node,

@@ -167,7 +167,7 @@ var array = []
 function swipe(lookingfor){
     //console.log(id)
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM [eksamen].[user] where lookingfor = @lookingfor'
+        const sql = 'SELECT * FROM [eksamen].[user] where gender = @lookingfor'
         const request = new Request(sql, (err, rowcount) => {
             if (err){
                 reject(err)

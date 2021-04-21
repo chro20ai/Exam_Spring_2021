@@ -33,7 +33,7 @@ graph.addEdge("sjaelland", "hovedstaden")
 //Hovedstaden
 graph.addEdge("hovedstaden", "sjaelland")
 
-console.log(graph.ShortestPathBFS("nordjylland", "midtjylland"))
+//console.log(graph.ShortestPathBFS("nordjylland", "midtjylland"))
 
 
 
@@ -89,14 +89,10 @@ function getAge(dateString)
                     
                     
                     for( i = 0; i < array.length; i ++){
-                        
                             regionarray.push(graph.ShortestPathBFS(region, array[i][9].value))
-                            totalarray.push(regionarray)
-                        
-                        
                     }
-                    console.log(totalarray)
                     console.log(regionarray)
+                    
                 })
             }
         )
