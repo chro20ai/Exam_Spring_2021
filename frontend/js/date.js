@@ -6,6 +6,37 @@ var id = localStorage.getItem("loggedIn")
 var lookingfor = localStorage.getItem("lookingfor")
 var agerange = localStorage.getItem("agerange")
 
+//import {Node, Graph} from '../classes/bfs'
+import { Node as _Node, Graph as _Graph } from '../classes/bfs.js';
+const Node = _Node
+const Graph = _Graph
+
+let node = new Node()
+let graph = new Graph()
+graph.addNode("syddanmark")
+graph.addNode("nordjylland")
+graph.addNode("midtjylland")
+graph.addNode("sjaelland")
+graph.addNode("hovedstaden")
+
+//Syddanmark
+graph.addEdge("syddanmark", "midtjylland")
+graph.addEdge("syddanmark", "sjaelland")
+//Midtjylland
+graph.addEdge("midtjylland", "syddanmark")
+graph.addEdge("midtjylland", "nordjylland")
+//Nordjylland 
+graph.addEdge("nordjylland", "midtjylland")
+//Sjælland
+graph.addEdge("sjaelland", "syddanmark")
+graph.addEdge("sjaelland", "hovedstaden")
+//Hovedstaden
+graph.addEdge("hovedstaden", "sjaelland")
+
+console.log(graph.ShortestPathBFS("nordjylland", "hovedstaden"))
+
+
+
 //lav om til 3140 osv.
 //lav agerange i localstorage
 var array1825 = []
@@ -25,7 +56,7 @@ function getAge(dateString)
     }
     return age;}
 
-function startDating(){
+    window.onload = function(){
         fetch(`http://localhost:7071/api/swipe?lookingfor=${lookingfor}`)
         //fetch("http://localhost:7071/api/swipe")
         .then(
@@ -35,7 +66,7 @@ function startDating(){
                     return
                 }
                 response.json().then(function(data) {
-    
+                var i
                     for( i = 0; i < data.length; i ++){
                         var age = getAge(data[i][5].value)
                         //console.log(age)
@@ -126,7 +157,9 @@ try {
     age = "";
     gender = "";
   }
-    swipeindex++;               
+    swipeindex++;  
+    
+    
 
                 document.getElementById("swipeusername").innerHTML = username
                 document.getElementById("swipefirstname").innerHTML = firstname
