@@ -229,10 +229,10 @@ module.exports.swipe = swipe;
 
 
 
-//Når man opretter en bruger 
+//Interests
 function insertInterest(payload){
     return new Promise((resolve, reject) => {
-    const sql = `INSERT INTO [eksamen].[user_interest] (user_id, interest_id) VALUES (@user_id, @interest_id)`
+    const sql = `INSERT INTO [eksamen].[user_interest] (user_id, interest_id)  VALUES (@user_id, @interest_id), (@user_id, @interest_id2) `
         const request = new Request(sql, (err) => {
             if(err){
                 reject(err)
@@ -241,6 +241,7 @@ function insertInterest(payload){
         });
         request.addParameter('user_id', TYPES.Int, payload.user_id)
         request.addParameter('interest_id', TYPES.Int, payload.interest_id)
+        request.addParameter('interest_id2', TYPES.Int, payload.interest_id2)
     
         request.on('requestCompleted', (row) => {
             console.log('Interests succeded', row)

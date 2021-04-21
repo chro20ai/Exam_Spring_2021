@@ -11,7 +11,7 @@ module.exports = async function (context, req) {
         }
     switch (req.method) {
         case 'POST':
-            await post(context, req);
+            await postInterest(context, req);
             break; 
         default:
             context.res = {
@@ -25,7 +25,7 @@ module.exports = async function (context, req) {
 async function postInterest(context, req){
     try{
         let payload = req.body;
-        await db.insert(payload)
+        await db.insertInterest(payload)
         context.res = {
             body: {status: 'Success'}
         }

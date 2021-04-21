@@ -23,13 +23,46 @@ if(netflixandchill.checked){
 }
 var coding = document.getElementById("coding")
 if(coding.checked){
-    interestarray.puhs(4)
+    interestarray.push(4)
 }
 var money = document.getElementById("money")
 if(money.checked){
     interestarray.push(5)
 }
 
-window.location = "login.html"
-});
+if(interestarray.length !== 2){
+    alert("You can only select two interests!")
+}
+
+else{
+
+fetch("http://localhost:7071/api/postInterests", {
+        
+            method: 'POST',
+            body: JSON.stringify({
+                user_id: localStorage.getItem("loggedIn"),
+                interest_id: interestarray[0],
+                interest_id2: interestarray[1]
+            }),
+            
+            headers: {
+                "Content-Type": "application/json; charset-UTF-8"
+            }
+        }) 
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            console.log("DET VIRKEDE")
+            
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    
+}
+//window.location = "homepage.html"
+);
 
