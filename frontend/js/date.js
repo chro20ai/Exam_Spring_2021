@@ -35,6 +35,54 @@ graph.addEdge("hovedstaden", "sjaelland")
 
 //console.log(graph.ShortestPathBFS("nordjylland", "midtjylland"))
 
+function sort(array){
+    
+    //I create a new array that is empty for now
+    //This array will have the array sorted
+    const arr2 = [];
+    //I set a variable that sets the max of an array and minimum of the array
+    let pos = 0, max = array[0][0].length, min = array[0][0].length;
+
+    //I make a for-loop that loops through the array
+    for (let j=0; j< array.length; j++){
+        //If the max value is less than the length of the array I will set the max value to be equal to the the index j of the array
+        //In this way I find the max value in the array
+        if(max < array[0][j].length){
+            max = array[0][j].length
+        }
+    }
+
+    //I insert a double for loop that will loop through the length of the array inserted
+    for (let i = 0; i<array.length; i++){
+        for (let k = 0; k < array.length; k++){
+            //I then check if the for every index of the array if it is different from null
+            //This is because I put the array to be null if I already used it
+            if(array[0][k] != null){
+                //and I check if the minimum value is less then the index of the array
+                if (min > array[0][k]){
+                    //If so I set the new minimum value
+                    min = array[0][k];
+                        //I define the position for the individual index to be the position of that index
+                        pos = k;
+                        console.log(array)
+            }
+        }
+    }
+    //I know create a new array with the index i to return 
+    //I set it to the minimum value of the first array that was inserted
+    //This value was found above and will keep running until the inserted array is empty
+    arr2[i] = min;
+    //Now I set every index that i defined as pos to be equal to null
+    //This means that it will sort from high to low in to the new index
+    //It also means that when the function has taken the lowest number it will put the value of the inserted array to null
+    array[0][pos] = null
+    //I know set the new minimum value to the max value to get the maximum value last in the array
+    min = max;
+}
+
+return console.log(arr2);
+}
+
 
 
 var array = []
@@ -85,13 +133,15 @@ function getAge(dateString)
                         array.push(data[i])
                         }
                     }
-                    console.log(array)
+                    //console.log(array)
                     
                     
                     for( i = 0; i < array.length; i ++){
-                            regionarray.push(graph.ShortestPathBFS(region, array[i][9].value))
+                            regionarray.push([graph.ShortestPathBFS(region, array[i][9].value), array[i]])
                     }
-                    console.log(regionarray)
+                    //console.log(regionarray)
+                    console.log(sort(regionarray))
+                    
                     
                 })
             }
