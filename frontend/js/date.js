@@ -137,10 +137,21 @@ function getAge(dateString)
                     
                     
                     for( i = 0; i < array.length; i ++){
-                            regionarray.push([graph.ShortestPathBFS(region, array[i][9].value), array[i]])
+                            regionarray.push([graph.ShortestPathBFS(region, array[i][9].value).length, array[i]])
                     }
-                    //console.log(regionarray)
-                    console.log(sort(regionarray))
+                    //var arraynytnyt = [[123, 3], [745, 4], [643, 5], [643, 2]];
+                    /*
+                    var sortedArray = regionarray.sort(function(a, b) {
+                        return a[0] - b[0];
+                      });
+                      
+                    console.log(sortedArray)
+                    */
+                    console.log(regionarray)
+                   
+                    //regionarray.forEach(n => n.length);
+                    //console.log(regionarray[0].length)
+                    //console.log(sortedArray)
                     
                     
                 })
