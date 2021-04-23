@@ -285,6 +285,36 @@ function votefunction(payload){
 
 module.exports.votefunction = votefunction;
 
+//Check for matches
+function posiblematch(payload){
+    
+    return new Promise((resolve, reject) => {
+    const sql = "SELECT * FROM [eksamen].[votes] WHERE target_user_id = @loggedIn"; 
+            const request = new Request(sql, (err, rowcount) => {
+                if (err){
+                    reject(err)
+                    console.log(err)
+                }
+                if (rowcount == 0){
+                    reject(err)
+                    console.log(err)
+                }
+            });
+        request.addParameter('loggedIn', TYPES.Int, payload.loggedInId)
+        
+        
+        request.on('row', (columns) => {
+            resolve(columns)
+        });
+
+    connection.execSql(request)
+
+
+    });
+}
+module.exports.posiblematch = posiblematch;
+
+
 function matchfunction(payload){
     
     return new Promise((resolve, reject) => {

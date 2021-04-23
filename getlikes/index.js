@@ -11,7 +11,7 @@ module.exports = async function (context, req) {
         }
     switch (req.method) {
         case 'POST':
-            await match(context, req);
+            await checkmatch(context, req);
             break; 
         default:
             context.res = {
@@ -21,10 +21,10 @@ module.exports = async function (context, req) {
     }
 }
 
-async function match(context, req){
+async function checkmatch(context, req){
     try{
         let payload = req.body;
-        await db.matchfunction(payload)
+        await db.posiblematch(payload)
         context.res = {
             body: {status: 'Success'}
         }

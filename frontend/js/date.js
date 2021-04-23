@@ -168,6 +168,30 @@ try {
                 document.getElementById("swiperegion").innerHTML = regionshow
 }
 
+function checkformatches(){
+    console.log("HEEEEEEJ")
+    fetch("http://localhost:7071/api/getlikes", {
+        
+    method: 'POST',
+    body: JSON.stringify({
+        loggedInId: localStorage.getItem("loggedIn"),
+    }),
+    
+    headers: {
+        "Content-Type": "application/json; charset-UTF-8"
+    }
+}) 
+.then((response) => {
+    return response.json()
+})
+.then((data) => {
+    console.log(data)
+})
+.catch(err => {
+    console.log(err)
+})
+}
+
 var like = document.getElementById("like")
 
 
@@ -179,6 +203,8 @@ like.addEventListener("click", function(e) {
     var vote = new Votes(1, id, swipeid, "like")
 
     vote.vote()
+
+    checkformatches() 
 
     swipefunction()
 })
