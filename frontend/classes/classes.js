@@ -159,11 +159,10 @@ export class Match{
     }
 
 match(){
-    fetch("http://localhost:7071/api/Votes", {
+    fetch("http://localhost:7071/api/match", {
         
     method: 'POST',
     body: JSON.stringify({
-        id: this._user_id,
         user_id_1: this._user_id_1,
         user_id_2: this._user_id_2
     }),

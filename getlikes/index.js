@@ -24,9 +24,9 @@ module.exports = async function (context, req) {
 async function checkmatch(context, req){
     try{
         let payload = req.body;
-        await db.posiblematch(payload)
+        var user = await db.posiblematch(payload)
         context.res = {
-            body: {status: 'Success'}
+            body: user
         }
     }
     catch(error){

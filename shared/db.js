@@ -316,10 +316,10 @@ module.exports.posiblematch = posiblematch;
 
 
 function matchfunction(payload){
-    
+
     return new Promise((resolve, reject) => {
         //laves om til insert funkction
-    const sql = "SELECT * FROM [eksamen].[votes] WHERE user_id_1 = " 
+    const sql = "INSERT INTO [eksamen].[match] (user_id_1, user_id_2) VALUES (@user_id_1, @user_id_2)" 
             const request = new Request(sql, (err, rowcount) => {
                 if (err){
                     reject(err)

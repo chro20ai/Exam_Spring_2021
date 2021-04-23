@@ -169,7 +169,7 @@ try {
 }
 
 function checkformatches(){
-    console.log("HEEEEEEJ")
+    
     fetch("http://localhost:7071/api/getlikes", {
         
     method: 'POST',
@@ -186,27 +186,47 @@ function checkformatches(){
 })
 .then((data) => {
     console.log(data)
+    if(data[1].value == swipeid){
+        console.log("Her er et match")
+    }
 })
 .catch(err => {
     console.log(err)
 })
 }
 
+function match() {
+
+    var match = new Match(user_id_1, user_id_2)
+
+    match.match()
+    
+}
+
 var like = document.getElementById("like")
+var liketry = document.getElementById("liketry")
 
 
-like.addEventListener("click", function(e) {
+like.addEventListener("click", async function(e) {
     e.preventDefault()
 
     var id = localStorage.getItem("loggedIn")
-
+/*
     var vote = new Votes(1, id, swipeid, "like")
 
-    vote.vote()
+    await vote.vote()
+*/
+    var match = new Match (1, id, swipeid)
+
+    match.match()
+
+    //swipefunction()
+})
+
+liketry.addEventListener("click", async function(e) {
+    e.preventDefault()
 
     checkformatches() 
-
-    swipefunction()
 })
 
 
@@ -225,12 +245,6 @@ dislike.addEventListener("click", function(e) {
     swipefunction()
 })
 
-function match() {
-    var id = localStorage.getItem("loggedIn")
 
-    var match = new Match(1, id, swipeid)
 
-    match.match()
-    
-}
 
