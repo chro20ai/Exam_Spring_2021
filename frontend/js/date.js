@@ -8,10 +8,11 @@ var agerange = localStorage.getItem("agerange")
 
 //import {Node, Graph} from '../classes/bfs'
 import { Node as _Node, Graph as _Graph } from '../classes/bfs.js';
-import { Votes as _Votes } from '../classes/classes.js';
+import { Votes as _Votes, Match as _Match } from '../classes/classes.js';
 const Node = _Node
 const Graph = _Graph
 const Votes = _Votes
+const Match = _Match
 
 let node = new Node()
 let graph = new Graph()
@@ -92,7 +93,7 @@ function getAge(dateString)
                     var sortedArray = regionarray.sort(function(a, b) {
                         return a[0] - b[0];
                       });
-                      
+                    
                     
                     array = sortedArray
                     console.log(array[0][1])
@@ -197,3 +198,13 @@ dislike.addEventListener("click", function(e) {
     
     swipefunction()
 })
+
+function match() {
+    var id = localStorage.getItem("loggedIn")
+
+    var match = new Match(1, id, swipeid)
+
+    match.match()
+    
+}
+

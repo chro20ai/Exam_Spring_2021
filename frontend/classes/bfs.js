@@ -1,3 +1,5 @@
+// Tyvstjålet fra Nicolais video
+
 export class Node{
     constructor(){
         this.connections = new Map()

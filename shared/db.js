@@ -285,3 +285,34 @@ function votefunction(payload){
 
 module.exports.votefunction = votefunction;
 
+function matchfunction(payload){
+    
+    return new Promise((resolve, reject) => {
+        //laves om til insert funkction
+    const sql = "SELECT * FROM [eksamen].[votes] WHERE user_id_1 = " 
+            const request = new Request(sql, (err, rowcount) => {
+                if (err){
+                    reject(err)
+                    console.log(err)
+                }
+                if (rowcount == 0){
+                    reject(err)
+                    console.log(err)
+                }
+            });
+        request.addParameter('user_id_1', TYPES.Int, payload.user_id_1)
+        request.addParameter('user_id_2', TYPES.Int, payload.user_id_2)
+        
+        
+        
+        request.on('row', (columns) => {
+            resolve(columns)
+        });
+
+    connection.execSql(request)
+
+
+    });
+}
+
+module.exports.matchfunction = matchfunction;

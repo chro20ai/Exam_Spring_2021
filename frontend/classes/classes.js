@@ -149,17 +149,67 @@ vote(){
 })
 }
 
-}
-
-class Match{
-    constructor(ID, userID1, userID2){
-        this._ID = ID        
-        this._userID1 = userID1
-        this._userID2 = userID2
+checkformatches(){
+    fetch("http://localhost:7071/api/Votes", {
+        
+    method: 'POST',
+    body: JSON.stringify({
+        user_id: this._user_id,
+        target_user_id: this._target_user_id,
+        vote: this._vote
+    }),
+    
+    headers: {
+        "Content-Type": "application/json; charset-UTF-8"
     }
+}) 
+.then((response) => {
+    return response.json()
+})
+.then((data) => {
+    //console.log(data)
+})
+.catch(err => {
+    console.log(err)
+})
 }
 
-class Address{
+}
+
+export class Match{
+    constructor(id, user_id_1, user_id_2){
+        this._id = id        
+        this._user_id_1 = user_id_1
+        this._user_id_2 = user_id_2
+    }
+
+match(){
+    fetch("http://localhost:7071/api/Votes", {
+        
+    method: 'POST',
+    body: JSON.stringify({
+        id: this._user_id,
+        user_id_1: this._user_id_1,
+        user_id_2: this._user_id_2
+    }),
+    
+    headers: {
+        "Content-Type": "application/json; charset-UTF-8"
+    }
+}) 
+.then((response) => {
+    return response.json()
+})
+.then((data) => {
+    //console.log(data)
+})
+.catch(err => {
+    console.log(err)
+})
+}
+}
+
+/*class Address{
     constructor(ID, street, number, city, postalCode, country){
         this._ID = ID
         this._street = street
@@ -168,5 +218,5 @@ class Address{
         this._postalCode = postalCode
         this._country = country
     }
-}
+}*/
 
