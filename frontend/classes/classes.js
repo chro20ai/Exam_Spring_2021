@@ -116,13 +116,38 @@ export class User{
 
 }
 
-class Like{
-    constructor(ID, userID, likedID){
-        this._ID = ID
-        this._userID = userID
-        this._likedID = likedID
+export class Votes{
+    constructor(id, user_id, target_user_id, vote){
+        this._id = id
+        this._user_id = user_id
+        this._target_user_id = target_user_id
+        this._vote = vote
 }
 
+vote(){
+    fetch("http://localhost:7071/api/Votes", {
+        
+    method: 'POST',
+    body: JSON.stringify({
+        user_id: this._user_id,
+        target_user_id: this._target_user_id,
+        vote: this._vote
+    }),
+    
+    headers: {
+        "Content-Type": "application/json; charset-UTF-8"
+    }
+}) 
+.then((response) => {
+    return response.json()
+})
+.then((data) => {
+    //console.log(data)
+})
+.catch(err => {
+    console.log(err)
+})
+}
 
 }
 

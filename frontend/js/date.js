@@ -1,5 +1,5 @@
 var swipe = document.getElementById("swipe")
-var index = 0;
+var swipeid = localStorage.getItem("swipeid")
 var swipeindex = 0; 
 var region = localStorage.getItem("region")
 var id = localStorage.getItem("loggedIn")
@@ -8,8 +8,10 @@ var agerange = localStorage.getItem("agerange")
 
 //import {Node, Graph} from '../classes/bfs'
 import { Node as _Node, Graph as _Graph } from '../classes/bfs.js';
+import { Votes as _Votes } from '../classes/classes.js';
 const Node = _Node
 const Graph = _Graph
+const Votes = _Votes
 
 let node = new Node()
 let graph = new Graph()
@@ -126,6 +128,7 @@ try {
     if(array[swipeindex][1][0].value == id){
             swipeindex++;
             }
+            localStorage.setItem("swipeid", array[swipeindex][1][0].value)
             username = array[swipeindex][1][1].value
             firstname = array[swipeindex][1][3].value
             lastname = array[swipeindex][1][4].value
@@ -158,4 +161,34 @@ var homepageButton = document.getElementById("homepage")
 homepageButton.addEventListener("click", function(e) {
     e.preventDefault()
     window.location = "homepage.html"
+})
+
+
+var like = document.getElementById("like")
+
+
+like.addEventListener("click", function(e) {
+    e.preventDefault()
+
+    var id = localStorage.getItem("loggedIn")
+
+    var vote = new Votes(1, id, swipeid, "like")
+
+    vote.vote()
+
+})
+
+
+var dislike = document.getElementById("dislike")
+
+
+dislike.addEventListener("click", function(e) {
+    e.preventDefault()
+
+    var id = localStorage.getItem("loggedIn")
+
+    var vote = new Votes(1, id, swipeid, "dislike")
+
+    vote.vote()
+
 })

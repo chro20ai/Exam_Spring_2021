@@ -254,10 +254,34 @@ function insertInterest(payload){
 module.exports.insertInterest = insertInterest
 ;
 
+function votefunction(payload){
+    
+    return new Promise((resolve, reject) => {
+    const sql = "INSERT INTO [eksamen].[votes] (user_id, target_user_id, vote) VALUES (@user_id, @target_user_id, @vote)" 
+            const request = new Request(sql, (err, rowcount) => {
+                if (err){
+                    reject(err)
+                    console.log(err)
+                }
+                if (rowcount == 0){
+                    reject(err)
+                    console.log(err)
+                }
+            });
+        request.addParameter('user_id', TYPES.Int, payload.user_id)
+        request.addParameter('target_user_id', TYPES.Int, payload.target_user_id)
+        request.addParameter('vote', TYPES.VarChar, payload.vote)
+        
+        
+        request.on('row', (columns) => {
+            resolve(columns)
+        });
+
+    connection.execSql(request)
 
 
-
-
-function sortingalgorithm(array){
-        array
+    });
 }
+
+module.exports.votefunction = votefunction;
+
