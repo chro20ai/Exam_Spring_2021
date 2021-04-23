@@ -113,7 +113,17 @@ function getAge(dateString)
 
 swipe.addEventListener("click", function(e) {
     e.preventDefault()
+swipefunction()
 
+})
+
+var homepageButton = document.getElementById("homepage")
+homepageButton.addEventListener("click", function(e) {
+    e.preventDefault()
+    window.location = "homepage.html"
+})
+
+function swipefunction(){
 var username;
 var firstname;
 var lastname;
@@ -155,14 +165,7 @@ try {
                 document.getElementById("swipeage").innerHTML = age
                 document.getElementById("swipegender").innerHTML = gender
                 document.getElementById("swiperegion").innerHTML = regionshow
-})
-
-var homepageButton = document.getElementById("homepage")
-homepageButton.addEventListener("click", function(e) {
-    e.preventDefault()
-    window.location = "homepage.html"
-})
-
+}
 
 var like = document.getElementById("like")
 
@@ -176,6 +179,7 @@ like.addEventListener("click", function(e) {
 
     vote.vote()
 
+    swipefunction()
 })
 
 
@@ -190,5 +194,6 @@ dislike.addEventListener("click", function(e) {
     var vote = new Votes(1, id, swipeid, "dislike")
 
     vote.vote()
-
+    
+    swipefunction()
 })
