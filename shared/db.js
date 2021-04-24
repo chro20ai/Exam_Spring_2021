@@ -273,8 +273,9 @@ function votefunction(payload){
         request.addParameter('vote', TYPES.VarChar, payload.vote)
         
         
-        request.on('row', (columns) => {
-            resolve(columns)
+        request.on('requestCompleted', (row) => {
+            console.log("HEEEEEEEJ")
+            resolve('vote inserted', row)
         });
 
     connection.execSql(request)

@@ -123,7 +123,7 @@ export class Votes{
         this._target_user_id = target_user_id
         this._vote = vote
 }
-
+//Fetch er promise-based. 
 vote(){
     return new Promise((resolve, reject) => {
     fetch("http://localhost:7071/api/Votes", {
@@ -140,14 +140,15 @@ vote(){
     }
 }) 
 .then((response) => {
-    resolve(response)
+    console.log(response)
+    resolve(response) 
     return response.json()
 })
 .then((data) => {
     //console.log(data)
 })
 .catch(err => {
-    reject(err)
+   reject(err)
     console.log(err)
 })
 });
