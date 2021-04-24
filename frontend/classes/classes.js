@@ -125,6 +125,7 @@ export class Votes{
 }
 
 vote(){
+    return new Promise((resolve, reject) => {
     fetch("http://localhost:7071/api/Votes", {
         
     method: 'POST',
@@ -139,16 +140,18 @@ vote(){
     }
 }) 
 .then((response) => {
+    resolve(response)
     return response.json()
 })
 .then((data) => {
     //console.log(data)
 })
 .catch(err => {
+    reject(err)
     console.log(err)
 })
+});
 }
-
 }
 
 export class Match{
@@ -159,6 +162,7 @@ export class Match{
     }
 
 match(){
+    return new Promise((resolve, reject) => {
     fetch("http://localhost:7071/api/match", {
         
     method: 'POST',
@@ -172,13 +176,16 @@ match(){
     }
 }) 
 .then((response) => {
+   resolve(response)
     return response.json()
 })
 .then((data) => {
     //console.log(data)
 })
 .catch(err => {
+    reject(err)
     console.log(err)
+})
 })
 }
 }

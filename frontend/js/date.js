@@ -211,14 +211,14 @@ like.addEventListener("click", async function(e) {
     e.preventDefault()
 
     var id = localStorage.getItem("loggedIn")
-/*
-    var vote = new Votes(1, id, swipeid, "like")
+
+     var vote = new Votes(1, id, swipeid, "like")
 
     await vote.vote()
-*/
+    
     var match = new Match (1, id, swipeid)
 
-    match.match()
+    await match.match()
 
     //swipefunction()
 })
