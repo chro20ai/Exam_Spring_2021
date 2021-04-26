@@ -1,3 +1,6 @@
+import { User as _User} from '../classes/classes.js';
+const User = _User
+
 //Få navn vist i h1 i toppen af profile.html
 const h1 = document.querySelector('h1')
 function showYourName() {
@@ -60,6 +63,28 @@ deleteButton.addEventListener("click", function(e) {
     })
 })
 
+
+
+var showMatches = document.getElementById("showmatches")
+showMatches.addEventListener("click", function(e) {
+    e.preventDefault()
+    
+    var user = new User(localStorage.getItem("loggedIn"))
+
+    document.getElementById("myTableData").style.visibility = "visible";
+    document.getElementById("delete").style.visibility = "visible";
+    document.getElementById("matchusername").style.visibility = "visible";
+    document.getElementById("matchfirstname").style.visibility = "visible";
+    document.getElementById("matchlastname").style.visibility = "visible";
+    document.getElementById("matchage").style.visibility = "visible";
+    document.getElementById("matchgender").style.visibility = "visible";
+    document.getElementById("matchregion").style.visibility = "visible";
+    
+    
+
+    user.showMatches(); 
+
+})
    
             
  

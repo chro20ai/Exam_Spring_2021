@@ -23,8 +23,8 @@ module.exports = async function (context, req) {
 
 async function get(context, req){
     try{
-        let username = req.query.username;
-        let user = await db.getMatches(username)
+        let id = req.query.id;
+        let user = await db.getMatches(id)
         context.res = {
             body: user
         };

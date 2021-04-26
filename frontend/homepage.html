@@ -19,26 +19,23 @@
     <button><a href="interest.html">Pick your interests</a></button>       
 
 
-    <button id="showmatches" onclick= "showmatches()">Vis dine matches!</button>
+    <button id="showmatches">Vis dine matches!</button>
     <br>
     <br>
     <br>    
         <table style="visibility:hidden;" id="myTableData"  border="1" cellpadding="2">
             <tr>
+                <td id = "delete" style="visibility:hidden;"><b>Delete</b></td>
                 <td id = "matchusername" style="visibility:hidden;"><b>Username</b></td>
                 <td id = "matchfirstname" style="visibility:hidden;"><b>Firstname</b></td>
                 <td id = "matchlastname" style="visibility:hidden;"><b>Lastname</b></td>
                 <td id = "matchage" style="visibility:hidden;"><b>Age</b></td>
                 <td id = "matchgender" style="visibility:hidden;"><b>Gender</b></td>
-                <td id = "matchregion" style="visibility:hidden;"><b>Region</b></td>
+                <td id = "matchregion" style="visibility:hidden;" style="background-color: white;"><b>Region</b></td>
+                
             </tr>
         </table>
-        <br>
-        <button id= "deleteLastMatchButton" style="visibility:hidden;" onclick="deleteRow()">Slet det sidst oprettede match her</button>
-        <br>
-        <br>
-        <br>
-        <br>
+       
 
 </body>
 <script type="module" src="./js/homepage.js"></script>

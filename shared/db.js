@@ -314,6 +314,7 @@ function posiblematch(payload){
             console.log(rowCount + ' rows returned');
             
             resolve(array1)
+            array1 = []
           });
 
     connection.execSql(request)
@@ -355,25 +356,32 @@ function matchfunction(payload){
 }
 
 module.exports.matchfunction = matchfunction;
-
+var array2 = []
 //Bruges til get matches. 
-function getMatches(username){
+function getMatches(id){
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM [eksamen].[match] where user_id_1 = @loggedIn OR user_id_2 = @loggedIn'
+        const sql = 'SELECT(CASE WHEN [eksamen].[match].user_id_1 = @id THEN [eksamen].[match].user_id_2 WHEN [eksamen].[match].user_id_2 = @id THEN [eksamen].[match].user_id_1 END), [eksamen].[user].username, [eksamen].[user].firstname, [eksamen].[user].lastname, [eksamen].[user].birthdate, [eksamen].[user].gender, [eksamen].[user].region FROM [eksamen].[match] INNER JOIN [eksamen].[user] ON (CASE WHEN [eksamen].[match].user_id_1 = @id THEN [eksamen].[match].user_id_2 WHEN [eksamen].[match].user_id_2 = @id THEN [eksamen].[match].user_id_1 END) = [eksamen].[user].id'
         const request = new Request(sql, (err, rowcount) => {
             if (err){
                 reject(err)
                 console.log(err)
             }
-            else if (rowcount == 0){
-                reject({message: 'User does not exist'})
-            }
         });
-        request.addParameter('username', TYPES.VarChar, username)
+        request.addParameter('id', TYPES.Int, id)
 
-        request.on('row', (columns) => {
-            resolve(columns)
-        });
+        request.on('row', function(columns) {
+            array2.push(columns)
+        }); 
+        request.on('done', (rowCount) => {
+            console.log('Done is called!');
+          });
+        
+          request.on('doneInProc', (rowCount, more) => {
+            console.log(rowCount + ' rows returned');
+            
+            resolve(array2)
+            array2 = []
+          });
         connection.execSql(request)    
         })
     

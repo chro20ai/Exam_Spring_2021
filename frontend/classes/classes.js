@@ -1,3 +1,18 @@
+function getAge(dateString) 
+{
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+    {
+        age--;
+    }
+    return age;}
+
+function deleteMatch(id){
+    alert(id)
+}
 
 export class User{
     constructor(id, username, password, firstname, lastname, birthdate,  gender, lookingfor, rangeAge, region){
@@ -75,56 +90,6 @@ export class User{
         })
     }   
 }
- 
-//Show matches
-showMatches(){
-    document.getElementById("matchusername").style.visibility = "visible";
-    document.getElementById("matchfirstname").style.visibility = "visible";
-    document.getElementById("matchlastname").style.visibility = "visible";
-    document.getElementById("matchage").style.visibility = "visible";
-    document.getElementById("matchgender").style.visibility = "visible";
-    document.getElementById("matchregion").style.backgroundColor= "red";
-
-    
-    fetch("http://localhost:7071/api/Update",  {
-        ?username=${username1}
-            method: 'PUT',
-            body: JSON.stringify({
-                id: this._id
-                
-            }),
-            
-            headers: {
-                "Content-Type": "application/json; charset-UTF-8"
-            }
-        }) 
-        .then((response) => {
-            return response.json()
-        })
-        .then((data) => {
-
-                    var Username = data.username;
-                    var Firstname = data.firstname;
-                    var Lastname = data.lastname;
-                    var Age = data.age;
-                    var Gender = data.gender;
-                    var Region = data.age;
-                    var table = document.getElementById("myTableData");
-
-                    var rowCount = table.rows.length;
-                    var row = table.insertRow(rowCount);
-                    row.insertCell(0).innerHTML= myName;
-                    row.insertCell(1).innerHTML= age;
-                    row.insertCell(2).innerHTML= interest;
-    
-        })
-        .catch(err => {
-            console.log(err)
-        })
-
-    
-
-}
 
     update(){
         fetch("http://localhost:7071/api/Update",  {
@@ -162,6 +127,54 @@ showMatches(){
 
     delete(){
     }
+
+
+    //Show matches
+    showMatches(){
+    document.getElementById("matchusername").style.visibility = "visible";
+    document.getElementById("matchfirstname").style.visibility = "visible";
+    document.getElementById("matchlastname").style.visibility = "visible";
+    document.getElementById("matchage").style.visibility = "visible";
+    document.getElementById("matchgender").style.visibility = "visible";
+    document.getElementById("matchregion").style.visibility = "visible";
+
+    
+    fetch(`http://localhost:7071/api/getMatches?id=${localStorage.getItem("loggedIn")}`)
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+                    console.log(data)
+                    for (let index = 0; index < data.length; index++) {
+        
+                        var table = document.getElementById("myTableData");
+                        var rowCount = table.rows.length;
+                        var row = table.insertRow(rowCount);
+
+                        var deleteIt = document.getElementById("dislike")
+                        deleteIt.addEventListener("click", function(e) {
+                        e.preventDefault()
+                        deleteMatch(data[index][0].value)})
+
+                    
+                        row.insertCell(0).innerHTML= `<input type="button" value = "Delete" click=${deleteMatch(data[index][0].value)}>`;
+                        row.insertCell(1).innerHTML= data[index][1].value;
+                        row.insertCell(2).innerHTML= data[index][2].value;
+                        row.insertCell(3).innerHTML= data[index][3].value;
+                        row.insertCell(4).innerHTML= getAge(data[index][4].value);
+                        row.insertCell(5).innerHTML= data[index][5].value;
+                        row.insertCell(6).innerHTML= data[index][6].value;
+                    }
+                  
+    
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+    
+
+}
 
 }
 
