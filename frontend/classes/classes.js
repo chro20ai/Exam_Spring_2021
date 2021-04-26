@@ -156,6 +156,7 @@ export class User{
                         e.preventDefault()
                         deleteMatch(data[index][0].value)})
 
+                        
                     
                         row.insertCell(0).innerHTML= `<input type="button" value = "Delete" click=${deleteMatch(data[index][0].value)}>`;
                         row.insertCell(1).innerHTML= data[index][1].value;
