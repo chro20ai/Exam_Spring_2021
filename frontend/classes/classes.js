@@ -150,10 +150,9 @@ export class User{
                         var table = document.getElementById("myTableData");
                         var rowCount = table.rows.length;
                         var row = table.insertRow(rowCount);
-
-
-                    
-                        row.insertCell(0).innerHTML= `<input type="button" value = "Delete" onclick=${deleteMatch(data[index][0].value)}>`;
+                        
+                        //"<input type='button' value = 'Delete' onClick='deleteMatch(data[index][0].value')>";
+                        row.insertCell(0).innerHTML= "hej"
                         row.insertCell(1).innerHTML= data[index][1].value;
                         row.insertCell(2).innerHTML= data[index][2].value;
                         row.insertCell(3).innerHTML= data[index][3].value;
@@ -161,7 +160,6 @@ export class User{
                         row.insertCell(5).innerHTML= data[index][5].value;
                         row.insertCell(6).innerHTML= data[index][6].value;
                     }
-                  
     
         })
         .catch(err => {
