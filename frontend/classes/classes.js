@@ -151,14 +151,9 @@ export class User{
                         var rowCount = table.rows.length;
                         var row = table.insertRow(rowCount);
 
-                        var deleteIt = document.getElementById("dislike")
-                        deleteIt.addEventListener("click", function(e) {
-                        e.preventDefault()
-                        deleteMatch(data[index][0].value)})
 
-                        
                     
-                        row.insertCell(0).innerHTML= `<input type="button" value = "Delete" click=${deleteMatch(data[index][0].value)}>`;
+                        row.insertCell(0).innerHTML= `<input type="button" value = "Delete" onclick=${deleteMatch(data[index][0].value)}>`;
                         row.insertCell(1).innerHTML= data[index][1].value;
                         row.insertCell(2).innerHTML= data[index][2].value;
                         row.insertCell(3).innerHTML= data[index][3].value;
