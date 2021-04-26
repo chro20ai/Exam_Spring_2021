@@ -73,9 +73,58 @@ export class User{
         .catch(err => {
             console.log(err)
         })
-    }
+    }   
 }
+ 
+//Show matches
+showMatches(){
+    document.getElementById("matchusername").style.visibility = "visible";
+    document.getElementById("matchfirstname").style.visibility = "visible";
+    document.getElementById("matchlastname").style.visibility = "visible";
+    document.getElementById("matchage").style.visibility = "visible";
+    document.getElementById("matchgender").style.visibility = "visible";
+    document.getElementById("matchregion").style.backgroundColor= "red";
+
     
+    fetch("http://localhost:7071/api/Update",  {
+        ?username=${username1}
+            method: 'PUT',
+            body: JSON.stringify({
+                id: this._id
+                
+            }),
+            
+            headers: {
+                "Content-Type": "application/json; charset-UTF-8"
+            }
+        }) 
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+
+                    var Username = data.username;
+                    var Firstname = data.firstname;
+                    var Lastname = data.lastname;
+                    var Age = data.age;
+                    var Gender = data.gender;
+                    var Region = data.age;
+                    var table = document.getElementById("myTableData");
+
+                    var rowCount = table.rows.length;
+                    var row = table.insertRow(rowCount);
+                    row.insertCell(0).innerHTML= myName;
+                    row.insertCell(1).innerHTML= age;
+                    row.insertCell(2).innerHTML= interest;
+    
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+    
+
+}
 
     update(){
         fetch("http://localhost:7071/api/Update",  {
@@ -153,6 +202,7 @@ vote(){
 })
 });
 }
+
 }
 
 export class Match{

@@ -140,6 +140,7 @@ try {
             swipeindex++;
             }
             localStorage.setItem("swipeid", array[swipeindex][1][0].value)
+            localStorage.setItem("swipefirstname", array[swipeindex][1][3].value)
             username = array[swipeindex][1][1].value
             firstname = array[swipeindex][1][3].value
             lastname = array[swipeindex][1][4].value
@@ -198,6 +199,8 @@ function checkformatches(){
 
             console.log("DET VIRKER !!!!")
             match.match();  
+            alert("Dette er en notifikation om at du har et match med " + localStorage.getItem("swipefirstname") + ". Tillykke!");  
+
         }
     }
 })

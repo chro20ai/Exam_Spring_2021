@@ -355,3 +355,27 @@ function matchfunction(payload){
 }
 
 module.exports.matchfunction = matchfunction;
+
+//Bruges til get matches. 
+function getMatches(username){
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM [eksamen].[match] where user_id_1 = @loggedIn OR user_id_2 = @loggedIn'
+        const request = new Request(sql, (err, rowcount) => {
+            if (err){
+                reject(err)
+                console.log(err)
+            }
+            else if (rowcount == 0){
+                reject({message: 'User does not exist'})
+            }
+        });
+        request.addParameter('username', TYPES.VarChar, username)
+
+        request.on('row', (columns) => {
+            resolve(columns)
+        });
+        connection.execSql(request)    
+        })
+    
+}
+module.exports.getMatches = getMatches;
