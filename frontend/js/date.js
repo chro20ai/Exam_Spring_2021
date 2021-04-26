@@ -168,8 +168,11 @@ try {
                 document.getElementById("swiperegion").innerHTML = regionshow
 }
 
+
+
 function checkformatches(){
-    
+    return new Promise((resolve, reject) => {
+
     fetch("http://localhost:7071/api/getlikes", {
         
     method: 'POST',
@@ -182,53 +185,49 @@ function checkformatches(){
     }
 }) 
 .then((response) => {
-    
+    resolve(response)
     return response.json()
 })
 .then((data) => {
     console.log(data)
-    if(data[1].value == swipeid){
-        console.log("Her er et match")
+
+    for (let index = 0; index < data.length; index++) {
+        
+        if(data[index][1].value == localStorage.getItem("swipeid")){
+            var match = new Match (1, localStorage.getItem("loggedIn"), localStorage.getItem("swipeid"))
+
+            console.log("DET VIRKER !!!!")
+            match.match();  
+        }
     }
 })
 .catch(err => {
+    reject(err)
     console.log(err)
+})
 })
 }
 
-function match() {
 
-    var match = new Match(user_id_1, user_id_2)
-
-    match.match()
-    
-}
 
 var like = document.getElementById("like")
-var liketry = document.getElementById("liketry")
 
 
 like.addEventListener("click", async function(e) {
     e.preventDefault()
 
-    var id = localStorage.getItem("loggedIn")
 
-     var vote = new Votes(1, id, swipeid, "like")
+     var vote = new Votes(1, localStorage.getItem("loggedIn"), localStorage.getItem("swipeid"), "like")
 
     await vote.vote()
     
-    var match = new Match (1, id, swipeid)
 
-    await match.match()
+    await checkformatches()
+    
 
     //swipefunction()
 })
 
-liketry.addEventListener("click", async function(e) {
-    e.preventDefault()
-
-    checkformatches() 
-})
 
 
 var dislike = document.getElementById("dislike")
@@ -237,14 +236,13 @@ var dislike = document.getElementById("dislike")
 dislike.addEventListener("click", function(e) {
     e.preventDefault()
 
-    var id = localStorage.getItem("loggedIn")
-
-    var vote = new Votes(1, id, swipeid, "dislike")
+    var vote = new Votes(1, localStorage.getItem("loggedIn"), localStorage.getItem("swipeid"), "dislike")
 
     vote.vote()
     
     swipefunction()
 })
+
 
 
 

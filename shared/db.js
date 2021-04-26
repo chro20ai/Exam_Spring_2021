@@ -274,7 +274,7 @@ function votefunction(payload){
         
         
         request.on('requestCompleted', (row) => {
-            console.log("HEEEEEEEJ")
+            //console.log("HEEEEEEEJ")
             resolve('vote inserted', row)
         });
 
@@ -286,27 +286,35 @@ function votefunction(payload){
 
 module.exports.votefunction = votefunction;
 
+var array1 = []
 //Check for matches
 function posiblematch(payload){
-    
+    console.log(payload)
     return new Promise((resolve, reject) => {
-    const sql = "SELECT * FROM [eksamen].[votes] WHERE target_user_id = @loggedIn"; 
+    const sql = "SELECT * FROM [eksamen].[votes] WHERE target_user_id = @loggedIn AND vote = 'like'"; 
             const request = new Request(sql, (err, rowcount) => {
                 if (err){
                     reject(err)
-                    console.log(err)
-                }
-                if (rowcount == 0){
-                    reject(err)
-                    console.log(err)
+                    //console.log(err)
                 }
             });
         request.addParameter('loggedIn', TYPES.Int, payload.loggedInId)
         
         
-        request.on('row', (columns) => {
-            resolve(columns)
-        });
+        request.on('row', function(columns) {
+        
+            array1.push(columns)
+            
+        }); 
+        request.on('done', (rowCount) => {
+            console.log('Done is called!');
+          });
+        
+          request.on('doneInProc', (rowCount, more) => {
+            console.log(rowCount + ' rows returned');
+            
+            resolve(array1)
+          });
 
     connection.execSql(request)
 
