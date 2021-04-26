@@ -314,6 +314,7 @@ function posiblematch(payload){
             console.log(rowCount + ' rows returned');
             
             resolve(array1)
+            array1 = []
           });
 
     connection.execSql(request)

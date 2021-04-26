@@ -198,6 +198,7 @@ function checkformatches(){
 
             console.log("DET VIRKER !!!!")
             match.match();  
+            
         }
     }
 })
