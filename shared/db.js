@@ -49,7 +49,7 @@ function insert(payload){
         });
 
     connection.execSql(request)
-//yallah
+
 
     });
 }
@@ -161,6 +161,9 @@ function updateStatement(payload){
     });
 }
 module.exports.updateStatement = updateStatement;
+
+
+
 
 var array = []
 //Bruges til get swipe. 
