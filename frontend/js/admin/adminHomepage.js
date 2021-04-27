@@ -9,7 +9,10 @@ updateUser.addEventListener("click", function(e) {
 var deleteButton = document.getElementById("delete")
 deleteButton.addEventListener("click", function(e) {
     e.preventDefault()
+    window.location = "adminDelete.html";
 
+
+    /*
     var id = localStorage.getItem("dataid")
         fetch("http://localhost:7071/api/deleteProfile", {
         method: 'DELETE',
@@ -32,6 +35,7 @@ deleteButton.addEventListener("click", function(e) {
     .catch(err => {
         console.log(err)
     })
+    */
 })
 
 
