@@ -5,24 +5,12 @@ updateUser.addEventListener("click", function(e) {
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-/*
 //delete User
 var deleteButton = document.getElementById("delete")
 deleteButton.addEventListener("click", function(e) {
     e.preventDefault()
 
-    var id = localStorage.getItem("loggedIn")
+    var id = localStorage.getItem("dataid")
         fetch("http://localhost:7071/api/deleteProfile", {
         method: 'DELETE',
         body: JSON.stringify({
@@ -46,4 +34,8 @@ deleteButton.addEventListener("click", function(e) {
     })
 })
 
-*/
+
+
+
+
+

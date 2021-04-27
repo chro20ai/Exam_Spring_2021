@@ -1,17 +1,14 @@
-
-import {User} from '../classes/classes.js'
-
-
-//const User = require('../classes/classes') 
+import { User as _User} from '../../classes/classes.js';
+const User = _User
 
 
-var form = document.getElementById("form")
+var form = document.getElementById("form1")
 
 
 form.addEventListener("submit", function(e) {
     e.preventDefault()
 
-    var id = document.getElementById("id").value
+    var id = localStorage.getItem("dataid")
     var updateusername = document.getElementById("updateusername").value
     var updatepassword = document.getElementById("updatepassword").value
     var updatefirstname = document.getElementById("updatefirstname").value
@@ -22,7 +19,6 @@ form.addEventListener("submit", function(e) {
     var updatelookingfor = document.querySelector('input[name="lookingfor"]:checked').value
     var rangeAge = document.querySelector('input[name="ageRange"]:checked').value
 
-    var id = localStorage.getItem("loggedIn")
 
     var user = new User(id, updateusername, updatepassword, updatefirstname, updatelastname, updatebirthdate, updategender, updatelookingfor, rangeAge, updateregion)
     

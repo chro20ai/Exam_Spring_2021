@@ -73,9 +73,11 @@ function select(username){
         request.on('row', (columns) => {
             resolve(columns)
         });
+
         connection.execSql(request)    
         })
     
+
 }
 module.exports.select = select;
 
@@ -135,7 +137,7 @@ function updateStatement(payload){
     return new Promise((resolve, reject) => {
         console.log(payload)
         
-    const sql = "UPDATE eksamen.[user] SET username = @updateusername, password = @updatepassword, firstname = @updatefirstname, lastname = @updatelastname, birthdate = @updatebirthdate, gender = @updategender, lookingfor = @lookingfor, agerange = @agerange, region = @region WHERE id = @id"
+    const sql = "UPDATE eksamen.[user] SET username = @updateusername, password = @updatepassword, firstname = @updatefirstname, lastname = @updatelastname, birthdate = @updatebirthdate, gender = @updategender, lookingfor = @lookingfor, agerange = @agerange, region = @region WHERE id = @id "
         const request = new Request(sql, (err) => {
             if(err){
                 reject({message: "error connection"})    

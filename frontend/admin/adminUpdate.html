@@ -5,10 +5,46 @@
 </head>
 <body>
     <div>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>eksamen</title>
+        </head>
+        <body>
+
+            <div>
+                <form id="form" method="post">
+                    <input type="text" id="username" placeholder="Username"/>
+                    
+                </form>
+            </div>
+        
+           
+            <div>
+                <h1>Get User</h1>
+                <button type="button" id="getUser">Get User</button>
+            </div>
+            <script type="module" src="../js/admin/getUser.js"></script>
+        
+            <div>
+                <p id="dataid"></p>
+                <p id="datausername"></p>
+                <p id="datapassword"></p>
+                <p id="datafirstname"></p>
+                <p id="datalastname"></p>
+                <p id="databirthdate"></p>
+                <p id="datagender"></p>
+                <p id="datalookingfor"></p>
+                <p id="dataagerange"></p>
+                <p id="dataregion"></p>
+            </div>
+        
+        
+
 
         <h1>update user profile</h1>
-        <form id="form" method="PUT">
-            <input type="text" id="id" placeholder="id"/>
+        <form id="form1" method="PUT">
             <input type="text" id="updateusername" placeholder="Username"/>
             <input type="password" id="updatepassword" placeholder="Password"/>
             <input type="text" id="updatefirstname" placeholder="First Name"/>
@@ -45,11 +81,12 @@
             <input type="radio" id="41+" name="ageRange" value="41+">
             <label for="41+">41+</label><br>
 
-            <button type="submit" name="Submit">Update User</button>
+            <button type="submit" name="submit">Update User</button>
         </form>
     </div>
 
-    <script type="module" src="./js/admin/adminUpdate.js"></script>
+    <script type="module" src="../js/admin/adminUpdate.js"></script>
+
 
 </body>
 </html>

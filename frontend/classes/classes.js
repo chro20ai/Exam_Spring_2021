@@ -119,7 +119,8 @@ export class User{
         })
         .then((data) => {
             //console.log(data)
-            window.location = "adminHomepage.html";
+            window.location = "admin.html";
+            alert('det virker')
     
         })
         .catch(err => {
@@ -128,7 +129,7 @@ export class User{
     }
 
 
-    
+
     delete(){
     }
 
