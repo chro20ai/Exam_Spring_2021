@@ -191,22 +191,7 @@ function swipe(lookingfor){
             });*/
            // console.log(columns)
             array.push(columns)
-             //array.push(columns[0].value, columns[9].value)
-             
-             //console.log(array)
-            
-       /* request.on('row', (columns) => {
-            resolve(columns)
-            console.log("id'er: " + columns[0].value)
-            console.log("username: " + columns[1].value)
-            console.log("password: " + columns[2].value)
-            console.log("firstname: " + columns[3].value)
-            console.log("lastname: " + columns[4].value)
-            console.log("birthdate: " + columns[5].value)
-            console.log("gender: " + columns[6].value)
-            console.log("interest: " + columns[7].value)
-            console.log("agerange: " + columns[8].value)
-            console.log("region: " + columns[9].value)*/
+         
 
 
             
@@ -220,6 +205,7 @@ function swipe(lookingfor){
             console.log(rowCount + ' rows returned');
             //console.log(array)
             resolve(array)
+            array = []
           });
         connection.execSql(request)    
         })

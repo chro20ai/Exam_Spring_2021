@@ -96,7 +96,7 @@ function getAge(dateString)
                     
                     
                     array = sortedArray
-                    console.log(array[0][1])
+                    console.log(sortedArray)
                    
                     //regionarray.forEach(n => n.length);
                     //console.log(regionarray[0].length)
