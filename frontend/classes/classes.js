@@ -168,16 +168,17 @@ export class User{
                         */
 
     
-                        row.insertCell(0).innerHTML= `<input type='button' value = 'Delete' onClick='deleteMatch(data[index][0].value)'>`;
-                        row.insertCell(1).innerHTML= data[index][1].value;
-                        row.insertCell(2).innerHTML= data[index][2].value;
-                        row.insertCell(3).innerHTML= data[index][3].value;
-                        row.insertCell(4).innerHTML= getAge(data[index][4].value);
-                        row.insertCell(5).innerHTML= data[index][5].value;
-                        row.insertCell(6).innerHTML= data[index][6].value;
+                       
+                        row.insertCell(0).innerHTML= data[index][1].value;
+                        row.insertCell(1).innerHTML= data[index][2].value;
+                        row.insertCell(2).innerHTML= data[index][3].value;
+                        row.insertCell(3).innerHTML= getAge(data[index][4].value);
+                        row.insertCell(4).innerHTML= data[index][5].value;
+                        row.insertCell(5).innerHTML= data[index][6].value;
                         //drop.innerHTML=  `<select> <option value='${data[index][0].value}'>${data[index][1].value};</option></select>`; 
                         
                     }
+                    arrayMatch = []
     
         })
         .catch(err => {

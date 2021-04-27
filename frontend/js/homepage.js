@@ -1,6 +1,7 @@
 import { User as _User} from '../classes/classes.js';
 import { arrayMatch} from '../classes/classes.js';
 const User = _User
+var matchid
 
 //Få navn vist i h1 i toppen af profile.html
 const h1 = document.querySelector('h1')
@@ -86,6 +87,28 @@ showMatches.addEventListener("click", function(e) {
     user.showMatches(); 
 
 })
+function deleteMatch(){
+    fetch("http://localhost:7071/api/deleteMatch", {
+        method: 'DELETE',
+        body: JSON.stringify({
+            id: matchid
+        }),
+        headers: {
+            "Content-Type": "application/json; charset-UTF-8"
+        }
+    }) 
+    
+    .then((response) => {
+        return response.json()
+
+    })
+    .then((data) => {        
+       
+    })     
+    .catch(err => {
+        console.log(err)
+    })
+}
 
 var select = document.getElementById("user");
 
@@ -96,30 +119,14 @@ var select = document.getElementById("user");
     var selected = selectdelete.options[selectdelete.selectedIndex].text;
     arrayMatch
     
-
-    
-/*
-    fetch("http://localhost:7071/api/deleteProfile", {
-        method: 'DELETE',
-        body: JSON.stringify({
-            id: id
-        }),
-        headers: {
-            "Content-Type": "application/json; charset-UTF-8"
+    var i
+    for( i=0 ; i < arrayMatch.length ; i ++){
+        if(arrayMatch[i] == selected){
+            matchid = arrayMatch[i-1]
         }
-    }) 
-    .then((response) => {
-        return response.json()
+    }
+    
+    deleteMatch()
 
-    })
-    .then((data) => {        
-        localStorage.removeItem("loggedIn")
-        localStorage.removeItem("username")
-        window.location = "login.html";
-    })     
-    .catch(err => {
-        console.log(err)
-    })
-*/
 })
 

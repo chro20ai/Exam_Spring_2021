@@ -389,14 +389,14 @@ function getMatches(id){
 module.exports.getMatches = getMatches;
 
 //Delete match
-function deleteMatchStatement(id1){
+function deleteMatchStatement(id){
     return new Promise((resolve, reject) => {
-    const sql = "DELETE FROM [eksamen].[user] WHERE id = @id"; 
+    const sql = "DELETE FROM [eksamen].[match] WHERE id = @id"; 
         const request = new Request(sql, (err) => {
             if(err){
                 reject({message: "error connection"})    
             }}); 
-                request.addParameter('id', TYPES.Int, id1)     
+                request.addParameter('id', TYPES.Int, id)     
                 request.on('row', (columns) => {
                 resolve(columns)
             });

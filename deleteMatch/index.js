@@ -23,8 +23,8 @@ module.exports = async function (context, req) {
 
 async function deleteMatch(context, req){
     try{
-        let username = req.body.username
-        let response = await db.deleteMatchStatement(username)
+        let id = req.body.id
+        let response = await db.deleteMatchStatement(id)
         console.log(response);
         context.res = {
             body: {status: 'Success'}
