@@ -16,7 +16,6 @@ function showYourName() {
 document.body.onload = showYourName
 
 
-var deleteButton = document.getElementById("delete")
 var updateUser = document.getElementById("update")
 updateUser.addEventListener("click", function(e) {
     e.preventDefault()
@@ -39,6 +38,8 @@ logOutButton.addEventListener("click", function(e) {
     window.location = "login.html"
 })
 
+//delete User
+var deleteButton = document.getElementById("delete")
 deleteButton.addEventListener("click", function(e) {
     e.preventDefault()
 

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div>
+
+        <h1>update user profile</h1>
+        <form id="form" method="PUT">
+            <input type="text" id="id" placeholder="id"/>
+            <input type="text" id="updateusername" placeholder="Username"/>
+            <input type="password" id="updatepassword" placeholder="Password"/>
+            <input type="text" id="updatefirstname" placeholder="First Name"/>
+            <input type="text" id="updatelastname" placeholder="Last Name"/>
+            <input type="date" id="updatebirthdate" placeholder="Birthdate">
+            <p>Update region?</p>
+            <input type="radio" id="hovedstaden" name="region" value="hovedstaden">
+            <label for="hovedstaden">Region Hovedstaden</label><br>
+            <input type="radio" id="sjaelland" name="region" value="sjaelland">
+            <label for="sjaelland">Region Sjælland</label><br>
+            <input type="radio" id="syddanmark" name="region" value="syddanmark">
+            <label for="syddanmark">Region Syddanmark</label><br>
+            <input type="radio" id="midtjylland" name="region" value="midtjylland">
+            <label for="midtjylland">Region Midtjylland</label><br>
+            <input type="radio" id="nordjylland" name="region" value="nordjylland">
+            <label for="nordjylland">Region Nordjylland</label><br>
+            <p>Update gender:</p>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label><br>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label><br>
+            <p>Update interest:</p>
+            <input type="radio" id="males" name="lookingfor" value="male">
+            <label for="males">Males</label><br>
+            <input type="radio" id="females" name="lookingfor" value="female">
+            <label for="females">Females</label><br>
+            <p>Update age range:</p>
+            <input type="radio" id="1825" name="ageRange" value="18-25">
+            <label for="1825">18-25</label><br>
+            <input type="radio" id="26-30" name="ageRange" value="26-30">
+            <label for="2630">26-30</label><br>
+            <input type="radio" id="3140" name="ageRange" value="31-40">
+            <label for="3140">31-40</label><br>
+            <input type="radio" id="41+" name="ageRange" value="41+">
+            <label for="41+">41+</label><br>
+
+            <button type="submit" name="Submit">Update User</button>
+        </form>
+    </div>
+
+    <script type="module" src="./js/admin/adminUpdate.js"></script>
+
+</body>
+</html>
