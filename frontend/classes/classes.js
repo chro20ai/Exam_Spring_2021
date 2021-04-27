@@ -119,7 +119,7 @@ export class User{
         })
         .then((data) => {
             //console.log(data)
-            window.location = "homepage.html";
+            window.location = "adminHomepage.html";
     
         })
         .catch(err => {
@@ -127,6 +127,8 @@ export class User{
         })
     }
 
+
+    
     delete(){
     }
 
@@ -190,6 +192,40 @@ export class User{
 }
 
 }
+
+
+class Admin extends User{
+    constructor(username, password ){
+                super(username, password)
+                this.employeeID = employeeID
+    }
+    updateUser(){
+
+
+
+
+        
+
+    }
+
+    deleteUser(){
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export class Votes{
     constructor(id, user_id, target_user_id, vote){
