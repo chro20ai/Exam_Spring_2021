@@ -3,6 +3,7 @@ import { arrayMatch} from '../classes/classes.js';
 const User = _User
 var matchid
 
+
 //Få navn vist i h1 i toppen af profile.html
 const h1 = document.querySelector('h1')
 function showYourName() {
@@ -87,6 +88,32 @@ showMatches.addEventListener("click", function(e) {
     user.showMatches(); 
 
 })
+
+/*function deleteLikes(){
+    fetch("http://localhost:7071/api/deleteLikes", {
+        method: 'DELETE',
+        body: JSON.stringify({
+            user_id: 107,
+            target_user_id: 105
+        }),
+        headers: {
+            "Content-Type": "application/json; charset-UTF-8"
+        }
+    }) 
+    
+    .then((response) => {
+        return response.json()
+
+    })
+    .then((data) => {        
+       
+    })     
+    .catch(err => {
+        console.log(err)
+    }) 
+}
+*/
+
 function deleteMatch(){
     fetch("http://localhost:7071/api/deleteMatch", {
         method: 'DELETE',
@@ -125,8 +152,11 @@ var select = document.getElementById("user");
             matchid = arrayMatch[i-1]
         }
     }
+
     
     deleteMatch()
+
+    //deleteLikes()
 
 })
 

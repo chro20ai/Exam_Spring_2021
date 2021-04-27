@@ -406,3 +406,25 @@ function deleteMatchStatement(id){
     });
 }
 module.exports.deleteMatchStatement = deleteMatchStatement;
+
+//Delete likes
+function deleteLikesStatement(payload){
+    return new Promise((resolve, reject) => {
+    const sql = "DELETE From eksamen.votes WHERE (user_id = @user_id and target_user_id = @target_user_id) OR (target_user_id = @user_id AND user_id = @target_user_id)"
+
+
+        const request = new Request(sql, (err) => {
+            if(err){
+                reject({message: "error connection"})    
+            }}); 
+                request.addParameter('user_id', TYPES.Int, payload.user_id)
+                request.addParameter('target_user_id', TYPES.Int, payload.target_user_id)  
+                request.on('row', (columns) => {
+                resolve(columns)
+            });
+    connection.execSql(request)
+
+
+    });
+}
+module.exports.deleteLikesStatement = deleteLikesStatement;
