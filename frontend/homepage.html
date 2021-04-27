@@ -36,18 +36,34 @@
             </tr>
         </table>
     <br>
-    <br>
-    <form action="/action_page.php">
-        <label for="cars">Choose a car:</label>
-        <select name="cars" id="cars">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option>
+   
+    <p>
+        Select one from the given options:
+        <select id="select1">
+            
         </select>
-        <br><br>
-        <input type="submit" value="Submit">
-      </form>
+    </p>
+      
+    <p>
+        The value of the option selected is:
+        <span class="output"></span>
+    </p>
+      
+    <button id = "user" type="click" >
+        Check option
+    </button>
+      
+    <script type="text/javascript">
+        function getOption() {
+            selectElement = 
+                    document.querySelector('#select1');
+                      
+            output = selectElement.value;
+  
+            document.querySelector('.output').textContent
+                    = output;
+        }
+    </script>
        
 
 </body>

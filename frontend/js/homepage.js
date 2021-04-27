@@ -1,4 +1,5 @@
 import { User as _User} from '../classes/classes.js';
+import { arrayMatch} from '../classes/classes.js';
 const User = _User
 
 //Få navn vist i h1 i toppen af profile.html
@@ -85,6 +86,40 @@ showMatches.addEventListener("click", function(e) {
     user.showMatches(); 
 
 })
-   
-            
- 
+
+var select = document.getElementById("user");
+
+    select.addEventListener("click", function(e) {
+        e.preventDefault()
+    
+    var selectdelete = document.getElementById("select1");
+    var selected = selectdelete.options[selectdelete.selectedIndex].text;
+    arrayMatch
+    
+
+    
+/*
+    fetch("http://localhost:7071/api/deleteProfile", {
+        method: 'DELETE',
+        body: JSON.stringify({
+            id: id
+        }),
+        headers: {
+            "Content-Type": "application/json; charset-UTF-8"
+        }
+    }) 
+    .then((response) => {
+        return response.json()
+
+    })
+    .then((data) => {        
+        localStorage.removeItem("loggedIn")
+        localStorage.removeItem("username")
+        window.location = "login.html";
+    })     
+    .catch(err => {
+        console.log(err)
+    })
+*/
+})
+

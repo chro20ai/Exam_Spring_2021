@@ -1,3 +1,5 @@
+export var arrayMatch = []
+
 function getAge(dateString) 
 {
     var today = new Date();
@@ -128,6 +130,7 @@ export class User{
     delete(){
     }
 
+    
 
     //Show matches
     showMatches(){
@@ -150,15 +153,30 @@ export class User{
                         var table = document.getElementById("myTableData");
                         var rowCount = table.rows.length;
                         var row = table.insertRow(rowCount);
-                        
-                        //"<input type='button' value = 'Delete' onClick='deleteMatch(data[index][0].value')>";
-                        row.insertCell(0).innerHTML= "hej"
+                        var drop = document.getElementById("select1")
+                        arrayMatch.push(data[index][7].value, data[index][1].value)
+                         
+                        //Til dropdown
+                        var option = document.createElement("option");
+                        option.text = data[index][1].value;
+                        drop.add(option);
+                    
+                        /*
+                        <option value="free">Free</option>
+                        <option value="basic">Basic</option>
+                        <option value="premium">Premium</option>
+                        */
+
+    
+                        row.insertCell(0).innerHTML= `<input type='button' value = 'Delete' onClick='deleteMatch(data[index][0].value)'>`;
                         row.insertCell(1).innerHTML= data[index][1].value;
                         row.insertCell(2).innerHTML= data[index][2].value;
                         row.insertCell(3).innerHTML= data[index][3].value;
                         row.insertCell(4).innerHTML= getAge(data[index][4].value);
                         row.insertCell(5).innerHTML= data[index][5].value;
                         row.insertCell(6).innerHTML= data[index][6].value;
+                        //drop.innerHTML=  `<select> <option value='${data[index][0].value}'>${data[index][1].value};</option></select>`; 
+                        
                     }
     
         })

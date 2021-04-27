@@ -360,7 +360,7 @@ var array2 = []
 //Bruges til get matches. 
 function getMatches(id){
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT(CASE WHEN [eksamen].[match].user_id_1 = @id THEN [eksamen].[match].user_id_2 WHEN [eksamen].[match].user_id_2 = @id THEN [eksamen].[match].user_id_1 END), [eksamen].[user].username, [eksamen].[user].firstname, [eksamen].[user].lastname, [eksamen].[user].birthdate, [eksamen].[user].gender, [eksamen].[user].region FROM [eksamen].[match] INNER JOIN [eksamen].[user] ON (CASE WHEN [eksamen].[match].user_id_1 = @id THEN [eksamen].[match].user_id_2 WHEN [eksamen].[match].user_id_2 = @id THEN [eksamen].[match].user_id_1 END) = [eksamen].[user].id'
+        const sql = 'SELECT(CASE WHEN [eksamen].[match].user_id_1 = @id THEN [eksamen].[match].user_id_2 WHEN [eksamen].[match].user_id_2 = @id THEN [eksamen].[match].user_id_1 END), [eksamen].[user].username, [eksamen].[user].firstname, [eksamen].[user].lastname, [eksamen].[user].birthdate, [eksamen].[user].gender, [eksamen].[user].region, [eksamen].[match].id FROM [eksamen].[match] INNER JOIN [eksamen].[user] ON (CASE WHEN [eksamen].[match].user_id_1 = @id THEN [eksamen].[match].user_id_2 WHEN [eksamen].[match].user_id_2 = @id THEN [eksamen].[match].user_id_1 END) = [eksamen].[user].id'
         const request = new Request(sql, (err, rowcount) => {
             if (err){
                 reject(err)
@@ -387,3 +387,22 @@ function getMatches(id){
     
 }
 module.exports.getMatches = getMatches;
+
+//Delete match
+function deleteMatchStatement(id1){
+    return new Promise((resolve, reject) => {
+    const sql = "DELETE FROM [eksamen].[user] WHERE id = @id"; 
+        const request = new Request(sql, (err) => {
+            if(err){
+                reject({message: "error connection"})    
+            }}); 
+                request.addParameter('id', TYPES.Int, id1)     
+                request.on('row', (columns) => {
+                resolve(columns)
+            });
+    connection.execSql(request)
+
+
+    });
+}
+module.exports.deleteMatchStatement = deleteMatchStatement;
