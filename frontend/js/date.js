@@ -215,7 +215,7 @@ function checkformatches(){
 
 var like = document.getElementById("like")
 
-
+//der bliver nu ikke postet hvis man liker en man allerede har liket. Men det bliver stadig til et match, da checkformatches() kører
 like.addEventListener("click", async function(e) {
     e.preventDefault()
 

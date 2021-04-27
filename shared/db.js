@@ -257,7 +257,8 @@ module.exports.insertInterest = insertInterest
 function votefunction(payload){
     
     return new Promise((resolve, reject) => {
-    const sql = "INSERT INTO [eksamen].[votes] (user_id, target_user_id, vote) VALUES (@user_id, @target_user_id, @vote)" 
+    //const sql = "INSERT INTO [eksamen].[votes] (user_id, target_user_id, vote) VALUES (@user_id, @target_user_id, @vote)" 
+    const sql = "DECLARE @Counter INT , @MaxId INT, @variable INT, @yesorno NVARCHAR(100) SELECT @Counter = min([eksamen].[votes].id) , @MaxId = max([eksamen].[votes].id) FROM [eksamen].[votes] SET @yesorno = 'post' WHILE (@Counter IS NOT NULL AND @Counter <= @MaxId) BEGIN IF @user_id = (SELECT [eksamen].[votes].user_id from [eksamen].[votes] WHERE id = @Counter) AND @target_user_id = (SELECT [eksamen].[votes].target_user_id from [eksamen].[votes] WHERE id = @Counter) BEGIN SET @yesorno = 'no post' BREAK END SET @Counter  = @Counter  + 1; END IF @yesorno = 'post' INSERT INTO [eksamen].[votes] (user_id, target_user_id, vote) VALUES (@user_id, @target_user_id, @vote) else print 'der blev ikke postet'"
             const request = new Request(sql, (err, rowcount) => {
                 if (err){
                     reject(err)
@@ -274,7 +275,7 @@ function votefunction(payload){
         
         
         request.on('requestCompleted', (row) => {
-            //console.log("HEEEEEEEJ")
+            (console.log(row))
             resolve('vote inserted', row)
         });
 
