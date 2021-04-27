@@ -193,22 +193,7 @@ function swipe(lookingfor){
             });*/
            // console.log(columns)
             array.push(columns)
-             //array.push(columns[0].value, columns[9].value)
-             
-             //console.log(array)
-            
-       /* request.on('row', (columns) => {
-            resolve(columns)
-            console.log("id'er: " + columns[0].value)
-            console.log("username: " + columns[1].value)
-            console.log("password: " + columns[2].value)
-            console.log("firstname: " + columns[3].value)
-            console.log("lastname: " + columns[4].value)
-            console.log("birthdate: " + columns[5].value)
-            console.log("gender: " + columns[6].value)
-            console.log("interest: " + columns[7].value)
-            console.log("agerange: " + columns[8].value)
-            console.log("region: " + columns[9].value)*/
+         
 
 
             
@@ -222,6 +207,7 @@ function swipe(lookingfor){
             console.log(rowCount + ' rows returned');
             //console.log(array)
             resolve(array)
+            array = []
           });
         connection.execSql(request)    
         })
@@ -262,7 +248,8 @@ module.exports.insertInterest = insertInterest
 function votefunction(payload){
     
     return new Promise((resolve, reject) => {
-    const sql = "INSERT INTO [eksamen].[votes] (user_id, target_user_id, vote) VALUES (@user_id, @target_user_id, @vote)" 
+    //const sql = "INSERT INTO [eksamen].[votes] (user_id, target_user_id, vote) VALUES (@user_id, @target_user_id, @vote)" 
+    const sql = "DECLARE @Counter INT , @MaxId INT, @variable INT, @yesorno NVARCHAR(100) SELECT @Counter = min([eksamen].[votes].id) , @MaxId = max([eksamen].[votes].id) FROM [eksamen].[votes] SET @yesorno = 'post' WHILE (@Counter IS NOT NULL AND @Counter <= @MaxId) BEGIN IF @user_id = (SELECT [eksamen].[votes].user_id from [eksamen].[votes] WHERE id = @Counter) AND @target_user_id = (SELECT [eksamen].[votes].target_user_id from [eksamen].[votes] WHERE id = @Counter) BEGIN SET @yesorno = 'no post' BREAK END SET @Counter  = @Counter  + 1; END IF @yesorno = 'post' INSERT INTO [eksamen].[votes] (user_id, target_user_id, vote) VALUES (@user_id, @target_user_id, @vote) else print 'der blev ikke postet'"
             const request = new Request(sql, (err, rowcount) => {
                 if (err){
                     reject(err)
@@ -279,7 +266,7 @@ function votefunction(payload){
         
         
         request.on('requestCompleted', (row) => {
-            //console.log("HEEEEEEEJ")
+            (console.log(row))
             resolve('vote inserted', row)
         });
 
@@ -411,3 +398,25 @@ function deleteMatchStatement(id){
     });
 }
 module.exports.deleteMatchStatement = deleteMatchStatement;
+
+//Delete likes
+function deleteLikesStatement(payload){
+    return new Promise((resolve, reject) => {
+    const sql = "DELETE From eksamen.votes WHERE (user_id = @user_id and target_user_id = @target_user_id) OR (target_user_id = @user_id AND user_id = @target_user_id)"
+
+
+        const request = new Request(sql, (err) => {
+            if(err){
+                reject({message: "error connection"})    
+            }}); 
+                request.addParameter('user_id', TYPES.Int, payload.user_id)
+                request.addParameter('target_user_id', TYPES.Int, payload.target_user_id)  
+                request.on('row', (columns) => {
+                resolve(columns)
+            });
+    connection.execSql(request)
+
+
+    });
+}
+module.exports.deleteLikesStatement = deleteLikesStatement;

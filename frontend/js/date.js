@@ -96,7 +96,7 @@ function getAge(dateString)
                     
                     
                     array = sortedArray
-                    console.log(array[0][1])
+                    console.log(sortedArray)
                    
                     //regionarray.forEach(n => n.length);
                     //console.log(regionarray[0].length)
@@ -215,7 +215,7 @@ function checkformatches(){
 
 var like = document.getElementById("like")
 
-
+//der bliver nu ikke postet hvis man liker en man allerede har liket. Men det bliver stadig til et match, da checkformatches() kører
 like.addEventListener("click", async function(e) {
     e.preventDefault()
 
