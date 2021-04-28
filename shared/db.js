@@ -203,7 +203,7 @@ var array = []
 function swipe(lookingfor){
     //console.log(id)
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM [eksamen].[user] where gender = @lookingfor'
+        const sql = 'SELECT * FROM [eksamen].[user] INNER JOIN [eksamen].[user_interest] ON [eksamen].[user].id = [eksamen].[user_interest].user_id where gender = @lookingfor'
         const request = new Request(sql, (err, rowcount) => {
             if (err){
                 reject(err)
@@ -254,7 +254,7 @@ module.exports.swipe = swipe;
 //Interests
 function insertInterest(payload){
     return new Promise((resolve, reject) => {
-    const sql = `INSERT INTO [eksamen].[user_interest] (user_id, interest_id)  VALUES (@user_id, @interest_id), (@user_id, @interest_id2) `
+    const sql = `INSERT INTO [eksamen].[user_interest] (user_id, interest_id)  VALUES (@user_id, @interest_id) `
         const request = new Request(sql, (err) => {
             if(err){
                 reject(err)
@@ -263,7 +263,6 @@ function insertInterest(payload){
         });
         request.addParameter('user_id', TYPES.Int, payload.user_id)
         request.addParameter('interest_id', TYPES.Int, payload.interest_id)
-        request.addParameter('interest_id2', TYPES.Int, payload.interest_id2)
     
         request.on('requestCompleted', (row) => {
             console.log('Interests succeded', row)

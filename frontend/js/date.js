@@ -42,6 +42,12 @@ graph.addEdge("hovedstaden", "sjaelland")
 var array = []
 var regionarray = []
 
+var nordjylland = []
+var midtjylland = []
+var syddanmark = []
+var sjaelland = []
+var hovedstaden = []
+
 
 function getAge(dateString) 
 {
@@ -82,20 +88,45 @@ function getAge(dateString)
                         array.push(data[i])
                         }
                     }
+                    console.log("din mor" + data)
+                    console.log(array)
                     
+                    for( var j = 0; j < array.length; j ++){
+                        //console.log(age)
+                        if(array[j][9].value == "nordjylland"){
+                        nordjylland.push(array[j])
+                        
+                        }
+                        else if(array[j][9].value == "midtjylland"){
+                        midtjylland.push(array[j])
+                        }
+                        else if(array[j][9].value == "syddanmark"){
+                        syddanmark.push(array[j])
+                        }  
+                        else if(array[j][9].value == "sjaelland"){
+                        sjaelland.push(array[j])
+                            }     
+                        else if(array[j][9].value == "hovedstaden"){
+                        hovedstaden.push(array[j])
+                        }
+                    }
+
                     
-                    
+
                     for( i = 0; i < array.length; i ++){
                             regionarray.push([graph.ShortestPathBFS(region, array[i][9].value).length, array[i]])
                     }
-                    
+                
                     
                     var sortedArray = regionarray.sort(function(a, b) {
                         return a[0] - b[0];
                       });
                     
+                    [[[hovedstaden +"eller"+ 1],[]],[[],[]],[[],[]],[[],[]],[[],[]]]
                     
                     array = sortedArray
+
+
                     console.log(sortedArray)
                    
                     //regionarray.forEach(n => n.length);
