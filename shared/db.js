@@ -81,7 +81,7 @@ function select(username){
 }
 module.exports.select = select;
 
-//Logge ind
+//Logge ind som user
 function insertlogin(payload){
     
     return new Promise((resolve, reject) => {
@@ -110,6 +110,37 @@ function insertlogin(payload){
     });
 }
 module.exports.insertlogin = insertlogin;
+
+
+//Logge ind
+function adminlogin(payload){
+    
+    return new Promise((resolve, reject) => {
+    const sql = "SELECT * FROM [eksamen].[admin] WHERE username = @username and password = @password"; 
+            const request = new Request(sql, (err, rowcount) => {
+                if (err){
+                    reject(err)
+                    console.log(err)
+                }
+                if (rowcount == 0){
+                    reject(err)
+                    console.log(err)
+                }
+            });
+        request.addParameter('username', TYPES.VarChar, payload.username)
+        request.addParameter('password', TYPES.VarChar, payload.password)
+        
+        
+        request.on('row', (columns) => {
+            resolve(columns)
+        });
+
+    connection.execSql(request)
+
+
+    });
+}
+module.exports.adminlogin = adminlogin;
 
 
 
@@ -420,3 +451,56 @@ function deleteLikesStatement(payload){
     });
 }
 module.exports.deleteLikesStatement = deleteLikesStatement;
+
+
+//Bruges til usercount. 
+function selectusercount(){
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT COUNT ([eksamen].[user].id) FROM [eksamen].[user]'
+        const request = new Request(sql, (err, rowcount) => {
+            if (err){
+                reject(err)
+                console.log(err)
+            }
+            else if (rowcount == 0){
+                reject({message: 'No users in database'})
+            }
+        });
+        //request.addParameter('username', TYPES.VarChar, username)
+
+        request.on('row', (columns) => {
+            resolve(columns)
+        });
+
+        connection.execSql(request)    
+        })
+    
+
+}
+module.exports.selectusercount = selectusercount;
+
+//bruges til matchcount
+function selectmatchcount(){
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT COUNT ([eksamen].[match].id) FROM [eksamen].[match]'
+        const request = new Request(sql, (err, rowcount) => {
+            if (err){
+                reject(err)
+                console.log(err)
+            }
+            else if (rowcount == 0){
+                reject({message: 'No users in database'})
+            }
+        });
+        //request.addParameter('username', TYPES.VarChar, username)
+
+        request.on('row', (columns) => {
+            resolve(columns)
+        });
+
+        connection.execSql(request)    
+        })
+    
+
+}
+module.exports.selectmatchcount = selectmatchcount;
