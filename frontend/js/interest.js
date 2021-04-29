@@ -30,19 +30,19 @@ if(money.checked){
     interestarray.push(5)
 }
 
-if(interestarray.length !== 2){
-    alert("You can only select two interests!")
+if(interestarray.length !== 1){
+    interestarray = []
+    return alert("Select one interest!")
 }
 
-else{
 
+    console.log(interestarray);
 fetch("http://localhost:7071/api/postInterests", {
         
             method: 'POST',
             body: JSON.stringify({
                 user_id: localStorage.getItem("loggedIn"),
-                interest_id: interestarray[0],
-                interest_id2: interestarray[1]
+                interest_id: interestarray[0]
             }),
             
             headers: {
@@ -62,7 +62,7 @@ fetch("http://localhost:7071/api/postInterests", {
     }
 
     
-}
+
 //window.location = "homepage.html"
 );
 
