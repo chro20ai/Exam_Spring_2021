@@ -30,6 +30,7 @@ loginform.addEventListener("submit", function(e) {
         localStorage.setItem('region', data[9].value);
         localStorage.setItem('lookingfor', data[7].value);
         localStorage.setItem('agerange', data[8].value)
+        localStorage.setItem('interest', data[11].value)
         //console.log(data)
         window.location = "homepage.html";
     })
