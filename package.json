@@ -4,7 +4,6 @@
   "scripts": {
     "start": "func start",
     "test": "mocha --recursive 'test/*'"
-
   },
   "dependencies": {
     "chai": "^4.3.4",

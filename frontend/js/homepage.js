@@ -9,7 +9,7 @@ const h1 = document.querySelector('h1')
 function showYourName() {
     if(localStorage.getItem('username')){
         let username = localStorage.getItem("username");
-        h1.textContent = "Velkommen til din profil, " + username + "!";
+        h1.textContent = "Welcome to your profile, " + username + "!";
     }
 }
 //Dette betyder, at funktion køres når der tilgås siden. 
@@ -87,7 +87,7 @@ showMatches.addEventListener("click", function(e) {
     document.getElementById("matchage").style.visibility = "visible";
     document.getElementById("matchgender").style.visibility = "visible";
     document.getElementById("matchregion").style.visibility = "visible";
-    
+    document.getElementById("selection").style.visibility = "visible"; 
     
 
     user.showMatches(); 
@@ -145,8 +145,7 @@ function deleteMatch(){
 var select = document.getElementById("user");
 
     select.addEventListener("click", function(e) {
-        e.preventDefault()
-    
+        e.preventDefault()   
     var selectdelete = document.getElementById("select1");
     var selected = selectdelete.options[selectdelete.selectedIndex].text;
     arrayMatch

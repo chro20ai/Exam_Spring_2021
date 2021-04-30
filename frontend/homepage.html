@@ -3,26 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Velkommen</title>
-    <h1>Du er ikke logget ind.</h1>
+    <title>Welcome</title>
+    <h1>You are not signed in.</h1>
 </head>
 <body>
-    
-    <button type="click" id="date">Find young bitches under 18 here</button>
-
+    <b>Important message: You cannot start dating before you have picked an interest.</b>
+    <br>
+    <br>
+    <button><a href="interest.html">Pick your interests</a></button>  
+    <br>
+    <br>
+    <button type="click" id="date">Start dating</button>
+    <br>
+    <br>
+    <b>Customize user</b>
+    <br>
+    <br>
     <button type="click" id="update">Update your profile</button>
     <button type="click" id="delete" >Delete your profile</button>
-
-    <button type="click" id="logout">Log out</button>
-
-    <button><a href="date.html">start dating</a></button>  
-    <button><a href="interest.html">Pick your interests</a></button>       
-
-
-    <button id="showmatches">Vis dine matches!</button>
     <br>
     <br>
-    <br>    
+    <button id="showmatches">Show your matches!</button>
+    <br>  
         <table style="visibility:hidden;" id="myTableData"  border="1" cellpadding="2">
             <tr>
                 <td id = "matchusername" style="visibility:hidden;"><b>Username</b></td>
@@ -36,17 +38,19 @@
         </table>
     <br>
    
-    <p>
-        Vælg en user:
-        <select id="select1">
-            
-        </select>
-    </p>
-      
-      
-    <button id = "user" type="click" >
-        Delete selected user
-    </button>
+    <div id = "selection" style="visibility:hidden;">
+        <p>
+            Choose who you want to unmatch:
+            <select id="select1">
+                
+            </select>
+        </p>
+          
+        <button id = "user" type="click" >
+            Delete selected user
+        </button>
+    </div>
+    
       
     <script type="text/javascript">
         function getOption() {
@@ -59,7 +63,9 @@
                     = output;
         }
     </script>
-       
+    <br>
+    <br>
+    <button type="click" id="logout">Log out</button>
 
 </body>
 <script type="module" src="./js/homepage.js"></script>
