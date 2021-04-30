@@ -261,7 +261,7 @@ module.exports.swipe = swipe;
 //Interests
 function insertInterest(payload){
     return new Promise((resolve, reject) => {
-    const sql = `INSERT INTO [eksamen].[user_interest] (user_id, interest_id)  VALUES (@user_id, @interest_id) `
+    const sql = `DELETE FROM [eksamen].[user_interest] where user_id = @user_id INSERT INTO [eksamen].[user_interest] (user_id, interest_id)  VALUES (@user_id, @interest_id)`
         const request = new Request(sql, (err) => {
             if(err){
                 reject(err)
@@ -436,7 +436,7 @@ function deleteMatchStatement(id){
 }
 module.exports.deleteMatchStatement = deleteMatchStatement;
 
-//Delete likes
+//Delete likes - chris hvad fuck er det her din søde mand
 function deleteLikesStatement(payload){
     return new Promise((resolve, reject) => {
     const sql = "DELETE From eksamen.votes WHERE (user_id = @user_id and target_user_id = @target_user_id) OR (target_user_id = @user_id AND user_id = @target_user_id)"
