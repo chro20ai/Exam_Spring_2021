@@ -22,10 +22,10 @@ module.exports = async function (context, req) {
     }
 }
 
-async function getmatchcount(context, req){
+module.exports = async function getmatchcount(context, req){
     try{
-        let username = req.query.username;
-        let user = await db.selectmatchcount(username)
+        let id = req.query.id;
+        let user = await db.selectmatchcount(id)
         context.res = {
             body: user
         };
@@ -38,3 +38,4 @@ async function getmatchcount(context, req){
     }
 
 }
+
