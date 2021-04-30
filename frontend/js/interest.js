@@ -53,6 +53,7 @@ fetch("http://localhost:7071/api/postInterests", {
             return response.json()
         })
         .then((data) => {
+            localStorage.setItem('interest', data[11].value)
             console.log("DET VIRKEDE")
             
         })
