@@ -40,6 +40,8 @@ graph.addEdge("hovedstaden", "sjaelland")
 
 
 var array = []
+var newarray = []
+var testarray = []
 var regionarray = []
 
 var nordjylland = []
@@ -88,46 +90,88 @@ function getAge(dateString)
                         array.push(data[i])
                         }
                     }
-                    console.log("din mor" + data)
-                    console.log(array)
+                    
                     
                     for( var j = 0; j < array.length; j ++){
-                        //console.log(age)
+
                         if(array[j][9].value == "nordjylland"){
-                        nordjylland.push(array[j])
-                        
+                        if(localStorage.getItem("interest") == array[j][11].value){
+                            nordjylland.push([1,array[j]])
+                    }
+                        else{
+                            nordjylland.push([0,array[j]])
+                        }
+                        nordjylland.sort(function(a, b) {return b[0] - a[0];});
                         }
                         else if(array[j][9].value == "midtjylland"){
-                        midtjylland.push(array[j])
+                        if(localStorage.getItem("interest") == array[j][11].value){
+                            midtjylland.push([1,array[j]])
+                    }
+                        else{
+                            midtjylland.push([0,array[j]])
+                        }
+                        midtjylland.sort(function(a, b) {return b[0] - a[0];});
                         }
                         else if(array[j][9].value == "syddanmark"){
-                        syddanmark.push(array[j])
+                        if(localStorage.getItem("interest") == array[j][11].value){
+                            syddanmark.push([1,array[j]])
+                    }
+                        else{
+                            syddanmark.push([0,array[j]])
+                        }
+                        syddanmark.sort(function(a, b) {return b[0] - a[0];});
                         }  
                         else if(array[j][9].value == "sjaelland"){
-                        sjaelland.push(array[j])
-                            }     
+                        if(localStorage.getItem("interest") == array[j][11].value){
+                            sjaelland.push([1,array[j]])
+                    }
+                        else{
+                            sjaelland.push([0,array[j]])
+                        }
+                        sjaelland.sort(function(a, b) {return b[0] - a[0];});
+                        }     
                         else if(array[j][9].value == "hovedstaden"){
-                        hovedstaden.push(array[j])
+                            if(localStorage.getItem("interest") == array[j][11].value){
+                                hovedstaden.push([1,array[j]])
+                        }
+                        else{
+                            hovedstaden.push([0,array[j]])
+                        }
+                        hovedstaden.sort(function(a, b) {return b[0] - a[0];});
+                        //console.log(hovedstaden)
                         }
                     }
 
+                    newarray.push([graph.ShortestPathBFS(region, "nordjylland").length, nordjylland], [graph.ShortestPathBFS(region, "midtjylland").length, midtjylland], [graph.ShortestPathBFS(region, "syddanmark").length, syddanmark], [graph.ShortestPathBFS(region, "sjaelland").length, sjaelland], [graph.ShortestPathBFS(region, "hovedstaden").length, hovedstaden])
                     
 
-                    for( i = 0; i < array.length; i ++){
+                    /*for( i = 0; i < array.length; i ++){
                             regionarray.push([graph.ShortestPathBFS(region, array[i][9].value).length, array[i]])
                     }
-                
-                    
+                    console.log(regionarray);
+                */
+                    /*
                     var sortedArray = regionarray.sort(function(a, b) {
                         return a[0] - b[0];
                       });
+                    */
+                   console.log(newarray)
+                   
+                   var sortedArray = newarray.sort(function(a, b) {
+                    return a[0] - b[0];
+                  });
+                
+                  console.log(sortedArray)
+                    for (let i = 0; i < sortedArray.length; i++) {
+                        for (let j = 0; j < sortedArray[i][1].length; j++) {
+                                testarray.push(sortedArray[i][1][j])
+                        }
+                    }
                     
-                    [[[hovedstaden +"eller"+ 1],[]],[[],[]],[[],[]],[[],[]],[[],[]]]
-                    
-                    array = sortedArray
-
-
-                    console.log(sortedArray)
+                    array = testarray
+                    //console.log(array[0][1].toString())
+                    console.log(testarray)
+                    //console.log(sortedArray)
                    
                     //regionarray.forEach(n => n.length);
                     //console.log(regionarray[0].length)

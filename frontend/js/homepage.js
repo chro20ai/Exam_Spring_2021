@@ -35,6 +35,10 @@ logOutButton.addEventListener("click", function(e) {
     localStorage.removeItem("username")
     localStorage.removeItem("region")
     localStorage.removeItem("lookingfor")
+    localStorage.removeItem("interest")
+    localStorage.removeItem("swipefirstname")
+    localStorage.removeItem("agerange")
+    localStorage.removeItem("swipeid")
     window.location = "login.html"
 })
 

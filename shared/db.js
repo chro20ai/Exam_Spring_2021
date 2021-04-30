@@ -85,7 +85,7 @@ module.exports.select = select;
 function insertlogin(payload){
     
     return new Promise((resolve, reject) => {
-    const sql = "SELECT * FROM [eksamen].[user] WHERE username = @username and password = @password"; 
+    const sql = "declare @variabel INT set @variabel = (SELECT [eksamen].[user_interest].user_id  FROM [eksamen].[user] INNER JOIN [eksamen].[user_interest] ON [eksamen].[user].id = [eksamen].[user_interest].user_id WHERE [eksamen].[user].username = @username and [eksamen].[user].password = @password) if @variabel is null SELECT * FROM [eksamen].[user] WHERE username = @username and password = @password else SELECT *  FROM [eksamen].[user] INNER JOIN [eksamen].[user_interest] ON [eksamen].[user].id = [eksamen].[user_interest].user_id WHERE [eksamen].[user].username = @username and [eksamen].[user].password = @password"
             const request = new Request(sql, (err, rowcount) => {
                 if (err){
                     reject(err)
@@ -101,6 +101,7 @@ function insertlogin(payload){
         
         
         request.on('row', (columns) => {
+            console.log(columns)
             resolve(columns)
         });
 
