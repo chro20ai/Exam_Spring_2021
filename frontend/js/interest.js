@@ -35,7 +35,7 @@ if(interestarray.length !== 1){
     return alert("Select one interest!")
 }
 
-
+localStorage.setItem('interest', interestarray[0])
     console.log(interestarray);
 fetch("http://localhost:7071/api/postInterests", {
         
@@ -53,7 +53,6 @@ fetch("http://localhost:7071/api/postInterests", {
             return response.json()
         })
         .then((data) => {
-            localStorage.setItem('interest', data[11].value)
             console.log("DET VIRKEDE")
             
         })

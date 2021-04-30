@@ -86,16 +86,22 @@ function insertlogin(payload){
     
     return new Promise((resolve, reject) => {
     const sql = "declare @variabel INT set @variabel = (SELECT [eksamen].[user_interest].user_id  FROM [eksamen].[user] INNER JOIN [eksamen].[user_interest] ON [eksamen].[user].id = [eksamen].[user_interest].user_id WHERE [eksamen].[user].username = @username and [eksamen].[user].password = @password) if @variabel is null SELECT * FROM [eksamen].[user] WHERE username = @username and password = @password else SELECT *  FROM [eksamen].[user] INNER JOIN [eksamen].[user_interest] ON [eksamen].[user].id = [eksamen].[user_interest].user_id WHERE [eksamen].[user].username = @username and [eksamen].[user].password = @password"
+    //const sql = "SELECT * FROM [eksamen].[user] WHERE username = @username and password = @password"; 
             const request = new Request(sql, (err, rowcount) => {
                 if (err){
                     reject(err)
                     console.log(err)
+                    console.log("test")
                 }
-                if (rowcount == 0){
+                console.log(rowcount)
+                if ( rowcount == 1 ){
                     reject(err)
                     console.log(err)
+                    console.log("test123123123")
                 }
+                
             });
+            
         request.addParameter('username', TYPES.VarChar, payload.username)
         request.addParameter('password', TYPES.VarChar, payload.password)
         

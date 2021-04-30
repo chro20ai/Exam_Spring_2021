@@ -26,7 +26,7 @@ async function post(context, req){
         let payload = req.body;
         let response = await db.insertlogin(payload)
         //Her skal valideres. Hvis der kommer en bruger er man logget ind. 
-        console.log(response);
+       
         context.res = {
             body: response
         }
