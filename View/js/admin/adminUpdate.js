@@ -1,9 +1,19 @@
-import { User as _User} from '../../classes/classes.js';
+import { User as _User, Admin as _Admin} from '../../classes/classes.js';
 const User = _User
+const Admin = _Admin
+
+var getButton = document.getElementById("getUser")
+
+getButton.addEventListener('click', function(){
+
+    var admin = new Admin() 
+
+    admin.getUser() 
+    
+})
 
 
 var form = document.getElementById("form1")
-
 
 form.addEventListener("submit", function(e) {
     e.preventDefault()
@@ -24,4 +34,5 @@ form.addEventListener("submit", function(e) {
     
     user.update()
     
+
 })

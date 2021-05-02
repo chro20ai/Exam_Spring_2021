@@ -1,3 +1,4 @@
+
 var swipe = document.getElementById("swipe")
 var swipeid = localStorage.getItem("swipeid")
 var swipeindex = 0; 
@@ -5,6 +6,9 @@ var region = localStorage.getItem("region")
 var id = localStorage.getItem("loggedIn")
 var lookingfor = localStorage.getItem("lookingfor")
 var agerange = localStorage.getItem("agerange")
+
+import { User as _User} from '../classes/classes.js';
+const User = _User
 
 //import {Node, Graph} from '../classes/bfs'
 import { Node as _Node, Graph as _Graph } from '../classes/bfs.js';
@@ -51,18 +55,6 @@ var sjaelland = []
 var hovedstaden = []
 
 
-function getAge(dateString) 
-{
-    var today = new Date();
-    var birthDate = new Date(dateString);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
-    {
-        age--;
-    }
-    return age;}
-
     window.onload = function(){
         fetch(`http://localhost:7071/api/swipe?lookingfor=${lookingfor}`)
         //fetch("http://localhost:7071/api/swipe")
@@ -72,11 +64,14 @@ function getAge(dateString)
                     console.log("Something went wrong " + response.status);
                     return
                 }
+                
                 response.json().then(function(data) {
                 var i
                     for( i = 0; i < data.length; i ++){
-                        var age = getAge(data[i][5].value)
-                        //console.log(age)
+                        var swipeuser = new User (data[i][0].value, data[i][1].value, data[i][2].value, data[i][3].value, data[i][4].value, data[i][5].value, data[i][6].value, data[i][7].value, data[i][8].value, data[i][9].value)
+                        var age =  swipeuser.getAge(swipeuser._birthdate)
+                        console.log(age)
+
                         if(age >= 18 && age <= 25 && agerange == "18-25"){
                         array.push(data[i])
                         }
@@ -208,7 +203,9 @@ var gender;
 var regionshow;
 
 
+console.log(array)
 
+var swipeuser = new User ()
 
 try {
     if(array[swipeindex][1][0].value == id){
@@ -219,7 +216,7 @@ try {
             username = array[swipeindex][1][1].value
             firstname = array[swipeindex][1][3].value
             lastname = array[swipeindex][1][4].value
-            age = getAge(array[swipeindex][1][5].value)
+            age = swipeuser.getAge(array[swipeindex][1][5].value)
             gender = array[swipeindex][1][6].value   
             regionshow =  array[swipeindex][1][9].value   
   }
