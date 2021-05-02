@@ -201,6 +201,7 @@ var lastname;
 var age;
 var gender;
 var regionshow;
+var interest;
 
 
 console.log(array)
@@ -218,7 +219,12 @@ try {
             lastname = array[swipeindex][1][4].value
             age = swipeuser.getAge(array[swipeindex][1][5].value)
             gender = array[swipeindex][1][6].value   
-            regionshow =  array[swipeindex][1][9].value   
+            regionshow =  array[swipeindex][1][9].value  
+            if(array[swipeindex][1][11].value == 1){interest = "Sport"}
+            if(array[swipeindex][1][11].value == 2){interest = "Art"}
+            if(array[swipeindex][1][11].value == 3){interest = "Netflix and Chill"}
+            if(array[swipeindex][1][11].value == 4){interest = "Coding"}
+            if(array[swipeindex][1][11].value == 5){interest = "Money"}
   }
   catch(err) {
     alert("No more users for you, checkout out pornhub")
@@ -228,6 +234,7 @@ try {
     age = "";
     gender = "";
     regionshow = "";
+    interest = "";
   }
     swipeindex++;  
     
@@ -239,6 +246,7 @@ try {
                 document.getElementById("swipeage").innerHTML = age
                 document.getElementById("swipegender").innerHTML = gender
                 document.getElementById("swiperegion").innerHTML = regionshow
+                document.getElementById("swipeinterest").innerHTML = interest
 }
 
 
@@ -300,7 +308,7 @@ like.addEventListener("click", async function(e) {
     await checkformatches()
     
 
-    //swipefunction()
+    swipefunction()
 })
 
 

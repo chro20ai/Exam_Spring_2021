@@ -54,6 +54,7 @@ fetch("http://localhost:7071/api/postInterests", {
         })
         .then((data) => {
             console.log("DET VIRKEDE")
+            window.location = "homepage.html";
             
         })
         .catch(err => {
