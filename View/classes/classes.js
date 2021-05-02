@@ -183,8 +183,75 @@ loginUser(){
         console.log(err)
     })
 
+    };
+//Metode til at vælge interesser
+    selectInterest(){
+    var interestarray = []
+
+    var sport = document.getElementById("sport")
+    if(sport.checked){
+        interestarray.push(1);
+    }
+    var art = document.getElementById("art")
+    if(art.checked){
+        interestarray.push(2)
+    }
+    var netflixandchill = document.getElementById("netflixandchill")
+    if(netflixandchill.checked){
+        interestarray.push(3)
+    }
+    var coding = document.getElementById("coding")
+    if(coding.checked){
+        interestarray.push(4)
+    }
+    var money = document.getElementById("money")
+    if(money.checked){
+        interestarray.push(5)
+    }
+    
+    if(interestarray.length !== 1){
+        interestarray = []
+        return alert("Select one interest!")
     }
 
+    localStorage.setItem('interest', interestarray[0])
+    console.log(interestarray);
+
+    fetch("http://localhost:7071/api/postInterests", {
+        
+            method: 'POST',
+            body: JSON.stringify({
+                user_id: localStorage.getItem("loggedIn"),
+                interest_id: interestarray[0]
+            }),
+            
+              
+            headers: {
+                "Content-Type": "application/json; charset-UTF-8"
+            }
+        }) 
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            //console.log(data)
+            window.location = "homepage.html";
+            alert('det virker')
+    
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+
+swipe(){
+    
+}
+
+checkformatches(){
+
+}
 
 //Show matches metode
     showMatches(){
@@ -242,7 +309,7 @@ loginUser(){
         })  
 }
 
-//Metode til at slette match 
+//Metode til at slette match --> virker ikke 
 deleteMatch(){
     arrayMatch = []
     var matchid
@@ -438,15 +505,8 @@ export class Admin extends User{
 
 
 
-
-
-
-
-
-
-
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////// 
+//Vote klasse//
 
 export class Votes{
     constructor(id, user_id, target_user_id, vote){
@@ -456,6 +516,8 @@ export class Votes{
         this._vote = vote
 }
 //Fetch er promise-based. 
+
+//Metode til at like og dislike
 vote(){
     return new Promise((resolve, reject) => {
     fetch("http://localhost:7071/api/Votes", {
@@ -488,6 +550,9 @@ vote(){
 
 }
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//Mmtch klasse//
 export class Match{
     constructor(id, user_id_1, user_id_2){
         this._id = id        
@@ -495,6 +560,8 @@ export class Match{
         this._user_id_2 = user_id_2
     }
 
+
+//Metode til at tjekke for match
 match(){
     return new Promise((resolve, reject) => {
     fetch("http://localhost:7071/api/match", {
@@ -524,14 +591,4 @@ match(){
 }
 }
 
-/*class Address{
-    constructor(ID, street, number, city, postalCode, country){
-        this._ID = ID
-        this._street = street
-        this._number = number
-        this._city = city
-        this._postalCode = postalCode
-        this._country = country
-    }
-}*/
 
