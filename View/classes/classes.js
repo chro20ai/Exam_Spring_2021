@@ -18,7 +18,8 @@ export class User{
     } 
 
 
-    getAge(dateString) {
+//Calulate age metode 
+    getAge(dateString){
         var today = new Date();
         var birthDate = new Date(dateString);
         var age = today.getFullYear() - birthDate.getFullYear();
@@ -29,7 +30,7 @@ export class User{
         }
         return age;}
 
-
+// create metode 
     create(){
     var errormessage = ""; 
     //Errors hvis kravene for udfyldelse af oplysninger ikke er korrekte. 
@@ -43,17 +44,6 @@ export class User{
         errormessage += "Mangler at udfylde et efternavn\n"}
     if(birthdate.value == "") {
         errormessage += "Angiv din fødselsdagsdato\n"}
-
-    /*
-    if(gender.value == "") {
-        errormessage += "Angiv dit køn\n"}
-    if(lookingfor.value == "") {
-         errormessage += "Angiv hvilket køn du vil bumle\n"}
-    if(rangeAge.value == "") {
-        errormessage += "Angiv hvilken alder du vil bumle\n"}
-    if(region.value == "") {
-        errormessage += "Angiv hvor du kommer fra\n"}
-    */
 
     if(errormessage != ""){
         alert(errormessage)
@@ -92,6 +82,43 @@ export class User{
     }   
 }
 
+//Metode for login 
+loginUser(){
+    var usernamelogin = document.getElementById("usernameid").value
+    var passwordlogin = document.getElementById("passwordid").value
+    fetch("http://localhost:7071/api/Login", {
+        method: 'POST',
+        body: JSON.stringify({
+            username : usernamelogin,
+            password : passwordlogin
+        }),
+        headers: {
+            "Content-Type": "application/json; charset-UTF-8"
+        }
+    }) 
+    .then((response) => {
+        return response.json()
+
+    })
+    .then((data) => {
+        localStorage.setItem('loggedIn', data[0].value);
+        localStorage.setItem('username', data[1].value);
+        localStorage.setItem('region', data[9].value);
+        localStorage.setItem('lookingfor', data[7].value);
+        localStorage.setItem('agerange', data[8].value)
+        
+        if(data.length > 10){
+            localStorage.setItem('interest', data[11].value)
+        }
+            window.location = "homepage.html";
+    })
+    .catch(err => {
+        alert("There was an error. Check your username and password")
+        console.log(err)
+    })
+
+}
+//Metode for update
     update(){
         fetch("http://localhost:7071/api/Update",  {
         
@@ -128,21 +155,48 @@ export class User{
     }
 
 
+//Metode for delete
+    deleteUser(){
+        var id = localStorage.getItem("loggedIn")
+        console.log(id)
+        fetch("http://localhost:7071/api/deleteProfile", {
+        method: 'DELETE',
+        body: JSON.stringify({
+            id: id
+        }),
+        headers: {
+            "Content-Type": "application/json; charset-UTF-8"
+        }
+    }) 
+    .then((response) => {
+        return response.json()
 
-    delete(){
+    })
+    .then((data) => {     
+        console.log(data)   
+        localStorage.removeItem("loggedIn")
+        localStorage.removeItem("username")
+        window.location = "login.html";
+
+    })     
+    .catch(err => {
+        console.log(err)
+    })
+
     }
 
-    
 
-    //Show matches
+//Show matches metode
     showMatches(){
-    document.getElementById("matchusername").style.visibility = "visible";
-    document.getElementById("matchfirstname").style.visibility = "visible";
-    document.getElementById("matchlastname").style.visibility = "visible";
-    document.getElementById("matchage").style.visibility = "visible";
-    document.getElementById("matchgender").style.visibility = "visible";
-    document.getElementById("matchregion").style.visibility = "visible";
-
+        document.getElementById("myTableData").style.visibility = "visible";
+        document.getElementById("delete").style.visibility = "visible";
+        document.getElementById("matchusername").style.visibility = "visible";
+        document.getElementById("matchfirstname").style.visibility = "visible";
+        document.getElementById("matchlastname").style.visibility = "visible";
+        document.getElementById("matchage").style.visibility = "visible";
+        document.getElementById("matchgender").style.visibility = "visible";
+        document.getElementById("matchregion").style.visibility = "visible";
+        document.getElementById("selection").style.visibility = "visible"; 
     
     fetch(`http://localhost:7071/api/getMatches?id=${localStorage.getItem("loggedIn")}`)
         .then((response) => {
@@ -169,14 +223,14 @@ export class User{
                         <option value="premium">Premium</option>
                         */
 
-    
-                       
+                        var user = new User()
                         row.insertCell(0).innerHTML= data[index][1].value;
                         row.insertCell(1).innerHTML= data[index][2].value;
                         row.insertCell(2).innerHTML= data[index][3].value;
-                        row.insertCell(3).innerHTML= getAge(data[index][4].value);
+                        row.insertCell(3).innerHTML= user.getAge(user._birthdate);
+                        console.log(user.getAge())
                         row.insertCell(4).innerHTML= data[index][5].value;
-                        row.insertCell(5).innerHTML= data[index][6].value;
+                        row.insertCell(5).innerHTML= data[index][6].value; 
                         //drop.innerHTML=  `<select> <option value='${data[index][0].value}'>${data[index][1].value};</option></select>`; 
                         
                     }
@@ -185,18 +239,89 @@ export class User{
         })
         .catch(err => {
             console.log(err)
+        })  
+}
+
+//Metode til at slette match 
+deleteMatch(){
+    arrayMatch = []
+    var matchid
+
+    var selectdelete = document.getElementById("select1");
+    var selected = selectdelete.options[selectdelete.selectedIndex].text;
+    arrayMatch
+    
+    var i
+    for( i=0 ; i < arrayMatch.length ; i ++){
+        if(arrayMatch[i] == selected){
+            matchid = arrayMatch[i-1]
+console.log(matchid)
+        }
+    }
+    
+    fetch("http://localhost:7071/api/deleteMatch", {
+        method: 'DELETE',
+        body: JSON.stringify({
+            id: matchid
+        }),
+        headers: {
+            "Content-Type": "application/json; charset-UTF-8"
+        }
+    }) 
+    
+    .then((response) => {
+        return response.json()
+
+    })
+    .then((data) => {    
+
+       console.log(data)
+    })     
+    .catch(err => {
+        console.log(err)
+    })
+
+}
+
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Admin klassen//
+export class Admin extends User{
+    constructor(username, password, id ){
+                super(username, password)
+                this._id = id
+    }
+
+    loginAdmin(){
+
+        var usernamelogin = document.getElementById("usernameid").value
+        var passwordlogin = document.getElementById("passwordid").value
+
+        fetch("http://localhost:7071/api/loginasadmin", {
+            method: 'POST',
+            body: JSON.stringify({
+                username : usernamelogin,
+                password : passwordlogin
+            }),
+            headers: {
+                "Content-Type": "application/json; charset-UTF-8"
+            }
+        }) 
+        .then((response) => {
+            return response.json()
+    
+        })
+        .then((data) => {
+            localStorage.setItem('adminid', data[0].value);
+            localStorage.setItem('adminusername', data[1].value);
+            window.location = "admin.html";
+        })
+        .catch(err => {
+            alert("There was an error. Check your username and password")
+            console.log(err)
         })
 
-    
-
-}
-
-}
-
-
-export class Admin extends User{
-    constructor(username, password ){
-                super(username, password)
     }
  
     deleteUser(){
@@ -263,6 +388,7 @@ export class Admin extends User{
     .catch(function(err){
         console.log(err)
     })
+
     }
 
 //metode til at tælle user statestik
@@ -305,6 +431,7 @@ export class Admin extends User{
             console.log(err)
         })
     }
+
 
 }
 
