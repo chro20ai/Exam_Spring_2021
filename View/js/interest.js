@@ -1,5 +1,5 @@
 //importere User-klassen
-import { User as _User} from '../classes/classes.js';
+import { User as _User} from '../../Model/classes.js';
 const User = _User
 
 //vi laver ny instans af user-klassen og så kalder vi metoden selectInterest()

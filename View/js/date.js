@@ -10,9 +10,9 @@
 
 
  //importere User, Node og Votes klasserne, så vi kan tilgå metoderne
- import { User as _User} from '../classes/classes.js';
- import { Node as _Node, Graph as _Graph } from '../classes/bfs.js';
- import { Votes as _Votes, Match as _Match } from '../classes/classes.js';
+ import { User as _User} from '../../Model/classes.js';
+ import { Node as _Node, Graph as _Graph } from '../../Model/bfs.js';
+ import { Votes as _Votes, Match as _Match } from '../../Model/classes.js';
  const User = _User
  const Node = _Node
  const Graph = _Graph

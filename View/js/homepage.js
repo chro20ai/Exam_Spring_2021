@@ -1,6 +1,6 @@
-import { User as _User} from '../classes/classes.js';
+import { User as _User} from '../../Model/classes.js';
 const User = _User
-import {arrayMatch} from '../classes/classes.js'
+import {arrayMatch} from '../../Model/classes.js'
 var matchid
 
 //Få navn vist i h1 i toppen af profile.html

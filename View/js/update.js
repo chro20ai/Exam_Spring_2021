@@ -1,6 +1,6 @@
 
 //imporrtere user-klassen
-import {User} from '../classes/classes.js'
+import {User} from '../../Model/classes.js'
 
 var form = document.getElementById("form")
 
