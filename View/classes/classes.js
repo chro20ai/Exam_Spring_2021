@@ -74,7 +74,7 @@ export class User{
         })
         .then((data) => {
             //console.log(data)
-            window.location = "interest.html";
+            window.location = "login.html";
         })
         .catch(err => {
             console.log(err)
@@ -273,9 +273,8 @@ loginUser(){
             return response.json()
         })
         .then((data) => {
-            //console.log(data)
             window.location = "homepage.html";
-            alert('det virker')
+    
     
         })
         .catch(err => {
@@ -325,14 +324,13 @@ loginUser(){
                         row.insertCell(0).innerHTML= data[index][1].value;
                         row.insertCell(1).innerHTML= data[index][2].value;
                         row.insertCell(2).innerHTML= data[index][3].value;
-                        row.insertCell(3).innerHTML= user.getAge(user._birthdate);
-                        console.log(user.getAge())
+                        row.insertCell(3).innerHTML= user.getAge(data[index][4].value);
                         row.insertCell(4).innerHTML= data[index][5].value;
                         row.insertCell(5).innerHTML= data[index][6].value; 
                         //drop.innerHTML=  `<select> <option value='${data[index][0].value}'>${data[index][1].value};</option></select>`; 
                         
                     }
-                    arrayMatch = []
+                    
     
         })
         .catch(err => {

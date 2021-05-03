@@ -233,7 +233,7 @@ try {
             if(array[swipeindex][1][11].value == 5){interest = "Money"}
   }
   catch(err) {
-    alert("No more users for you, checkout out pornhub")
+    alert("No more users for you!")
     username = "";
     firstname = "";
     lastname = "";
@@ -320,7 +320,6 @@ like.addEventListener("click", async function(e) {
     await checkformatches()
     
 
-    swipefunction()
 })
 
 
@@ -335,7 +334,7 @@ dislike.addEventListener("click", function(e) {
 
     vote.vote()
     
-    swipefunction()
+
 })
 
 

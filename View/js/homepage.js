@@ -1,6 +1,7 @@
 import { User as _User} from '../classes/classes.js';
 const User = _User
 import {arrayMatch} from '../classes/classes.js'
+var matchid
 
 //Få navn vist i h1 i toppen af profile.html
 const h1 = document.querySelector('h1')
@@ -90,7 +91,7 @@ function deleteMatch(){
 }
 
 
-var matchid
+
 var select = document.getElementById("user");
 
 //tilføjer en eventlistender der lytter til click, og selecter et match
@@ -107,10 +108,12 @@ var select = document.getElementById("user");
 //ved at kalde deletemMtch metoden fra klassen
     var i
     for( i=0 ; i < arrayMatch.length ; i ++){
+        
         if(arrayMatch[i] == selected){
             matchid = arrayMatch[i-1]
         }
     }
+    console.log(matchid)
 
     deleteMatch()
 
