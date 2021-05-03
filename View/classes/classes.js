@@ -145,7 +145,8 @@ loginUser(){
         })
         .then((data) => {
             //console.log(data)
-            window.location = "admin.html";
+            window.location = "homepage.html";
+            
             alert('det virker')
     
         })
@@ -155,14 +156,53 @@ loginUser(){
     }
 
 
+
+    adminUpdate(){
+        fetch("http://localhost:7071/api/Update",  {
+        
+            method: 'PUT',
+            body: JSON.stringify({
+                id: this._id,
+                username: this._username,
+                password: this._password,
+                firstname: this._firstname,
+                lastname: this._lastname,
+                birthdate: this._birthdate,
+                gender: this._gender,
+                lookingfor: this._lookingfor,
+                agerange: this._rangeAge,
+                region: this._region
+            }),
+            
+            headers: {
+                "Content-Type": "application/json; charset-UTF-8"
+            }
+        }) 
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            //console.log(data)
+            window.location = "admin.html";
+            
+            alert('det virker')
+    
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+
+
+
 //Metode for delete
     deleteUser(){
-        var id = localStorage.getItem("loggedIn")
-        console.log(id)
+        
         fetch("http://localhost:7071/api/deleteProfile", {
         method: 'DELETE',
         body: JSON.stringify({
-            id: id
+            id: localStorage.getItem("loggedIn")
         }),
         headers: {
             "Content-Type": "application/json; charset-UTF-8"
@@ -173,7 +213,6 @@ loginUser(){
 
     })
     .then((data) => {     
-        console.log(data)   
         localStorage.removeItem("loggedIn")
         localStorage.removeItem("username")
         window.location = "login.html";
@@ -245,14 +284,6 @@ loginUser(){
 }
 
 
-swipe(){
-    
-}
-
-checkformatches(){
-
-}
-
 //Show matches metode
     showMatches(){
         document.getElementById("myTableData").style.visibility = "visible";
@@ -309,48 +340,17 @@ checkformatches(){
         })  
 }
 
+}
+
+
+
+
+
+
+
+
 //Metode til at slette match --> virker ikke 
-deleteMatch(){
-    arrayMatch = []
-    var matchid
 
-    var selectdelete = document.getElementById("select1");
-    var selected = selectdelete.options[selectdelete.selectedIndex].text;
-    arrayMatch
-    
-    var i
-    for( i=0 ; i < arrayMatch.length ; i ++){
-        if(arrayMatch[i] == selected){
-            matchid = arrayMatch[i-1]
-console.log(matchid)
-        }
-    }
-    
-    fetch("http://localhost:7071/api/deleteMatch", {
-        method: 'DELETE',
-        body: JSON.stringify({
-            id: matchid
-        }),
-        headers: {
-            "Content-Type": "application/json; charset-UTF-8"
-        }
-    }) 
-    
-    .then((response) => {
-        return response.json()
-
-    })
-    .then((data) => {    
-
-       console.log(data)
-    })     
-    .catch(err => {
-        console.log(err)
-    })
-
-}
-
-}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Admin klassen//
@@ -376,7 +376,7 @@ export class Admin extends User{
             }
         }) 
         .then((response) => {
-            return response.json()
+            return response.json() 
     
         })
         .then((data) => {
@@ -390,14 +390,14 @@ export class Admin extends User{
         })
 
     }
- 
-    deleteUser(){
-    var id = localStorage.getItem("dataid")
 
+ 
+    adminDelete(){
+        console.log(localStorage.getItem("dataid"))
         fetch("http://localhost:7071/api/deleteProfile", {
         method: 'DELETE',
         body: JSON.stringify({
-            id: id
+            id: localStorage.getItem("dataid")
         }),
         headers: {
             "Content-Type": "application/json; charset-UTF-8"
@@ -416,6 +416,12 @@ export class Admin extends User{
     })
 
     }
+
+
+
+
+
+
 
     getUser(){
         var username1 = document.getElementById("username").value

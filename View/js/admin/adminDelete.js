@@ -1,4 +1,4 @@
-
+//import
 import { Admin as _Admin} from '../../classes/classes.js';
 const Admin = _Admin
 
@@ -13,15 +13,16 @@ getButton.addEventListener('click', function(){
     
 })
 
-
-
 //delete User
+localStorage.getItem("dataid")
+
 var deleteButton = document.getElementById("deleteUser")
+
 deleteButton.addEventListener("click", function(e) {
     e.preventDefault()
 
     var admin = new Admin()
-    
-    admin.deleteUser()
+    admin.adminDelete()
 })
-//husk at importer User og getAge 
+
+

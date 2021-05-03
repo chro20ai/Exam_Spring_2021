@@ -1,27 +1,204 @@
-import { User as _User} from '../classes/classes.js';
-import { Node as _Node, Graph as _Graph } from '../classes/algoritmen.js';
-import { Votes as _Votes, Match as _Match } from '../classes/classes.js';
-const User = _User
-const Graph = _Graph
-const Votes = _Votes
-const Match = _Match
 
-//hent og sorter brugere
-window.onload = function(){
-var node = new Graph()
-node.algoritme()
-}
-    
+ //ligger data i localstorage  
+ var swipe = document.getElementById("swipe")
+ var swipeid = localStorage.getItem("swipeid")
+ var swipeindex = 0; 
+ var region = localStorage.getItem("region")
+ var id = localStorage.getItem("loggedIn")
+ var lookingfor = localStorage.getItem("lookingfor")
+ var agerange = localStorage.getItem("agerange")
 
 
-//swipe brugere  
+ //importere User, Node og Votes klasserne, så vi kan tilgå metoderne
+ import { User as _User} from '../classes/classes.js';
+ import { Node as _Node, Graph as _Graph } from '../classes/bfs.js';
+ import { Votes as _Votes, Match as _Match } from '../classes/classes.js';
+ const User = _User
+ const Node = _Node
+ const Graph = _Graph
+ const Votes = _Votes
+ const Match = _Match
+
+
+ //Vi definere noderne = regioner
+ let node = new Node()
+ let graph = new Graph()
+ graph.addNode("syddanmark")
+ graph.addNode("nordjylland")
+ graph.addNode("midtjylland")
+ graph.addNode("sjaelland")
+ graph.addNode("hovedstaden")
+
+
+//Vi sætter grapf.edge mellem de regioner der grænser mod hinanden 
+ //Syddanmark
+ graph.addEdge("syddanmark", "midtjylland")
+ graph.addEdge("syddanmark", "sjaelland")
+ //Midtjylland
+ graph.addEdge("midtjylland", "syddanmark")
+ graph.addEdge("midtjylland", "nordjylland")
+ //Nordjylland 
+ graph.addEdge("nordjylland", "midtjylland")
+ //Sjælland
+ graph.addEdge("sjaelland", "syddanmark")
+ graph.addEdge("sjaelland", "hovedstaden")
+ //Hovedstaden
+ graph.addEdge("hovedstaden", "sjaelland")
+
+
+
+//Vi har samlet de arrays der bruges i algoritmen nedenfor 
+ var array = []
+ var newarray = []
+ var testarray = []
+ var regionarray = []
+
+ var nordjylland = []
+ var midtjylland = []
+ var syddanmark = []
+ var sjaelland = []
+ var hovedstaden = []
+
+
+     window.onload = function(){
+         fetch(`http://localhost:7071/api/swipe?lookingfor=${lookingfor}`)
+         //fetch("http://localhost:7071/api/swipe")
+         .then(
+             function(response){
+                 if (response.status !== 200){
+                     console.log("Something went wrong " + response.status);
+                     return
+                 }
+
+                 response.json().then(function(data) {
+                 var i
+                     for( i = 0; i < data.length; i ++){
+                         var swipeuser = new User (data[i][0].value, data[i][1].value, data[i][2].value, data[i][3].value, data[i][4].value, data[i][5].value, data[i][6].value, data[i][7].value, data[i][8].value, data[i][9].value)
+                         var age =  swipeuser.getAge(swipeuser._birthdate)
+                         console.log(age)
+
+                         if(age >= 18 && age <= 25 && agerange == "18-25"){
+                         array.push(data[i])
+                         }
+                         else if(age >= 26 && age <= 30 && agerange == "26-30"){
+                         array.push(data[i])
+                         }
+                         else if(age >= 31 && age <= 40 && agerange == "31-40"){
+                         array.push(data[i])
+                         }    
+                         else if(age >= 41 && agerange == "41+"){
+                         array.push(data[i])
+                         }
+                     }
+
+
+                     for( var j = 0; j < array.length; j ++){
+
+                         if(array[j][9].value == "nordjylland"){
+                         if(localStorage.getItem("interest") == array[j][11].value){
+                             nordjylland.push([1,array[j]])
+                     }
+                         else{
+                             nordjylland.push([0,array[j]])
+                         }
+                         nordjylland.sort(function(a, b) {return b[0] - a[0];});
+                         }
+                         else if(array[j][9].value == "midtjylland"){
+                         if(localStorage.getItem("interest") == array[j][11].value){
+                             midtjylland.push([1,array[j]])
+                     }
+                         else{
+                             midtjylland.push([0,array[j]])
+                         }
+                         midtjylland.sort(function(a, b) {return b[0] - a[0];});
+                         }
+                         else if(array[j][9].value == "syddanmark"){
+                         if(localStorage.getItem("interest") == array[j][11].value){
+                             syddanmark.push([1,array[j]])
+                     }
+                         else{
+                             syddanmark.push([0,array[j]])
+                         }
+                         syddanmark.sort(function(a, b) {return b[0] - a[0];});
+                         }  
+                         else if(array[j][9].value == "sjaelland"){
+                         if(localStorage.getItem("interest") == array[j][11].value){
+                             sjaelland.push([1,array[j]])
+                     }
+                         else{
+                             sjaelland.push([0,array[j]])
+                         }
+                         sjaelland.sort(function(a, b) {return b[0] - a[0];});
+                         }     
+                         else if(array[j][9].value == "hovedstaden"){
+                             if(localStorage.getItem("interest") == array[j][11].value){
+                                 hovedstaden.push([1,array[j]])
+                         }
+                         else{
+                             hovedstaden.push([0,array[j]])
+                         }
+                         hovedstaden.sort(function(a, b) {return b[0] - a[0];});
+                         //console.log(hovedstaden)
+                         }
+                     }
+
+                     newarray.push([graph.ShortestPathBFS(region, "nordjylland").length, nordjylland], [graph.ShortestPathBFS(region, "midtjylland").length, midtjylland], [graph.ShortestPathBFS(region, "syddanmark").length, syddanmark], [graph.ShortestPathBFS(region, "sjaelland").length, sjaelland], [graph.ShortestPathBFS(region, "hovedstaden").length, hovedstaden])
+
+
+                     /*for( i = 0; i < array.length; i ++){
+                             regionarray.push([graph.ShortestPathBFS(region, array[i][9].value).length, array[i]])
+                     }
+                     console.log(regionarray);
+                 */
+                     /*
+                     var sortedArray = regionarray.sort(function(a, b) {
+                         return a[0] - b[0];
+                       });
+                     */
+                    console.log(newarray)
+
+                    var sortedArray = newarray.sort(function(a, b) {
+                     return a[0] - b[0];
+                   });
+
+                   console.log(sortedArray)
+                     for (let i = 0; i < sortedArray.length; i++) {
+                         for (let j = 0; j < sortedArray[i][1].length; j++) {
+                                 testarray.push(sortedArray[i][1][j])
+                         }
+                     }
+
+                     array = testarray
+                     //console.log(array[0][1].toString())
+                     console.log(testarray)
+                     //console.log(sortedArray)
+
+                     //regionarray.forEach(n => n.length);
+                     //console.log(regionarray[0].length)
+                     //console.log(sortedArray)
+
+
+                 })
+             }
+         )
+         .catch(function(err){
+         console.log(err)
+         })
+     }
+
+
+
+
+
+
+
+     //swipe brugere  
 swipe.addEventListener("click", function(e) {
     e.preventDefault()
 swipefunction()
 
 })
 
-//swipe metode 
 
 function swipefunction(){
 var username;

@@ -153,6 +153,7 @@ module.exports.adminlogin = adminlogin;
 
 //Delete user
 function deleteStatement(id1){
+    console.log(id1)
     return new Promise((resolve, reject) => {
     const sql = "DELETE FROM [eksamen].[user] WHERE id = @id"; 
         const request = new Request(sql, (err) => {
@@ -168,7 +169,11 @@ function deleteStatement(id1){
 
     });
 }
+
+
 module.exports.deleteStatement = deleteStatement;
+
+
 
 //Update user
 function updateStatement(payload){

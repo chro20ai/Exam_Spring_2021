@@ -31,7 +31,7 @@ form.addEventListener("submit", function(e) {
 
     var user = new User(id, updateusername, updatepassword, updatefirstname, updatelastname, updatebirthdate, updategender, updatelookingfor, rangeAge, updateregion)
     
-    user.update()
+    user.adminUpdate()
     
 
 })
