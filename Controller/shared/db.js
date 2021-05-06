@@ -13,8 +13,9 @@ function startDb(){
                 throw err;
             }
             else{
-                console.log("Connected")
+                
                 resolve();
+                return "Connected"
             }
         })
         connection.connect();

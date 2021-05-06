@@ -1,5 +1,5 @@
 //import
-import { Admin as _Admin} from '../../classes/classes.js';
+import { Admin as _Admin} from '../../../Model/classes.js';
 const Admin = _Admin
 
 

@@ -1,5 +1,5 @@
 //import af User og Admin klasserne
-import { User as _User, Admin as _Admin} from '../../classes/classes.js';
+import { User as _User, Admin as _Admin} from '../../../Model/classes.js';
 const User = _User
 const Admin = _Admin
 

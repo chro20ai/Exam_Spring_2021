@@ -1,44 +1,59 @@
-let chai = require('chai');
-const db = require('../shared/db');
-const {Connection, Request, TYPES} = require('tedious');
-const httpFunction = require('../shared/db.js');
-const context = require('../testing/defaultContext')
-let expect = chai.expect;
-const config = require('../shared/config.json')
-
-var connection = new Connection(config);
-/*
-it('Match function should return known text', async () => {
-
-const request = { query: { id: 5 }}
-
-let id = req.query.id;
-let user = await db.selectmatchcount(id)
+    const chai = require("chai")
+    const chaiHttp = require("chai-http")
+    const expect = chai.expect
+    chai.use(chaiHttp)
+    chai.use( require('chai-integer') );
     
-    await httpFunction(context, request);
-    //context.res.body = "hallo penis"
-    expect(context.log.callCount).to.equal(1);
-    //expect(context.res.body).to.equal('hallo penis');
-    expect(context.res.body).to.equal(user);
+
     
+    describe("POST a user", () => {
     
-});
-*/
-it('db.connection.connect should ...', async function(done) {
-    /*var connection = new Connection(config);
-    db.connection.startDb(function(err, result) {
-        if(err){
-            done(err);
-            return;
-        }*/
-        try{
-            await db.startDb(); //Start db connection
-            }       catch (error) {
-                console.log("Error connecting to the database", error.message) 
-                done()
-            }
-            resolve()
-        expect(result).to.equal("Connected");
-        done();
-    });
+        it("should post a user", async () => {
+            let res = await chai
+          
+                .request("http://localhost:7071/api")
+                .post("/PostAndGetUser")
+                .send({
+                username: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+                password: "testing",
+                firstname: "testing",
+                lastname: "testing",
+                birthdate: "0001-01-01",
+                gender: "testing",
+                lookingfor: "testing",
+                agerange: "testing",
+                region: "testing"
+                })
+ 
+                expect(res).to.have.status(200)
+        })
+    })
+
+    describe("Matchcounter", () => {
+    it("should have status 200", async () => {
+        let res = await chai
+      
+            .request("http://localhost:7071/api")
+            .get("/matchcounter")
+          
+            expect(res).to.have.status(200)
+            
+                   
+    })
+    it("should get a number from the database", async () => {
+        let res = await chai
+      
+            .request("http://localhost:7071/api")
+            .get("/matchcounter")
+          
+           
+           
+    
+            expect(JSON.parse(res.text)[0].value).to.be.an.integer()
+        
+
+
+                   
+    })
+})
 
