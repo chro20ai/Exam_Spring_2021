@@ -156,15 +156,17 @@ module.exports.adminlogin = adminlogin;
 function deleteStatement(id1){
     console.log(id1)
     return new Promise((resolve, reject) => {
-    const sql = "DELETE FROM [eksamen].[user] WHERE id = @id"; 
+    const sql = "BEGIN DECLARE @Counter INT , @MaxId INT SELECT @Counter = min([eksamen].[match].id) , @MaxId = max([eksamen].[match].id) FROM [eksamen].[match] WHILE(@Counter IS NOT NULL AND @Counter <= @MaxId) BEGIN IF (SELECT [eksamen].[match].user_id_1 FROM [eksamen].[match] WHERE [eksamen].[match].id = @Counter ) = @id OR (SELECT [eksamen].[match].user_id_2 FROM [eksamen].[match] WHERE [eksamen].[match].id = @Counter ) = @id BEGIN DELETE FROM [eksamen].[match] WHERE [eksamen].[match].id = @Counter END SET @Counter = @Counter + 1 END DELETE FROM [eksamen].[user] WHERE [eksamen].[user].id = @id END"; 
         const request = new Request(sql, (err) => {
             if(err){
                 reject({message: "error connection"})    
             }}); 
-                request.addParameter('id', TYPES.Int, id1)     
+                request.addParameter('id', TYPES.Int, id1)   
+
                 request.on('row', (columns) => {
                 resolve(columns)
             });
+
     connection.execSql(request)
 
 

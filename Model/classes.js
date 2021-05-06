@@ -216,6 +216,7 @@ loginUser(){
         localStorage.removeItem("loggedIn")
         localStorage.removeItem("username")
         window.location = "login.html";
+        alert("hvad foregår der :" + data)
 
     })     
     .catch(err => {
@@ -507,11 +508,6 @@ export class Admin extends User{
 }
 
 
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////// 
-//Vote klasse//
-
 export class Votes{
     constructor(id, user_id, target_user_id, vote){
         this._id = id
@@ -543,7 +539,7 @@ vote(){
     return response.json()
 })
 .then((data) => {
-    //console.log(data)
+    alert ("You have liked a user!")
 })
 .catch(err => {
    reject(err)
