@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "scripts": {
     "start": "func start",
-    "test": "mocha --recursive 'test/*'"
+    "test": "mocha --recursive '*/test/*'"
   },
   "dependencies": {
     "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "chai-integer": "^0.1.0",
     "cors": "^2.8.5",
     "mocha": "^8.3.2",
     "sinon": "^10.0.0",

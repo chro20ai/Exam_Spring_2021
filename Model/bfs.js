@@ -72,7 +72,7 @@ export class Graph{
             }
         }
 
-        return ["No path exists"]
+        return ["This array has a length of 1"]
     }
 
     backtrack(parents, startingNode, endNode){
