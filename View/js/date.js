@@ -154,11 +154,12 @@
                      //Vi nu har sorteres de forskellige brugere efter hvilken region de bor i og hvor mange interesser de har tilfældes. 
                      //Nu benyttes BFS til at sortere den korteste afstand mellem regionen tilhørende brugeren der er logget ind og alle regioner. 
                      //.length bliver benyttes til at give et konkret tal som aftand fremfor at vise vejen fra a til b. 
-                     newarray.push([graph.ShortestPathBFS(region, "nordjylland").length, nordjylland], [graph.ShortestPathBFS(region, "midtjylland").length, midtjylland], [graph.ShortestPathBFS(region, "syddanmark").length, syddanmark], [graph.ShortestPathBFS(region, "sjaelland").length, sjaelland], [graph.ShortestPathBFS(region, "hovedstaden").length, hovedstaden])
+                     newarray.push([graph.ShortestPathBFS(region, "nordjylland").length, nordjylland], 
+                     [graph.ShortestPathBFS(region, "midtjylland").length, midtjylland], 
+                     [graph.ShortestPathBFS(region, "syddanmark").length, syddanmark], 
+                     [graph.ShortestPathBFS(region, "sjaelland").length, sjaelland], 
+                     [graph.ShortestPathBFS(region, "hovedstaden").length, hovedstaden])
 
-
-                    
-                    console.log(newarray)
 
                     //Nu sorteres regionerne fra laveste til højeste tal.
                     //Laveste tal udtrykker korteste afstand. 

@@ -4,7 +4,6 @@
     chai.use(chaiHttp)
     chai.use( require('chai-integer') );
     
-
     
     describe("POST a user", () => {
     

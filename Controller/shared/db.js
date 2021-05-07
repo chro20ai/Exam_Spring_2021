@@ -96,18 +96,17 @@ function insertlogin(payload){
     
     return new Promise((resolve, reject) => {
     const sql = "declare @variabel INT set @variabel = (SELECT [eksamen].[user_interest].user_id  FROM [eksamen].[user] INNER JOIN [eksamen].[user_interest] ON [eksamen].[user].id = [eksamen].[user_interest].user_id WHERE [eksamen].[user].username = @username and [eksamen].[user].password = @password) if @variabel is null SELECT * FROM [eksamen].[user] WHERE username = @username and password = @password else SELECT *  FROM [eksamen].[user] INNER JOIN [eksamen].[user_interest] ON [eksamen].[user].id = [eksamen].[user_interest].user_id WHERE [eksamen].[user].username = @username and [eksamen].[user].password = @password"
-    //const sql = "SELECT * FROM [eksamen].[user] WHERE username = @username and password = @password"; 
+
             const request = new Request(sql, (err, rowcount) => {
                 if (err){
                     reject(err)
                     console.log(err)
-                    console.log("test")
+                
                 }
                 console.log(rowcount)
                 if ( rowcount == 1 ){
                     reject(err)
                     console.log(err)
-                    console.log("test123123123")
                 }
                 
             });
@@ -167,7 +166,6 @@ module.exports.adminlogin = adminlogin;
 
 //Delete user
 function deleteStatement(id1){
-    console.log(id1)
     return new Promise((resolve, reject) => {
     const sql = "BEGIN DECLARE @Counter INT , @MaxId INT SELECT @Counter = min([eksamen].[match].id) , @MaxId = max([eksamen].[match].id) FROM [eksamen].[match] WHILE(@Counter IS NOT NULL AND @Counter <= @MaxId) BEGIN IF (SELECT [eksamen].[match].user_id_1 FROM [eksamen].[match] WHERE [eksamen].[match].id = @Counter ) = @id OR (SELECT [eksamen].[match].user_id_2 FROM [eksamen].[match] WHERE [eksamen].[match].id = @Counter ) = @id BEGIN DELETE FROM [eksamen].[match] WHERE [eksamen].[match].id = @Counter END SET @Counter = @Counter + 1 END DELETE FROM [eksamen].[user] WHERE [eksamen].[user].id = @id END"; 
         const request = new Request(sql, (err) => {
@@ -234,7 +232,6 @@ module.exports.updateStatement = updateStatement;
 var array = []
 //Bruges til get swipe. 
 function swipe(lookingfor){
-    //console.log(id)
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM [eksamen].[user] INNER JOIN [eksamen].[user_interest] ON [eksamen].[user].id = [eksamen].[user_interest].user_id where gender = @lookingfor'
         const request = new Request(sql, (err, rowcount) => {
@@ -344,7 +341,6 @@ function posiblematch(payload){
             const request = new Request(sql, (err, rowcount) => {
                 if (err){
                     reject(err)
-                    //console.log(err)
                 }
             });
         request.addParameter('loggedIn', TYPES.Int, payload.loggedInId)
@@ -373,7 +369,7 @@ module.exports.posiblematch = posiblematch;
 function matchfunction(payload){
 
     return new Promise((resolve, reject) => {
-        //laves om til insert funkction
+       
     const sql = "INSERT INTO [eksamen].[match] (user_id_1, user_id_2) VALUES (@user_id_1, @user_id_2)" 
             const request = new Request(sql, (err, rowcount) => {
                 if (err){
@@ -421,9 +417,7 @@ function getMatches(id){
         request.on('row', function(columns) {
             array2.push(columns)
         }); 
-        /*request.on('done', (rowCount) => {
-            console.log('Done is called!');
-          });*/
+        
         //DoneInProc til at returnere alle linjer. Returnerer først promise når alle linjer er klar til at blive sendt til frontend. 
           request.on('doneInProc', (rowCount, more) => {
             console.log(rowCount + ' rows returned');
