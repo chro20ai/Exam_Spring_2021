@@ -10,6 +10,7 @@ module.exports = async function (context, req) {
             console.log("Error connecting to the database", error.message) 
         }
     switch (req.method) {
+        //Hvis method fra Fetch er Post startes funktion i case.
         case 'POST':
             await post(context, req);
             break; 
@@ -23,9 +24,10 @@ module.exports = async function (context, req) {
 
 async function post(context, req){
     try{
+        //Modtager req.body fra fetch i frontend. 
         let payload = req.body;
+        //Kører inserlogin i db fil. 
         let response = await db.insertlogin(payload)
-        //Her skal valideres. Hvis der kommer en bruger er man logget ind. 
        
         context.res = {
             body: response

@@ -9,6 +9,7 @@ module.exports = async function (context, req) {
         }       catch (error) {
             console.log("Error connecting to the database", error.message) 
         }
+        //Hvis method fra Fetch er GET startes funktion i case.
     switch (req.method) {
         case 'GET':
             await get(context, req);
@@ -23,6 +24,7 @@ module.exports = async function (context, req) {
 
 async function get(context, req){
     try{
+        //req.query modtager lookingfor fra fetch i frontend. 
         let lookingfor = req.query.lookingfor;
         let user = await db.swipe(lookingfor)
         context.res = {

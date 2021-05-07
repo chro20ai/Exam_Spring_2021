@@ -9,6 +9,7 @@ module.exports = async function (context, req) {
         }       catch (error) {
             console.log("Error connecting to the database", error.message) 
         }
+        //Hvis method fra Fetch er GET startes funktion i case.
     switch (req.method) {
         case 'GET':
             await getmatchcount(context, req);
@@ -24,7 +25,9 @@ module.exports = async function (context, req) {
 
 module.exports = async function getmatchcount(context, req){
     try{
+        //Modtager req-query.id fra fetch i frontend. 
         let id = req.query.id;
+        //Kører selectmatchcount i db fil. 
         let user = await db.selectmatchcount(id)
         context.res = {
             body: user

@@ -9,6 +9,7 @@ module.exports = async function (context, req) {
         }       catch (error) {
             console.log("Error connecting to the database", error.message) 
         }
+        //Hvis method fra Fetch er Post startes funktion i case.
     switch (req.method) {
         case 'POST':
             await post(context, req);
@@ -23,7 +24,9 @@ module.exports = async function (context, req) {
 
 async function post(context, req){
     try{
+        //Modtager req.body fra fetch i frontend
         let payload = req.body;
+        //Kører insert() i db fil
         await db.insert(payload)
         context.res = {
             body: {status: 'Success'}

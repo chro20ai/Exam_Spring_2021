@@ -9,6 +9,7 @@ module.exports = async function (context, req) {
         }       catch (error) {
             console.log("Error connecting to the database", error.message) 
         }
+        //Hvis method fra Fetch er PUT startes funktion i case.
     switch (req.method) {
         case 'PUT':
             await updateUser(context, req);
@@ -23,7 +24,9 @@ module.exports = async function (context, req) {
 
 async function updateUser(context, req){
     try{
+        //Modtager indholdet af req.body fra fetch i frontend. 
         let payload = req.body;
+        //Kører updateStatement i db fil. 
         let response = await db.updateStatement(payload)
         console.log(response);
         context.res = {

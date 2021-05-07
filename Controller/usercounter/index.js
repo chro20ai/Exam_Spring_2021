@@ -9,6 +9,7 @@ module.exports = async function (context, req) {
         }       catch (error) {
             console.log("Error connecting to the database", error.message) 
         }
+        //Hvis method fra Fetch er GET startes funktion i case.
     switch (req.method) {
         case 'GET':
             await getusercount(context, req);
@@ -24,7 +25,9 @@ module.exports = async function (context, req) {
 
 async function getusercount(context, req){
     try{
+        //Modtager req.query.username fra fetch i frontend. 
         let username = req.query.username;
+        //Kører funktionen selectusercount i db fil. 
         let user = await db.selectusercount(username)
         context.res = {
             body: user

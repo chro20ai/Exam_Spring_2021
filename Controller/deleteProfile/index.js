@@ -9,6 +9,7 @@ module.exports = async function (context, req) {
         }       catch (error) {
             console.log("Error connecting to the database", error.message) 
         }
+        //Hvis method fra Fetch er DELETE startes funktion i case.
     switch (req.method) {
         case 'DELETE':
             await deleteUser(context, req);
@@ -23,7 +24,9 @@ module.exports = async function (context, req) {
 
 async function deleteUser(context, req){
     try{
+        //Modtager req.body.id fra fetch i frontend. 
         let id1 = req.body.id
+        //deleteStatement køres i db fil. 
         let response = await db.deleteStatement(id1)
         console.log(response);
         context.res = {

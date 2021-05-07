@@ -5,6 +5,7 @@ module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
     try{
+        //Hvis method fra Fetch er DELETE startes funktion i case.
         await db.startDb(); //Start db connection
         }       catch (error) {
             console.log("Error connecting to the database", error.message) 
@@ -23,7 +24,9 @@ module.exports = async function (context, req) {
 
 async function deleteLikes(context, req){
     try{
+        //Modtager req.body fra fetch frontend. 
         let payload = req.body;
+        //deleteLikesStatement startes i db fil. 
         let response = await db.deleteLikesStatement(payload)
         console.log(response);
         context.res = {

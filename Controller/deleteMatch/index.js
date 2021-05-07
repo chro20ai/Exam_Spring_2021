@@ -10,6 +10,7 @@ module.exports = async function (context, req) {
             console.log("Error connecting to the database", error.message) 
         }
     switch (req.method) {
+        //Hvis method fra Fetch er DELETE startes funktion i case.
         case 'DELETE':
             await deleteMatch(context, req);
             break; 
@@ -23,7 +24,9 @@ module.exports = async function (context, req) {
 
 async function deleteMatch(context, req){
     try{
+        //Modtager req.body.id fra fetch i frontend. 
         let id = req.body.id
+        //deleteMatchStatement startes i db fil. 
         let response = await db.deleteMatchStatement(id)
         console.log(response);
         context.res = {

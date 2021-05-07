@@ -9,6 +9,7 @@ module.exports = async function (context, req) {
         }       catch (error) {
             console.log("Error connecting to the database", error.message) 
         }
+        //Hvis method fra Fetch er POST startes funktion i case.
     switch (req.method) {
         case 'POST':
             await vote(context, req);
@@ -23,6 +24,7 @@ module.exports = async function (context, req) {
 
 async function vote(context, req){
     try{
+        //Modtager req.body fra fetch i frontend. 
         let payload = req.body;
         await db.votefunction(payload)
         context.res = {
