@@ -1,5 +1,12 @@
 -- GitLog --
 
+
+commit 0b3b17cc2bb68fbbcb3db14b44c538d3e0b24aba (HEAD -> main)
+Author: chro20ai <chri20ai@student.cbs.dk>
+Date:   Fri May 7 17:49:42 2021 +0200
+
+    GitLog added
+
 commit 11afe1c9e1f6fb9c06465af8cb4caac50b664e7d (HEAD -> main, origin/main, origin/HEAD)
 Author: chro20ai <chri20ai@student.cbs.dk>
 Date:   Fri May 7 17:33:44 2021 +0200
