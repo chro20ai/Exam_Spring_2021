@@ -1,7 +1,6 @@
 
  //ligger data i localstorage  
  var swipe = document.getElementById("swipe")
- var swipeid = localStorage.getItem("swipeid")
  var swipeindex = 0; 
  var region = localStorage.getItem("region")
  var id = localStorage.getItem("loggedIn")
