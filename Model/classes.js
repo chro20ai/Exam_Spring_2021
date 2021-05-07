@@ -417,11 +417,6 @@ export class Admin extends User{
     }
 
 
-
-
-
-
-
     getUser(){
         var username1 = document.getElementById("username").value
         fetch(`http://localhost:7071/api/PostAndGetUser?username=${username1}`)
@@ -440,15 +435,15 @@ export class Admin extends User{
             var userdata = new User (data[0].value, data[1].value, data[2].value, data[3].value, data[4].value, data[5].value, data[6].value, data[7].value, data[8].value, data[9].value)
 
                 document.getElementById("dataid").innerHTML = userdata._id
-                document.getElementById("datausername").innerHTML = userdata._username
-                document.getElementById("datapassword").innerHTML = userdata._password
-                document.getElementById("datafirstname").innerHTML = userdata._firstname
-                document.getElementById("datalastname").innerHTML = userdata._lastname
-                document.getElementById("databirthdate").innerHTML = userdata.getAge(userdata._birthdate)
-                document.getElementById("datagender").innerHTML = userdata._gender
-                document.getElementById("datalookingfor").innerHTML = userdata._lookingfor
-                document.getElementById("dataagerange").innerHTML = userdata._agerange
-                document.getElementById("dataregion").innerHTML = userdata._region
+                document.getElementById("datausername").innerHTML = "Username: " + userdata._username
+                document.getElementById("datapassword").innerHTML = "Password: " + userdata._password
+                document.getElementById("datafirstname").innerHTML = "Firstname: " + userdata._firstname
+                document.getElementById("datalastname").innerHTML = "Lastname: " + userdata._lastname
+                document.getElementById("databirthdate").innerHTML = "Age: " + userdata.getAge(userdata._birthdate)
+                document.getElementById("datagender").innerHTML = "Gender: " + userdata._gender
+                document.getElementById("datalookingfor").innerHTML = "Looking for: " + userdata._lookingfor
+                document.getElementById("dataagerange").innerHTML = "Age range: " + userdata._rangeAge
+                document.getElementById("dataregion").innerHTML = "Location: " + userdata._region
 
                 
                 localStorage.setItem('dataid', data[0].value);

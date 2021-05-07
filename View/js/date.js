@@ -261,10 +261,10 @@ homepageButton.addEventListener("click", function(e) {
 })
 
 //check for matches 
-
 function checkformatches(){
+    //Promise 
     return new Promise((resolve, reject) => {
-
+    //Post request til azure function. 
     fetch("http://localhost:7071/api/getlikes", {
         
     method: 'POST',
@@ -278,19 +278,24 @@ function checkformatches(){
 }) 
 .then((response) => {
     resolve(response)
+    //Returnerer body i json, så det kan læses som JS objekt. 
     return response.json()
 })
 .then((data) => {
     console.log(data)
-
+    //Vi benytter data fra response. 
     for (let index = 0; index < data.length; index++) {
-        
+        //Her er hentet liste over alle brugere som har liket din user. 
+        //Hvis denne brugers username er det samme som swipe id, betyder det at du nu har liket en som tidligere har liket dig. 
+        //Derfor er det et match. 
         if(data[index][1].value == localStorage.getItem("swipeid")){
+            //Opret instans af match klasse
             var match = new Match (1, localStorage.getItem("loggedIn"), localStorage.getItem("swipeid"))
-
-            console.log("DET VIRKER !!!!")
+            
+            //Indsætter match i databasen. 
             match.match();  
-            alert("Dette er en notifikation om at du har et match med " + localStorage.getItem("swipefirstname") + ". Tillykke!");  
+            //Notifikation for match. 
+            alert("This is a notification that you are a match with " + localStorage.getItem("swipefirstname") + ". Congratulations!");  
 
         }
     }
@@ -306,16 +311,19 @@ function checkformatches(){
 
 var like = document.getElementById("like")
 
-//der bliver nu ikke postet hvis man liker en man allerede har liket. Men det bliver stadig til et match, da checkformatches() kører
+//Hvad der sker når man trykker like. 
+//Kører asynkront. 
 like.addEventListener("click", async function(e) {
     e.preventDefault()
 
-
+    //Ny instans af vote klasse. 
      var vote = new Votes(1, localStorage.getItem("loggedIn"), localStorage.getItem("swipeid"), "like")
 
+    //Benytter await, da vi venter på et promise. 
+    //Der køres metoden vote som indsætter like. 
     await vote.vote()
     
-
+    //Her tjekkes for matches, og såfremt der er match, bliver dette indsat i databasen. 
     await checkformatches()
     
 
@@ -325,18 +333,14 @@ like.addEventListener("click", async function(e) {
 
 var dislike = document.getElementById("dislike")
 
-
+//Dislike knappen
 dislike.addEventListener("click", function(e) {
     e.preventDefault()
 
+    //Instans af vote klasse
     var vote = new Votes(1, localStorage.getItem("loggedIn"), localStorage.getItem("swipeid"), "dislike")
-
+    //Metoden vote indsætter vote i form af dislike. 
     vote.vote()
     
 
 })
-
-
-
-
-

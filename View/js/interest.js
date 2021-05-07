@@ -9,6 +9,7 @@ form.addEventListener("submit", function(e) {
 
 var interest = new User()
 
+//Metode til at poste den valgte interesse. 
 interest.selectInterest()
 
 });

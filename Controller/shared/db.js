@@ -26,8 +26,11 @@ module.exports.startDb = startDb;
 
 //Når man opretter en bruger 
 function insert(payload){
+    //Promise
     return new Promise((resolve, reject) => {
+    //SQL-statement 
     const sql = `INSERT INTO [eksamen].[user] (username, password, firstname, lastname, birthdate, gender, lookingfor, agerange, region) VALUES (@username, @password, @firstname, @lastname, @birthdate, @gender, @lookingfor, @agerange, @region)`
+        //Selve requestet, som tager 2 parametre. 
         const request = new Request(sql, (err) => {
             if(err){
                 reject(err)
@@ -44,8 +47,11 @@ function insert(payload){
         request.addParameter('agerange', TYPES.VarChar, payload.agerange)
         request.addParameter('region', TYPES.VarChar, payload.region)
 
+        //request.on, til at der skal ske, når requestet er eksekveret. 
+        //RequestCompleted, til at fortælle request er slut. 
         request.on('requestCompleted', (row) => {
             console.log('Login succeeded', row)
+            //Med resolve() returneres promise.
             resolve('User inserted', row)
         });
 
@@ -71,7 +77,10 @@ function select(username){
         });
         request.addParameter('username', TYPES.VarChar, username)
 
+        //request.on, til at der skal ske, når requestet er eksekveret. 
+        //Row sørger for der kan returneres en række til frontend. 
         request.on('row', (columns) => {
+            //Med resolve() returneres promise.
             resolve(columns)
         });
 
@@ -106,9 +115,11 @@ function insertlogin(payload){
         request.addParameter('username', TYPES.VarChar, payload.username)
         request.addParameter('password', TYPES.VarChar, payload.password)
         
-        
+        //request.on, til at der skal ske, når requestet er eksekveret. 
+        //Row sørger for der kan returneres en række til frontend. 
         request.on('row', (columns) => {
             console.log(columns)
+            //Med resolve() returneres promise.
             resolve(columns)
         });
 
@@ -138,8 +149,10 @@ function adminlogin(payload){
         request.addParameter('username', TYPES.VarChar, payload.username)
         request.addParameter('password', TYPES.VarChar, payload.password)
         
-        
+        //request.on, til at der skal ske, når requestet er eksekveret. 
+        //Row sørger for der kan returneres en række til frontend. 
         request.on('row', (columns) => {
+            //Med resolve() returneres promise.
             resolve(columns)
         });
 
@@ -163,7 +176,10 @@ function deleteStatement(id1){
             }}); 
                 request.addParameter('id', TYPES.Int, id1)   
 
+                //request.on, til at der skal ske, når requestet er eksekveret. 
+                //Row sørger for der kan returneres en række til frontend.  
                 request.on('row', (columns) => {
+                //Med resolve() returneres promise.
                 resolve(columns)
             });
 
@@ -199,8 +215,10 @@ function updateStatement(payload){
             request.addParameter('region', TYPES.VarChar, payload.region)
             request.addParameter('id', TYPES.Int, payload.id)     
             
+            //request.on, til at der skal ske, når requestet er eksekveret. 
+            //RequestCompleted, til at fortælle request er slut. 
             request.on('requestCompleted', (row) => {
-                //console.log('Update succeeded', row)
+                //Med resolve() returneres promise.
                 resolve('User updated', row)
             });
     connection.execSql(request)
@@ -230,28 +248,18 @@ function swipe(lookingfor){
         });
         request.addParameter('lookingfor', TYPES.VarChar, lookingfor)
 
-
+        //request.on, til at der skal ske, når requestet er eksekveret. 
+        //Row sørger for der kan returneres en række til frontend. 
         request.on('row', function(columns) {
-            /*columns.forEach(function(column) {
-             array.push(column.value)
-              
-              
-            });*/
-           // console.log(columns)
-            array.push(columns)
-         
-
-
-            
-            
+            array.push(columns)   
         }); 
-        request.on('done', (rowCount) => {
+        /*request.on('done', (rowCount) => {
             console.log('Done is called!');
-          });
-        
+          });*/
+          //DoneInProc til at returnere alle linjer. Returnerer først promise når alle linjer er klar til at blive sendt til frontend. 
           request.on('doneInProc', (rowCount, more) => {
             console.log(rowCount + ' rows returned');
-            //console.log(array)
+            //Sender alle rækkerne med resolve()
             resolve(array)
             array = []
           });
@@ -279,8 +287,11 @@ function insertInterest(payload){
         request.addParameter('user_id', TYPES.Int, payload.user_id)
         request.addParameter('interest_id', TYPES.Int, payload.interest_id)
     
+        //request.on, til at der skal ske, når requestet er eksekveret. 
+        //RequestCompleted, til at fortælle request er slut. 
         request.on('requestCompleted', (row) => {
             console.log('Interests succeded', row)
+            //Med resolve() returneres promise.
             resolve('Interests inserted', row)
         });
 
@@ -309,9 +320,10 @@ function votefunction(payload){
         request.addParameter('target_user_id', TYPES.Int, payload.target_user_id)
         request.addParameter('vote', TYPES.VarChar, payload.vote)
         
-        
+        //RequestCompleted, til at fortælle request er slut. 
         request.on('requestCompleted', (row) => {
             (console.log(row))
+            //Med resolve() returneres promise.
             resolve('vote inserted', row)
         });
 
@@ -337,26 +349,22 @@ function posiblematch(payload){
             });
         request.addParameter('loggedIn', TYPES.Int, payload.loggedInId)
         
-        
+        //request.on, til at der skal ske, når requestet er eksekveret. 
+        //Row sørger for der kan returneres en række til frontend. 
         request.on('row', function(columns) {
-        
             array1.push(columns)
-            
         }); 
-        request.on('done', (rowCount) => {
+        /*request.on('done', (rowCount) => {
             console.log('Done is called!');
-          });
-        
+          });*/
+          //DoneInProc til at returnere alle linjer. Returnerer først promise når alle linjer er klar til at blive sendt til frontend. 
           request.on('doneInProc', (rowCount, more) => {
             console.log(rowCount + ' rows returned');
-            
+            //Med resolve() sendes alle rækker til frontend. 
             resolve(array1)
             array1 = []
           });
-
     connection.execSql(request)
-
-
     });
 }
 module.exports.posiblematch = posiblematch;
@@ -381,8 +389,10 @@ function matchfunction(payload){
         request.addParameter('user_id_2', TYPES.Int, payload.user_id_2)
         
         
-        
+        //request.on, til at der skal ske, når requestet er eksekveret. 
+        //Row sørger for der kan returneres en række til frontend. 
         request.on('row', (columns) => {
+            //Med resolve() returneres promise.
             resolve(columns)
         });
 
@@ -406,16 +416,18 @@ function getMatches(id){
         });
         request.addParameter('id', TYPES.Int, id)
 
+        //request.on, til at der skal ske, når requestet er eksekveret. 
+        //Row sørger for der kan returneres en række til frontend. 
         request.on('row', function(columns) {
             array2.push(columns)
         }); 
-        request.on('done', (rowCount) => {
+        /*request.on('done', (rowCount) => {
             console.log('Done is called!');
-          });
-        
+          });*/
+        //DoneInProc til at returnere alle linjer. Returnerer først promise når alle linjer er klar til at blive sendt til frontend. 
           request.on('doneInProc', (rowCount, more) => {
             console.log(rowCount + ' rows returned');
-            
+        //Med resolve() sendes alle rækker til frontend. 
             resolve(array2)
             array2 = []
           });
@@ -433,8 +445,12 @@ function deleteMatchStatement(id){
             if(err){
                 reject({message: "error connection"})    
             }}); 
-                request.addParameter('id', TYPES.Int, id)     
+                request.addParameter('id', TYPES.Int, id)    
+                
+                //request.on, til at der skal ske, når requestet er eksekveret. 
+                //Row sørger for der kan returneres en række til frontend. 
                 request.on('row', (columns) => {
+                //Med resolve() returneres promise.
                 resolve(columns)
             });
     connection.execSql(request)
@@ -456,7 +472,11 @@ function deleteLikesStatement(payload){
             }}); 
                 request.addParameter('user_id', TYPES.Int, payload.user_id)
                 request.addParameter('target_user_id', TYPES.Int, payload.target_user_id)  
+
+                //request.on, til at der skal ske, når requestet er eksekveret. 
+                //Row sørger for der kan returneres en række til frontend. 
                 request.on('row', (columns) => {
+                //Med resolve() returneres promise.
                 resolve(columns)
             });
     connection.execSql(request)
@@ -480,9 +500,11 @@ function selectusercount(){
                 reject({message: 'No users in database'})
             }
         });
-        //request.addParameter('username', TYPES.VarChar, username)
 
+        //request.on, til at der skal ske, når requestet er eksekveret. 
+        //Row sørger for der kan returneres en række til frontend. 
         request.on('row', (columns) => {
+            //Med resolve() returneres promise.
             resolve(columns)
         });
 
@@ -506,9 +528,11 @@ function selectmatchcount(){
                 reject({message: 'No users in database'})
             }
         });
-        //request.addParameter('username', TYPES.VarChar, username)
-
+        
+        //request.on, til at der skal ske, når requestet er eksekveret. 
+        //Row sørger for der kan returneres en række til frontend. 
         request.on('row', (columns) => {
+            //Med resolve() returneres promise.
             resolve(columns)
         });
 

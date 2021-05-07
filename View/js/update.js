@@ -1,5 +1,5 @@
 
-//imporrtere user-klassen
+//importerer user-klassen
 import {User} from '../../Model/classes.js'
 
 var form = document.getElementById("form")
@@ -19,7 +19,7 @@ form.addEventListener("submit", function(e) {
     var rangeAge = document.querySelector('input[name="ageRange"]:checked').value
     var id = localStorage.getItem("loggedIn")
     
-//Vi updatere localstorage med den updaterede data  
+//Vi updaterer localstorage med den updaterede data  
     localStorage.setItem("region", updateregion)
     localStorage.setItem("lookingfor", updatelookingfor)
     localStorage.setItem("agerange", rangeAge)

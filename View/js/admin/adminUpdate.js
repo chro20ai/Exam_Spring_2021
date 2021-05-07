@@ -1,3 +1,4 @@
+//Importerer klassen
 import { User as _User, Admin as _Admin} from '../../../Model/classes.js';
 const User = _User
 const Admin = _Admin
@@ -7,7 +8,7 @@ var getButton = document.getElementById("getUser")
 getButton.addEventListener('click', function(){
 
     var admin = new Admin() 
-
+    //metode til at finde bruger man gerne vil opdatere. 
     admin.getUser() 
     
 })

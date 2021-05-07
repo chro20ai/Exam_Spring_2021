@@ -31,6 +31,7 @@ date.addEventListener("click", function(e) {
 var logOutButton = document.getElementById("logout")
 logOutButton.addEventListener("click", function(e) {
     e.preventDefault()
+    //Sletter alle værdier fra localstorage
     localStorage.removeItem("loggedIn")
     localStorage.removeItem("username")
     localStorage.removeItem("region")
@@ -39,6 +40,7 @@ logOutButton.addEventListener("click", function(e) {
     localStorage.removeItem("swipefirstname")
     localStorage.removeItem("agerange")
     localStorage.removeItem("swipeid")
+    //Sender dig videre til login side. 
     window.location = "login.html"
 })
 
@@ -46,8 +48,9 @@ logOutButton.addEventListener("click", function(e) {
 var deleteButton = document.getElementById("delete")
 deleteButton.addEventListener("click", function(e) {
     e.preventDefault()
-    
+    //Laver instans af User
     var deleteuser = new User()
+    //Kalder metoden delete
     deleteuser.deleteUser()
 
 })
@@ -56,15 +59,19 @@ deleteButton.addEventListener("click", function(e) {
 var showMatches = document.getElementById("showmatches")
 showMatches.addEventListener("click", function(e) {
     e.preventDefault()
+    //Laver instans af User
     var user = new User(localStorage.getItem("loggedIn"))
+    //Kalder metoden showMatches. 
     user.showMatches(); 
 })
 
 
 // function der deleter et valgt knap. 
 function deleteMatch(){
+    //Laver fetch med URL fra azure function. 
     fetch("http://localhost:7071/api/deleteMatch", {
         method: 'DELETE',
+        //Stringifier body så den kan længes i azure function. 
         body: JSON.stringify({
             id: matchid
         }),
@@ -75,19 +82,15 @@ function deleteMatch(){
 
     .then((response) => {
         return response.json()
-
     })
-    .then((data) => {        
-        localStorage.removeItem("loggedIn")
-        localStorage.removeItem("username")
-        window.location = "login.html";
-
-    })     
+      
     .catch(err => {
         console.log(err)
     })
-
-
+    //Giver en alert når der er slettet en bruger. 
+    alert("You have now succesfully deleted your match with the selected user.")
+    //Refresher siden bag efter, så listen over matches bliver opdateret. 
+    location.reload();
 }
 
 
@@ -100,6 +103,7 @@ var select = document.getElementById("user");
 
 //selectdelete, vælger brugeres fra dropdown man gerne vil vælge. 
     var selectdelete = document.getElementById("select1");
+    //Vælger hvem der skal slettes fra dropdown.
     var selected = selectdelete.options[selectdelete.selectedIndex].text;
     arrayMatch
 
@@ -113,8 +117,7 @@ var select = document.getElementById("user");
             matchid = arrayMatch[i-1]
         }
     }
-    console.log(matchid)
-
+    //Sletter et match. 
     deleteMatch()
 
 })

@@ -4,6 +4,7 @@ import {User} from '../../Model/classes.js'
 
 var form = document.getElementById("form")
 
+//Når du trykker submit og vil oprette din bruger. 
 form.addEventListener("submit", function(e) {
     e.preventDefault()
 
