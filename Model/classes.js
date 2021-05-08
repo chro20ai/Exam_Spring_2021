@@ -147,7 +147,7 @@ loginUser(){
             //console.log(data)
             window.location = "homepage.html";
             
-            alert('det virker')
+            alert('Your user has been updates.')
     
         })
         .catch(err => {
@@ -185,7 +185,7 @@ loginUser(){
             //console.log(data)
             window.location = "admin.html";
             
-            alert('det virker')
+            alert('This user has been updated.')
     
         })
         .catch(err => {

@@ -244,13 +244,13 @@ try {
     
     
                 //innerHTML sørger for informationerne vises på siden. 
-                document.getElementById("swipeusername").innerHTML = username
-                document.getElementById("swipefirstname").innerHTML = firstname
-                document.getElementById("swipelastname").innerHTML = lastname
-                document.getElementById("swipeage").innerHTML = age
-                document.getElementById("swipegender").innerHTML = gender
-                document.getElementById("swiperegion").innerHTML = regionshow
-                document.getElementById("swipeinterest").innerHTML = interest
+                document.getElementById("swipeusername").innerHTML = "Username: " + username
+                document.getElementById("swipefirstname").innerHTML = "Firstname: " + firstname
+                document.getElementById("swipelastname").innerHTML = "Lastname: " + lastname
+                document.getElementById("swipeage").innerHTML = "Age: " + age
+                document.getElementById("swipegender").innerHTML = "Gender: " + gender
+                document.getElementById("swiperegion").innerHTML = "Region: " + regionshow
+                document.getElementById("swipeinterest").innerHTML = "Interest: " + interest
 }
 
 //Knap til at komme tilbage på homepage. 
