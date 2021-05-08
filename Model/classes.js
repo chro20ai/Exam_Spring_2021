@@ -216,7 +216,6 @@ loginUser(){
         localStorage.removeItem("loggedIn")
         localStorage.removeItem("username")
         window.location = "login.html";
-        alert("hvad foregår der :" + data)
 
     })     
     .catch(err => {
@@ -315,11 +314,6 @@ loginUser(){
                         option.text = data[index][1].value;
                         drop.add(option);
                     
-                        /*
-                        <option value="free">Free</option>
-                        <option value="basic">Basic</option>
-                        <option value="premium">Premium</option>
-                        */
 
                         var user = new User()
                         row.insertCell(0).innerHTML= data[index][1].value;
@@ -328,7 +322,7 @@ loginUser(){
                         row.insertCell(3).innerHTML= user.getAge(data[index][4].value);
                         row.insertCell(4).innerHTML= data[index][5].value;
                         row.insertCell(5).innerHTML= data[index][6].value; 
-                        //drop.innerHTML=  `<select> <option value='${data[index][0].value}'>${data[index][1].value};</option></select>`; 
+                       
                         
                     }
                     
@@ -343,16 +337,6 @@ loginUser(){
 
 
 
-
-
-
-
-
-//Metode til at slette match --> virker ikke 
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Admin klassen//
 export class Admin extends User{
     constructor(username, password, id ){
                 super(username, password)
@@ -510,7 +494,7 @@ export class Votes{
         this._target_user_id = target_user_id
         this._vote = vote
 }
-//Fetch er promise-based. 
+
 
 //Metode til at like og dislike
 vote(){
@@ -546,8 +530,6 @@ vote(){
 }
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
-//Mmtch klasse//
 export class Match{
     constructor(id, user_id_1, user_id_2){
         this._id = id        
@@ -576,7 +558,6 @@ match(){
     return response.json()
 })
 .then((data) => {
-    //console.log(data)
 })
 .catch(err => {
     reject(err)
