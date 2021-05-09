@@ -9,8 +9,6 @@ export class User{
     this._firstname = firstname 
     this._lastname = lastname
     this._birthdate = birthdate
-    //this._address = address
-    //Der har stået address her! Det skal vidst fjernes i databasen.
     this._gender = gender
     this._lookingfor = lookingfor
     this._rangeAge = rangeAge 
@@ -73,7 +71,6 @@ export class User{
             return response.json()
         })
         .then((data) => {
-            //console.log(data)
             window.location = "login.html";
         })
         .catch(err => {
@@ -144,7 +141,6 @@ loginUser(){
             return response.json()
         })
         .then((data) => {
-            //console.log(data)
             window.location = "homepage.html";
             
             alert('Your user has been updates.')
@@ -182,7 +178,6 @@ loginUser(){
             return response.json()
         })
         .then((data) => {
-            //console.log(data)
             window.location = "admin.html";
             
             alert('This user has been updated.')
