@@ -323,11 +323,9 @@ like.addEventListener("click", async function(e) {
     //Benytter await, da vi venter på et promise. 
     //Der køres metoden vote som indsætter like. 
     await vote.vote()
-    
+    alert ("You have liked a user!")
     //Her tjekkes for matches, og såfremt der er match, bliver dette indsat i databasen. 
-    await checkformatches()
-    
-
+    await checkformatches() 
 })
 
 

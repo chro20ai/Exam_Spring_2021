@@ -513,7 +513,6 @@ vote(){
     return response.json()
 })
 .then((data) => {
-    alert ("You have liked a user!")
 })
 .catch(err => {
    reject(err)
